@@ -20,11 +20,11 @@
 - [Blok 2](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Procesboek/Blok-2)
 - [Sterkte en zwakteanalyse](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Procesboek/Sterkte--en-zwakteanalyse)
 4. Samenwerking-contract
-- [Inleiding](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/1-Inleiding) {:target="_blank"}
-- [Communicatieve afspraken](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/2-Communicatieve-afspraken) {:target="_blank"}
-- [Werkwijze](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/3-Werkwijze){:target="_blank"}
-- [Sancties](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/4-Sancties) {:target="_blank"}
-- [Ondertekening](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/5-Ondertekening) {:target="_blank"}
+- [Inleiding](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/1-Inleiding)
+- [Communicatieve afspraken](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/2-Communicatieve-afspraken)
+- [Werkwijze](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/3-Werkwijze)
+- [Sancties](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/4-Sancties)
+- [Ondertekening](https://gitlab.fdmci.hva.nl/FYS/2021/is106/team-5/-/wikis/Samenwerking-contract/5-Ondertekening)
 
 
 ## Introductie FYS Project
