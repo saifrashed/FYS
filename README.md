@@ -1,5 +1,4 @@
-
-![landing](uploads/e83b6f780265abb755c64986b831e9e6/landing.jpg)
+![landing](./img/landing.jpg)
 
 
 ## Inhoudsopgave
