@@ -1,0 +1,19 @@
+#klikmij-button {
+    padding: 5px;
+    background: red;
+    border-radius: 3px 3px 3px 3px;
+    user-select: none;
+    border: 1px solid black;
+    color: white;
+    font-weight: bold;
+}
+
+#klikmij-button:hover {
+    color: yellow;
+}
+
+#klikmij-toggle {
+    border: 1px solid black;
+    display: none;
+    text-align: center;
+}
