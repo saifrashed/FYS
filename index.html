@@ -3,53 +3,105 @@
 <head>
     <meta charset="UTF-8"/>
 
-    <title>FYS Voorbeeld</title>
+    <title>Corendon - Vakantie Maatje</title>
 
     <!-- Stylesheets -->
     <link href="assets/css/default.css" rel="stylesheet"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
     <!-- Javascript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <script src="assets/vendors/jquery/jquery-3.4.1.min.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
 <body>
-<h1>FYS Voorbeeld</h1>
 
-<p>
-    Dit project bevat een voorbeeld structuur die je kunt aanhouden voor je eigen FYS project.
-</p>
+<header id="landing-header">
+    <nav class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="assets/img/logo.jpg" width="auto" height="100%"/></a>
+            </div>
 
-<p>
-    Plaats alles wat je op je website beschikbaar wil hebben (HTML, JavaScript, CSS, afbeeldingen, videos, enzovoorts)
-    onder de <code>www</code>-map.
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Inloggen</button>
+                    <button type="submit" class="btn ">Registreren</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
 
-    Hierbij is het gebruikelijk om alle niet-HTML bestanden netjes te verdelen onder de <code>www/assets</code>-map!
-</p>
-
-<p>Wil je gebruik maken van externe bronnen, zoals <a href="https://jquery.com/" target="_blank">jQuery</a> of <a
-        href="https://getbootstrap.com/" target="_blank">Bootstrap</a>? Plaats
-    die dan in een map onder <code>www/assets/vendors</code>, dit houdt jouw code gescheiden van externe bronnen.
-</p>
-
-<p>
-    Dit project bevat ook een <code>.gitignore</code>-bestand, hiermee voorkom je dat bepaalde bestanden (perongeluk) op
-    Git worden ingechecked. Denk bijvoorbeeld aan <code>.DS_STORE</code>-bestanden die elke Mac-gebruiker aanmaakt, of
-    aan de <code>workspace.xml</code> van IntelliJ die voor alle gebruikers weer anders is.
-</p>
-
-<hr/>
-
-<p>
-    Klik op onderstaande knop om plaatjes te tonen en te verbergen!
-</p>
-
-<p>
-    <a id="klikmij-button">Klik mij!</a>
-</p>
-
-<div id="klikmij-toggle">
-    <img src="assets/img/jquery-logo.png" alt="jQuery Logo"/>
-    <img src="assets/img/bootstrap-logo.png" alt="Bootstrap Logo"/>
+<div class="jumbotron" id="landing-hero">
+    <div class="container">
+        <h1>Ja boys wat vinden jullie hiervan?</h1>
+        <p>
+            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+            mauris
+            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+            euismod. Donec sed odio dui.
+        </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Bekijk Ervaringen</a></p>
+    </div>
 </div>
+
+<div class="container">
+    <div class="row" id="hero-blocks">
+        <div class="col-md-4">
+            <div class="item">
+                <h2>Registreer een account</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+                    mauris
+                    condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+                    euismod. Donec sed odio dui. </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item">
+                <h2>Personaliseer je profiel</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+                    mauris
+                    condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+                    euismod. Donec sed odio dui. </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item">
+                <h2>Vind je vakantie maatje</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id
+                    ligula
+                    porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+                    nibh, ut
+                    fermentum massa justo sit amet risus.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <footer id="landing-footer">
+        <p>&copy; Corendon - Gegarandeerd veilig boeken want Corendon is aangesloten bij het ANVR, SGR en
+            Calamiteitenfonds.</p>
+    </footer>
+</div> <!-- /container -->
 </body>
 </html>

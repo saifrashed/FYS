@@ -1,19 +1,77 @@
-#klikmij-button {
-    padding: 5px;
-    background: red;
-    border-radius: 3px 3px 3px 3px;
-    user-select: none;
-    border: 1px solid black;
-    color: white;
-    font-weight: bold;
+
+/**
+Default styling
+ */
+
+html, body{
+
 }
 
-#klikmij-button:hover {
-    color: yellow;
+h1,h2,h3,h4,h5,h6 {
+
 }
 
-#klikmij-toggle {
-    border: 1px solid black;
-    display: none;
-    text-align: center;
+/**
+Landing page styling
+ */
+
+/**
+Header
+ */
+#landing-header nav {
+    background-color: #ffffff;
 }
+
+#landing-header nav .navbar-brand {
+    padding: 10px 10px;
+}
+
+#landing-footer {
+
+}
+
+/**
+Content
+ */
+
+#landing-hero.jumbotron {
+    min-height:75vh;
+    display: flex;
+    align-items: center;
+}
+
+#hero-blocks {
+    margin-top: -15vh;
+}
+
+#hero-blocks div .item {
+    padding: 5px 15px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+/**
+Footer
+ */
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* Mobiel landscape */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+
+/* Mobiel */
+@media (min-width: 320px) and (max-width: 480px) {
+
+}
+
+/**
+Einde landing page styling
+ */
