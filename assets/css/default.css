@@ -1,13 +1,12 @@
-
 /**
 Default styling
  */
 
-html, body{
+html, body {
 
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
 
 }
 
@@ -35,7 +34,7 @@ Content
  */
 
 #landing-hero.jumbotron {
-    min-height:75vh;
+    min-height: 75vh;
     display: flex;
     align-items: center;
 }
@@ -50,6 +49,21 @@ Content
     border-radius: 15px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
+.featurette-divider {
+    margin: 5rem 0;
+}
+
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+
+.featurette img {
+    width: 100%;
+}
+
 
 /**
 Footer
@@ -88,9 +102,11 @@ login page styling
     padding: 15px;
     margin: 100px auto;
 }
+
 .form-signin .checkbox {
     font-weight: 400;
 }
+
 .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
@@ -98,14 +114,17 @@ login page styling
     padding: 10px;
     font-size: 16px;
 }
+
 .form-signin .form-control:focus {
     z-index: 2;
 }
+
 .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
