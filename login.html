@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>Corendon - Vakantie Maatje</title>
+
+    <!-- Stylesheets -->
+    <link href="assets/css/default.css" rel="stylesheet"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <!-- Javascript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="assets/vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</head>
+
+<body class="text-center">
+
+
+<header id="landing-header">
+    <nav class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html"><img src="assets/img/logo.jpg" width="auto" height="100%"/></a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Inloggen</button>
+                    <a class="btn" href="login.html">Registreren</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<form class="form-signin">
+    <img class="mb-4" src="assets/img/logo-short.jpg" alt="" width="auto" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Login in</h1>
+    <label for="inputEmail" class="sr-only">Email adres</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Wachtwoord</label>
+    <input type="Wachtwoord" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Onthoud
+        </label>
+    </div>
+    <button class="btn btn-lg  btn-block" type="submit">Login</button>
+</form>
+</body>
+</html>
