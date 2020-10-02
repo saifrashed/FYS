@@ -37,6 +37,10 @@ Content
     min-height: 75vh;
     display: flex;
     align-items: center;
+    background-image: url("../../assets/img/stock/stock-2.jpg");
+    background-size: cover;
+    color: #fff;
+    text-align: center;
 }
 
 #hero-blocks {
