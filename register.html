@@ -5,73 +5,111 @@
     <meta charset="UTF-8"/>
 
     <title>Corendon - Vakantie Maatje</title>
-    <link rel="icon" href="./assets/img/favicon.ico">favicon.ico
+    <link rel="icon" href="./assets/img/favicon.ico">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
     <link href="assets/css/default.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
     <!-- Javascript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
-    <script src="assets/vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+            crossorigin="anonymous"></script>
     <script src="assets/js/app.js"></script>
 </head>
 
 <body class="text-center">
+<nav class="navbar navbar-expand-lg  fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="./index.html"><img src="assets/img/logo.jpg" style="height: 40px;"/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-
-<header id="landing-header">
-    <nav class="navbar navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="./index.html"><img src="assets/img/logo.jpg" width="auto" height="100%"/></a>
-            </div>
-
-            <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Inloggen</button>
-                    <a class="btn" href="register.html">Registreren</a>
-                </form>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<form class="form-signin">
-    <img class="mb-4" src="assets/img/logo-short.jpg" alt="" width="auto" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Registratie</h1>
-    <label for="inputEmail" class="sr-only">Email adres</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Wachtwoord</label>
-    <input type="Wachtwoord" id="inputPassword" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me">Onthoud
-        </label>
+        <a class="btn btn-primary ml-auto" href="index.html">Ga terug</a>
     </div>
-    <button class="btn btn-lg  btn-block" type="submit">Login</button>
-</form>
+</nav>
 
 
-<footer id="landing-footer">
-    <p> Corendon &copy; Gegarandeerd veilig boeken want Corendon is aangesloten bij het ANVR, SGR en
-        Calamiteitenfonds.</p>
-</footer>
+<div class="card" style="margin-top: 100px; border:none;">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+        <a href="index.html"><img class="mb-4" src="assets/img/logo-short.jpg" alt="" style="height:50px;"></a>
+        <h4 class="card-title mt-3 text-center">Creeër een account</h4>
+        <p class="text-center">En vind een vakantie maatje</p>
+        <p>
+            <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
+            <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+        </p>
+        <p class="divider-text">
+            <span class="bg-light">OF</span>
+        </p>
+        <form>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input name="" class="form-control" placeholder="Full name" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                </div>
+                <input name="" class="form-control" placeholder="Email address" type="email">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                </div>
+                <select class="custom-select" style="max-width: 120px;">
+                    <option selected="">+971</option>
+                    <option value="1">+972</option>
+                    <option value="2">+198</option>
+                    <option value="3">+701</option>
+                </select>
+                <input name="" class="form-control" placeholder="Phone number" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                </div>
+                <select class="form-control">
+                    <option selected=""> Select job type</option>
+                    <option>Designer</option>
+                    <option>Manager</option>
+                    <option>Accaunting</option>
+                </select>
+            </div> <!-- form-group end.// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input class="form-control" placeholder="Create password" type="password">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input class="form-control" placeholder="Repeat password" type="password">
+            </div> <!-- form-group// -->
+            <div class="form-group">
+                <a type="submit" class="btn btn-primary btn-block" href="profiles.html"> Create Account</a>
+            </div> <!-- form-group// -->
+            <p class="text-center">Have an account? <a href="">Log In</a></p>
+        </form>
+    </article>
+</div>
+
 </body>
 </html>
