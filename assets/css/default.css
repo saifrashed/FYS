@@ -37,6 +37,7 @@ body.landing .navbar-light .navbar-toggler {
 }
 
 body.landing header h1, body.landing header h2 {
+    color: #ffc61b;
     word-break: break-all;
     text-shadow: 4px 4px #d81f06;
 }
