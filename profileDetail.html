@@ -7,6 +7,11 @@
 
     <title>Corendon - Vakantie Maatje</title>
     <link rel="icon" href="./assets/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -34,15 +39,18 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="./index.html"><img src="assets/img/logo.jpg" style="height: 40px;"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-ellipsis-v" style="color: #D72007; font-size: 1.5em;"></i>
         </button>
-
-        <a class="btn btn-primary ml-auto" href="profileOverview.html"><i class="fas fa-home"></i></a>
-        <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;"><i class="fas fa-user"></i></a>
-        <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;"><i class="fas fa-bell"></i></a>
-        <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;"><i class="fas fa-plus"></i></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="btn btn-primary ml-auto" href="profileOverview.html"><i class="fas fa-home"></i></a>
+            <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;"><i class="fas fa-user"></i></a>
+            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;"><i class="fas fa-bell"></i></a>
+            <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;"><i class="fas fa-plus"></i></a>
+            <a class="btn btn-danger" href="index.html" style="margin-left:10px;"><i
+                    class="fas fa-sign-out-alt"></i></a>
+        </div>
     </div>
 </nav>
 
@@ -55,7 +63,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item"><a href="profileOverview.html">Profiel overzicht</a></li>
-                <li class="breadcrumb-item active" aria-current="page">John Doe</li>
+                <li class="breadcrumb-item active" aria-current="page">@vanessasmith</li>
             </ol>
         </nav>
         <!-- /Breadcrumb -->
@@ -72,7 +80,8 @@
                                 <p class="text-muted font-size-sm">Utrecht, Utrecht</p>
                                 <button class="btn btn-primary"><i class="fas fa-user-plus"></i></button>
                                 <button class="btn btn-outline-primary" disabled><i class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary" disabled><i class="fas fa-envelope"></i></button>
+                                <button class="btn btn-outline-primary" disabled><i class="fas fa-envelope"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -198,30 +207,84 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Favorieten</i>Vakanties
                                 </h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                         aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                         aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                         aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                         aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link btn-block text-left" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                    Marokko
+                                                </button>
+                                            </h2>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                Beleef een betoverende vakantie in Marokko; schatkist vol contrasten en
+                                                verrassingen. Ontdek de koningssteden met hun eeuwenoude cultuur en de
+                                                prachtige, fascinerende omgeving. Bezoek palmoases, vriendelijke
+                                                berberdorpjes en de sprookjesachtige stad Marrakech, aan de voet van het
+                                                Atlasgebergte en één van de mooiste en kleurrijkste steden van Marokko.
+                                                Een vakantie naar Marokko is betoverend, een koninkrijk met een uniek
+                                                parfum dat gastvrijheid wordt genoemd.
+                                                <a class="btn btn-outline-primary m-1" target="_blank"
+                                                   href="https://www.corendon.nl/marokko">Bekijk vakantie <i
+                                                        class="fas fa-plane"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                        data-toggle="collapse" data-target="#collapseTwo"
+                                                        aria-expanded="false" aria-controls="collapseTwo">
+                                                    Griekenland
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                Hoewel Griekenland bekend staat om zijn ongerepte stranden, helderblauwe
+                                                zee en meer dan 300 dagen zon per jaar, heeft een vakantie naar dit
+                                                heerlijke land u nog veel meer te bieden! Griekenland is namelijk ook
+                                                een belangrijke historische bestemming met een rijk cultureel erfgoed en
+                                                vele bezienswaardigheden. Met Corendon vliegt u in slechts 3,5 uur naar
+                                                de mooiste Griekse eilanden.
+                                                <a class="btn btn-outline-primary m-1" target="_blank"
+                                                   href="https://www.corendon.nl/griekenland">Bekijk vakantie <i
+                                                        class="fas fa-plane"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                        data-toggle="collapse" data-target="#collapseThree"
+                                                        aria-expanded="false" aria-controls="collapseThree">
+                                                    Spanje
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                Hola señor, señorita! Bienvenida, oftewel welkom in het zonovergoten
+                                                Spanje! Niet voor niets is dit Zuid-Europese land al jaren een geliefd
+                                                vakantiebestemming voor jong en oud. Het heerlijke klimaat, de prachtige
+                                                stranden, bijzondere steden en authentiek dorpjes en de heerlijke keuken
+                                                dragen bij aan het ultieme vakantiegevoel. Bovendien valt er hier iedere
+                                                dag van alles te beleven. Wat dacht u van een indrukwekkende stedentip
+                                                naar steden die u zeker moet hebben gezien: Barcelona of Madrid.
+                                            </div>
+                                            <a class="btn btn-outline-primary m-1" href="https://www.corendon.nl/spanje" target="_blank">Bekijk
+                                                vakantie <i class="fas fa-plane"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -231,31 +294,13 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Favorieten</i>Hobby's
                                 </h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                         aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                         aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                         aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                         aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Bergwandelingen</li>
+                                    <li class="list-group-item">Vissen</li>
+                                    <li class="list-group-item">Scubadiven</li>
+                                    <li class="list-group-item">Shisha roken (ff serieus?)</li>
+                                    <li class="list-group-item">One night stands</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -263,7 +308,8 @@
 
                 <div class="row">
                     <div class="col-sm-12 mb-3">
-                        <h6 class="d-flex align-items-center mb-3 mt-3"><i class="material-icons text-info mr-2">Berichten</i>Oproepen</h6>
+                        <h6 class="d-flex align-items-center mb-3 mt-3"><i class="material-icons text-info mr-2">Berichten</i>Oproepen
+                        </h6>
                         <div class="list-group">
                             <a href="#"
                                class="list-group-item list-group-item-action flex-column align-items-start text-left">
@@ -277,8 +323,10 @@
                                     woord Scandinavië meteen doet denken aan ‘kou’ en winterjassen. Toch is het een erg
                                     onderschatte bestemming.
                                 </p>
-                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i></button>
+                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i>
+                                </button>
                             </a>
 
                             <a href="#"
@@ -293,8 +341,10 @@
                                     woord Scandinavië meteen doet denken aan ‘kou’ en winterjassen. Toch is het een erg
                                     onderschatte bestemming.
                                 </p>
-                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i></button>
+                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i>
+                                </button>
                             </a>
 
                             <a href="#"
@@ -309,8 +359,10 @@
                                     woord Scandinavië meteen doet denken aan ‘kou’ en winterjassen. Toch is het een erg
                                     onderschatte bestemming.
                                 </p>
-                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i></button>
+                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i>
+                                </button>
                             </a>
 
                         </div>

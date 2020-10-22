@@ -2,12 +2,18 @@
 Default styling
  */
 
-html, body {
-
+body {
+    font-family: 'Lato';
 }
 
-h1, h2, h3, h4, h5, h6 {
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Catamaran';
+    font-weight: 800 !important;
 }
 
 /**
@@ -23,44 +29,142 @@ Header
 }
 
 /**
-Content
+Landing
  */
 
-#landing-hero.jumbotron {
-    min-height: 75vh;
-    display: flex;
-    align-items: center;
-    background-image: url("../../assets/img/stock/stock-2.jpg");
+body.landing .navbar-light .navbar-toggler {
+    border: none;
+}
+
+body.landing header h1, body.landing header h2 {
+    word-break: break-all;
+    text-shadow: 4px 4px #d81f06;
+}
+
+body.landing h2 {
+    word-break: break-all;
+}
+
+body.landing .btn-xl {
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+}
+
+body.landing .bg-black {
+    background-color: #000 !important;
+}
+
+body.landing .rounded-pill {
+    border-radius: 5rem;
+}
+
+body.landing header.masthead {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(7rem + 72px);
+    padding-bottom: 7rem;
+    background-image: url("../img/stock/stock-5.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
     background-size: cover;
-    color: #fff;
-    text-align: center;
 }
 
-#hero-blocks {
-    margin-top: -15vh;
+body.landing header.masthead .masthead-content {
+    z-index: 1;
+    position: relative;
 }
 
-#hero-blocks div .item {
-    padding: 5px 15px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+body.landing header.masthead .masthead-content .masthead-heading {
+    font-size: 4rem;
 }
 
-.featurette-divider {
-    margin: 5rem 0;
+body.landing header.masthead .masthead-content .masthead-subheading {
+    font-size: 2rem;
 }
 
-.featurette-heading {
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -.05rem;
+body.landing header.masthead .bg-circle {
+    z-index: 0;
+    position: absolute;
+    border-radius: 100%;
+    background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
 }
 
-.featurette img {
-    width: 100%;
+body.landing header.masthead .bg-circle-1 {
+    height: 90rem;
+    width: 90rem;
+    bottom: -55rem;
+    left: -55rem;
 }
 
+body.landing header.masthead .bg-circle-2 {
+    height: 50rem;
+    width: 50rem;
+    top: -25rem;
+    right: -25rem;
+}
+
+body.landing header.masthead .bg-circle-3 {
+    height: 20rem;
+    width: 20rem;
+    bottom: -10rem;
+    right: 5%;
+}
+
+body.landing header.masthead .bg-circle-4 {
+    height: 30rem;
+    width: 30rem;
+    top: -5rem;
+    right: 35%;
+}
+
+@media (min-width: 992px) {
+    body.landing header.masthead {
+        padding-top: calc(10rem + 55px);
+        padding-bottom: 10rem;
+    }
+    body.landing header.masthead .masthead-content .masthead-heading {
+        font-size: 6rem;
+    }
+    body.landing header.masthead .masthead-content .masthead-subheading {
+        font-size: 4rem;
+    }
+}
+
+body.landing .bg-primary {
+    background-color: #FFC61B !important;
+}
+
+body.landing .btn-primary {
+    background-color: #FFC61B;
+    border-color: #FFC61B;
+}
+
+body.landing .btn-primary:active, body.landing .btn-primary:focus, body.landing .btn-primary:hover {
+    background-color: #ffad2a !important;
+    border-color: #ffad2a !important;
+}
+
+body.landing .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
+}
+
+body.landing .btn-secondary {
+    background-color: #ff6a00;
+    border-color: #ff6a00;
+}
+
+body.landing .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
+    background-color: #cc5500 !important;
+    border-color: #cc5500 !important;
+}
+
+body.landing .btn-secondary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
+}
 
 /**
 Footer
