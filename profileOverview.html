@@ -11,7 +11,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -44,11 +45,14 @@
             <i class="fas fa-ellipsis-v" style="color: #D72007; font-size: 1.5em;"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="btn btn-primary ml-auto" href="profileOverview.html"><i class="fas fa-home"></i></a>
-            <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;"><i class="fas fa-user"></i></a>
-            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;"><i class="fas fa-bell"></i></a>
-            <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;"><i class="fas fa-plus"></i></a>
-            <a class="btn btn-danger" href="index.html" style="margin-left:10px;"><i
+            <a class="btn btn-primary ml-auto" href="profileOverview.html">Home <i class="fas fa-home"></i></a>
+            <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;">Profiel <i
+                    class="fas fa-user"></i></a>
+            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;">Notificaties <i
+                    class="fas fa-bell"></i></a>
+            <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;">Bericht plaatsen <i
+                    class="fas fa-plus"></i></a>
+            <a class="btn btn-danger" href="index.html" style="margin-left:10px;">Uitloggen <i
                     class="fas fa-sign-out-alt"></i></a>
         </div>
     </div>
@@ -60,22 +64,37 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="card my-4">
+                <a class="btn btn-secondary" href="profileDetail.html" type="button" data-toggle="tooltip"
+                   data-placement="top" title="Vind een willekeurig profiel">I'm feeling lucky <i
+                        class="far fa-hand-point-right"></i></a>
+            </div>
+
+            <div class="card my-4">
                 <h5 class="card-header">Filter</h5>
                 <div class="card-body">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Zoek...">
-                        <span class="input-group-append">
-                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button>
-              </span>
+                        <span class="input-group-append"><button class="btn btn-secondary" type="button"
+                                                                 data-toggle="tooltip" data-placement="top"
+                                                                 title="Zoek naar een profiel"><i
+                                class="fas fa-search"></i></button></span>
                     </div>
                 </div>
+            </div>
+
+        <div class="card my-4">
+            <h5 class="card-header">Zoek op interesses</h5>
+            <div class="card-body">
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Marokko</a>
-                    <a href="#" class="list-group-item">Gekrulde jongens</a>
-                    <a href="#" class="list-group-item">dikke biceps</a>
+                    <a href="#" class="list-group-item">Scuba dive</a>
+                    <a href="#" class="list-group-item">Sport</a>
+                    <a href="#" class="list-group-item">Waterpolo</a>
                 </div>
             </div>
         </div>
+        </div>
+
+
         <div class="col-lg-9">
             <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                 <ol class="carousel-indicators">

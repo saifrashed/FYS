@@ -158,7 +158,7 @@ body.landing .btn-secondary {
     border-color: #ff6a00;
 }
 
-body.landing .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
+body.landing .btn-secondary:active, body.landing .btn-secondary:focus, body.landing .btn-secondary:hover {
     background-color: #cc5500 !important;
     border-color: #cc5500 !important;
 }

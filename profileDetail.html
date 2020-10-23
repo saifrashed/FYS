@@ -11,7 +11,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -20,18 +21,6 @@
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous"/>
     <link href="assets/css/default.css" rel="stylesheet"/>
-
-    <!-- Javascript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
-            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
-            crossorigin="anonymous"></script>
-    <script src="assets/js/app.js"></script>
 </head>
 
 
@@ -44,11 +33,14 @@
             <i class="fas fa-ellipsis-v" style="color: #D72007; font-size: 1.5em;"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="btn btn-primary ml-auto" href="profileOverview.html"><i class="fas fa-home"></i></a>
-            <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;"><i class="fas fa-user"></i></a>
-            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;"><i class="fas fa-bell"></i></a>
-            <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;"><i class="fas fa-plus"></i></a>
-            <a class="btn btn-danger" href="index.html" style="margin-left:10px;"><i
+            <a class="btn btn-primary ml-auto" href="profileOverview.html">Home <i class="fas fa-home"></i></a>
+            <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;">Profiel <i
+                    class="fas fa-user"></i></a>
+            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;">Notificaties <i
+                    class="fas fa-bell"></i></a>
+            <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;">Bericht plaatsen <i
+                    class="fas fa-plus"></i></a>
+            <a class="btn btn-danger" href="index.html" style="margin-left:10px;">Uitloggen <i
                     class="fas fa-sign-out-alt"></i></a>
         </div>
     </div>
@@ -66,7 +58,6 @@
                 <li class="breadcrumb-item active" aria-current="page">@vanessasmith</li>
             </ol>
         </nav>
-        <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
@@ -78,9 +69,19 @@
                                 <h4>Vanessa Smith</h4>
                                 <p class="text-secondary mb-1">Reiziger</p>
                                 <p class="text-muted font-size-sm">Utrecht, Utrecht</p>
-                                <button class="btn btn-primary"><i class="fas fa-user-plus"></i></button>
-                                <button class="btn btn-outline-primary" disabled><i class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary" disabled><i class="fas fa-envelope"></i>
+                                <button class="btn btn-primary" id="alert-button" data-toggle="tooltip" data-placement="top"
+                                        title="Toevoegen als vriend" ><i class="fas fa-user-plus"></i></button>
+                                <a class="btn btn-secondary" href="profileUser.html" data-toggle="tooltip"
+                                   data-placement="top" title="Bewerk uw profiel"><i
+                                        class="fas fa-user-edit"></i></a>
+                                <button class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top"
+                                        title="Bel naar dit profiel"
+                                        onclick=""><i
+                                        class="fas fa-phone"></i></button>
+                                <button class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top"
+                                        title="Mail naar dit profiel"
+                                        onclick=""><i
+                                        class="fas fa-envelope"></i>
                                 </button>
                             </div>
                         </div>
@@ -153,54 +154,6 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                Vanessa Smith
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                Vannessa@live.nl
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Phone</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                (239) 816-9029
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Mobile</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                (320) 380-4539
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Address</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                Utrecht, Nederland
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row gutters-sm">
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
@@ -281,7 +234,8 @@
                                                 dag van alles te beleven. Wat dacht u van een indrukwekkende stedentip
                                                 naar steden die u zeker moet hebben gezien: Barcelona of Madrid.
                                             </div>
-                                            <a class="btn btn-outline-primary m-1" href="https://www.corendon.nl/spanje" target="_blank">Bekijk
+                                            <a class="btn btn-outline-primary m-1" href="https://www.corendon.nl/spanje"
+                                               target="_blank">Bekijk
                                                 vakantie <i class="fas fa-plane"></i></a>
                                         </div>
                                     </div>
@@ -298,8 +252,6 @@
                                     <li class="list-group-item">Bergwandelingen</li>
                                     <li class="list-group-item">Vissen</li>
                                     <li class="list-group-item">Scubadiven</li>
-                                    <li class="list-group-item">Shisha roken (ff serieus?)</li>
-                                    <li class="list-group-item">One night stands</li>
                                 </ul>
                             </div>
                         </div>
@@ -372,6 +324,19 @@
         </div>
     </div>
 </div>
+
+<!-- Javascript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+        crossorigin="anonymous"></script>
+<script src="assets/js/app.js"></script>
+
 </div>
 
 </body>
