@@ -4,33 +4,34 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Corendon - Vakantie Maatje</title>
-    <link rel="icon" href="./assets/img/favicon.ico">
+    <link href="./assets/img/favicon.ico" rel="icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-          crossorigin="anonymous"/>
+          rel="stylesheet"/>
     <link href="assets/css/default.css" rel="stylesheet"/>
 
     <!-- Javascript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <script crossorigin="anonymous"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script crossorigin="anonymous"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script crossorigin="anonymous"
             integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
-            crossorigin="anonymous"></script>
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
 
@@ -39,15 +40,16 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="./index.html"><img src="assets/img/logo.jpg" style="height: 40px;"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
             <i class="fas fa-ellipsis-v" style="color: #D72007; font-size: 1.5em;"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <a class="btn btn-primary ml-auto" href="profileOverview.html">Home <i class="fas fa-home"></i></a>
-            <a class="btn btn-primary" href="profileDetail.html" style="margin-left:10px;">Profiel <i class="fas fa-user"></i></a>
-            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;">Notificaties <i class="fas fa-bell"></i></a>
-            <a class="btn btn-primary" href="addMessage.html" style="margin-left:10px;">Bericht plaatsen <i class="fas fa-plus"></i></a>
+            <a class="btn btn-primary" href="userProfile.html" style="margin-left:10px;">Profiel <i
+                    class="fas fa-user"></i></a>
+            <a class="btn btn-primary" href="notifications.html" style="margin-left:10px;">Notificaties <i
+                    class="fas fa-bell"></i></a>
             <a class="btn btn-danger" href="index.html" style="margin-left:10px;">Uitloggen <i
                     class="fas fa-sign-out-alt"></i></a>
         </div>
@@ -61,28 +63,31 @@
             <div class="col-md-12 mb-3">
                 <h1>Notificaties</h1>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start text-left">
+                    <a class="list-group-item list-group-item-action flex-column align-items-start text-left" href="#">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">Nieuwe vriend: Vanessa Smith</h5>
                             <small>3 days ago</small>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+                            varius blandit.</p>
                         <small>Donec id elit non mi porta.</small>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start text-left">
+                    <a class="list-group-item list-group-item-action flex-column align-items-start text-left" href="#">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">Maak zo hier een nieuwe oproep aan!</h5>
                             <small class="text-muted">3 days ago</small>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+                            varius blandit.</p>
                         <small class="text-muted">Donec id elit non mi porta.</small>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start text-left">
+                    <a class="list-group-item list-group-item-action flex-column align-items-start text-left" href="#">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">Welkom bij Corendon Vakantie maatje!</h5>
                             <small class="text-muted">3 days ago</small>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+                            varius blandit.</p>
                         <small class="text-muted">Donec id elit non mi porta.</small>
                     </a>
                 </div>
