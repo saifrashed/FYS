@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c9d0811-1889-43e7-a6e3-77e002c84e62" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/img/ads/ad-1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/ads/ad-2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/ads/ad-3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img/stock/stock-7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addMessage.html" beforeDir="false" afterPath="$PROJECT_DIR$/addMessage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/default.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img/holder.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/img/holder.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/vendors/jquery/jquery-3.4.1.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendors/jquery/jquery-3.4.1.min.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/userFriends.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notifications.html" beforeDir="false" afterPath="$PROJECT_DIR$/notifications.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/profileDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/profileOverview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profileUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/userProfile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/register.html" afterDir="false" />
-    </list>
+    <list default="true" id="7c9d0811-1889-43e7-a6e3-77e002c84e62" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
