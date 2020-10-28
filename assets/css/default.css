@@ -219,3 +219,12 @@ Einde landing page styling
 .min-width-input {
     min-width: 100px;
 }
+
+/*
+Profile detail page styling
+ */
+.profileDetail-img{
+    width: 100%;
+    height: 100%;
+    
+}
