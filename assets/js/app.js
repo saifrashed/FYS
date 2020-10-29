@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
+    
 
     /**
      * Alert for functionalities for which u need to be friends.
@@ -14,8 +15,7 @@ $(document).ready(function () {
      * Alert to give user feedback when friend request is send.
      */
     $(".friend-request-alert").click(function () {
-        $('.toast-body').html("U heeft een vriendverzoek verstuurd!");
-        $('.toast').toast('show');
+        toastr.success('Have fun storming the castle!')
     });
 
 
