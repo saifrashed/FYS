@@ -2,35 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Corendon - Vakantie Maatje</title>
-    <link rel="icon" href="./assets/img/favicon.ico">
+    <link href="./assets/img/favicon.ico" rel="icon">
 
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-          crossorigin="anonymous"/>
+          rel="stylesheet"/>
     <link href="assets/css/default.css" rel="stylesheet"/>
 
 
     <!-- Javascript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <script crossorigin="anonymous"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script crossorigin="anonymous"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script crossorigin="anonymous"
             integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
-            crossorigin="anonymous"></script>
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
 
@@ -40,15 +41,15 @@
     <div class="container">
         <a class="navbar-brand" href="./index.html"><img src="assets/img/logo.jpg" style="height: 40px;"/></a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
             <i class="fas fa-ellipsis-v" style="color: #D72007; font-size: 1.5em;"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0 navbar-nav ml-auto">
                 <input class="form-control mr-sm-2" placeholder="Email">
-                <input class="form-control mr-sm-2" type="password" placeholder="Wachtwoord">
+                <input class="form-control mr-sm-2" placeholder="Wachtwoord" type="password">
                 <a class="btn btn-outline-primary my-2 my-sm-0" href="profileOverview.html">Login</a>
                 <a class="btn btn-outline-primary my-2 my-sm-0" href="register.html" style="margin-left:10px;">Registreren</a>
             </form>
@@ -61,7 +62,7 @@
         <div class="container">
             <h1 class="masthead-heading mb-0">Vind jou vakantie buddy!</h1>
             <h2 class="masthead-subheading mb-0">en snel ook...</h2>
-            <a href="register.html" class="btn btn-primary btn-xl rounded-pill mt-5">Registreer</a>
+            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="register.html">Registreer</a>
         </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -73,13 +74,15 @@
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2">
                 <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="assets/img/landing/01.jpg" alt="">
+                    <img alt="" class="img-fluid rounded-circle" src="assets/img/landing/01.jpg">
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
                     <h2 class="display-4">Registreer</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
+                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                        voluptatum molestiae adipisci, beatae obcaecati.</p>
                 </div>
             </div>
         </div>
@@ -91,13 +94,15 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="assets/img/landing/02.jpg" alt="">
+                    <img alt="" class="img-fluid rounded-circle" src="assets/img/landing/02.jpg">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="p-5">
                     <h2 class="display-4">Personaliseer</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
+                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                        voluptatum molestiae adipisci, beatae obcaecati.</p>
                 </div>
             </div>
         </div>
@@ -109,13 +114,15 @@
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2">
                 <div class="p-5">
-                    <img class="img-fluid rounded-circle" src="assets/img/landing/03.jpg" alt="">
+                    <img alt="" class="img-fluid rounded-circle" src="assets/img/landing/03.jpg">
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
                     <h2 class="display-4">Ontdek meer</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
+                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                        voluptatum molestiae adipisci, beatae obcaecati.</p>
                 </div>
             </div>
         </div>
@@ -124,7 +131,8 @@
 
 <footer class="py-5 bg-black">
     <div class="container">
-        <p class="m-0 text-center text-white small">Corendon &copy; Gegarandeerd veilig boeken want Corendon is aangesloten bij het ANVR, SGR en
+        <p class="m-0 text-center text-white small">Corendon &copy; Gegarandeerd veilig boeken want Corendon is
+            aangesloten bij het ANVR, SGR en
             Calamiteitenfonds.</p>
     </div>
 </footer>

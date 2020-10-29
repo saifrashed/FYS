@@ -2,6 +2,23 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
 
+    /**
+     * Alert for functionalities for which u need to be friends.
+     */
+    $(".friend-required-alert").click(function () {
+        $('.toast-body').html("U moet eerst vrienden zijn voor dit");
+        $('.toast').toast('show');
+    });
+
+    /**
+     * Alert to give user feedback when friend request is send.
+     */
+    $(".friend-request-alert").click(function () {
+        $('.toast-body').html("U heeft een vriendverzoek verstuurd!");
+        $('.toast').toast('show');
+    });
+
+
     $('.items').slick({
         dots:           true,
         infinite:       true,
