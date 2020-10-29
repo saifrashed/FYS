@@ -1,21 +1,58 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
-    
+
 
     /**
      * Alert for functionalities for which u need to be friends.
      */
     $(".friend-required-alert").click(function () {
-        $('.toast-body').html("U moet eerst vrienden zijn voor dit");
-        $('.toast').toast('show');
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        toastr.info('U moet eerst vrienden zijn voor dit');
     });
 
     /**
      * Alert to give user feedback when friend request is send.
      */
     $(".friend-request-alert").click(function () {
-        toastr.success('Have fun storming the castle!')
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        toastr.success('Vriendschapverzoek verstuurd!');
     });
 
 
@@ -55,5 +92,3 @@ $(document).ready(function () {
         ]
     });
 });
-
-
