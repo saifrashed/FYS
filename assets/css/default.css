@@ -229,6 +229,6 @@ Profile detail page styling
 
 }
 
-.toast-success {
+.toast-success, .toast-info {
     opacity: 1 !important;
 }
