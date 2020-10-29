@@ -226,5 +226,9 @@ Profile detail page styling
 .profileDetail-img{
     width: 100%;
     height: 100%;
-    
+
+}
+
+.toast-success {
+    opacity: 1 !important;
 }
