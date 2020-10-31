@@ -1,11 +1,8 @@
 /**
  * Connects to the Cloud Database and offers operations.
  */
-class Database {
+class Api {
     constructor(apiUrl, apiKey, dbName, envName) {
-
-        console.log("WORKS?");
-
         var connection = FYSCloud.API.configure({
             url:         apiUrl,
             apiKey:      apiKey,
@@ -13,9 +10,15 @@ class Database {
             environment: envName
         });
 
-        console.log("WORKS?" + connection);
+        console.log("Api class loaded: " + connection);
     }
 
+    /**
+     * Sends a mail through FYS cloud
+     * @param subject
+     * @param nameAddress
+     * @param emailAddress
+     */
     sendMail(subject, nameAddress, emailAddress) {
         FYSCloud.API.sendEmail({
             from:    {
@@ -38,7 +41,4 @@ class Database {
     }
 
 
-    test() {
-        console.log("test");
-    }
 }

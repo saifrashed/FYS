@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8"/>
 
@@ -31,10 +29,12 @@
     <script crossorigin="anonymous"
             integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-    <script src="assets/js/toastr.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.fys.cloud/fyscloud/0.0.3/fyscloud.bundle.min.js"></script>
-    <script src="assets/js/classes/database.js"></script>
+    <script src="https://cdn.fys.cloud/fyscloud/0.0.3/fyscloud.bundle.min.js"></script>
+    <script src="assets/js/classes/Api.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
 
@@ -49,12 +49,12 @@
             <i class="fas fa-ellipsis-v" style="color: #D72007; font-size: 1.5em;"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="btn btn-primary ml-auto" href="profileOverview.html" data-translate="header.homepage"></a>
-            <a class="btn btn-primary" href="userProfile.html" data-translate="header.profile"></a>
-            <a class="btn btn-primary" href="notifications.html" data-translate="header.notifications"></a>
-            <a class="btn btn-danger" href="index.html" data-translate="header.logout"></a>
+            <a class="btn btn-primary ml-auto" data-translate="header.homepage" href="profileOverview.html"></a>
+            <a class="btn btn-primary" data-translate="header.profile" href="userProfile.html"></a>
+            <a class="btn btn-primary" data-translate="header.notifications" href="notifications.html"></a>
+            <a class="btn btn-danger" data-translate="header.logout" href="index.html"></a>
 
-            <div class="form-group" style="margin: 0 0 0 10px;">
+            <div class="form-group">
                 <select class="form-control" id="localizationLanguageSwitch">
                     <option value="nl">Nederlands</option>
                     <option value="en">English</option>
@@ -71,8 +71,9 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="profileOverview.html">Profiel overzicht</a></li>
+                <li class="breadcrumb-item"><a data-translate="breadcrumbs.home" href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a data-translate="breadcrumbs.profileList" href="profileOverview.html">Profiel
+                    overzicht</a></li>
                 <li aria-current="page" class="breadcrumb-item active">@vanessasmith</li>
             </ol>
         </nav>
@@ -80,26 +81,21 @@
 
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
-                <div class="card">
+                <div class="card profile-card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img alt="Admin" class="profileDetail-img" src="assets/img/stock/stock-4.jpg">
+                            <div class="profiledetail-img"
+                                 style="background-image: url('assets/img/stock/stock-4.jpg')">
+                            </div>
                             <div class="mt-3">
                                 <h4>Vanessa Smith</h4>
                                 <p class="text-secondary mb-1">Reiziger</p>
                                 <p class="text-muted font-size-sm">Utrecht, Utrecht</p>
-                                <button class="btn btn-primary friend-request-alert" data-placement="top"
-                                        data-toggle="tooltip"
-                                        title="Toevoegen als vriend"><i class="fas fa-user-plus"></i></button>
-                                <button class="btn btn-outline-primary friend-required-alert" data-placement="top"
-                                        data-toggle="tooltip"
-                                        onclick=""
-                                        title="Bel naar dit profiel"><i
+                                <button class="btn btn-primary friend-request-alert"><i class="fas fa-user-plus"></i>
+                                </button>
+                                <button class="btn btn-outline-primary friend-required-alert"><i
                                         class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary friend-required-alert" data-placement="top"
-                                        data-toggle="tooltip"
-                                        onclick=""
-                                        title="Mail naar dit profiel"><i
+                                <button class="btn btn-outline-primary friend-required-alert"><i
                                         class="fas fa-envelope"></i>
                                 </button>
                             </div>
@@ -171,8 +167,8 @@
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Favorieten</i>Vakanties
-                                </h6>
+                                <h6 class="d-flex align-items-center mb-3"
+                                    data-translate="profiledetail.favoriteVacations"></h6>
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
@@ -267,8 +263,8 @@
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Favorieten</i>Hobby's
-                                </h6>
+                                <h6 class="d-flex align-items-center mb-3"
+                                    data-translate="profiledetail.favoriteHobbies"></h6>
                                 <ul class="list-group">
                                     <li class="list-group-item">Bergwandelingen</li>
                                     <li class="list-group-item">Vissen</li>
@@ -281,8 +277,7 @@
 
                 <div class="row">
                     <div class="col-sm-12 mb-3">
-                        <h6 class="d-flex align-items-center mb-3 mt-3"><i class="material-icons text-info mr-2">Berichten</i>Oproepen
-                        </h6>
+                        <h6 class="d-flex align-items-center mb-3 mt-3" data-translate="profiledetail.messages"></h6>
                         <div class="list-group">
                             <a class="list-group-item list-group-item-action flex-column align-items-start text-left"
                                href="#">
@@ -296,10 +291,10 @@
                                     woord Scandinavië meteen doet denken aan ‘kou’ en winterjassen. Toch is het een erg
                                     onderschatte bestemming.
                                 </p>
-                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i>
-                                </button>
-                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i>
-                                </button>
+                                <button class="btn btn-outline-primary" data-translate="profiledetail.call"
+                                        disabled></button>
+                                <button class="btn btn-outline-primary" data-translate="profiledetail.mail"
+                                        disabled></button>
                             </a>
 
                             <a class="list-group-item list-group-item-action flex-column align-items-start text-left"
@@ -314,10 +309,10 @@
                                     woord Scandinavië meteen doet denken aan ‘kou’ en winterjassen. Toch is het een erg
                                     onderschatte bestemming.
                                 </p>
-                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i>
-                                </button>
-                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i>
-                                </button>
+                                <button class="btn btn-outline-primary" data-translate="profiledetail.call"
+                                        disabled></button>
+                                <button class="btn btn-outline-primary" data-translate="profiledetail.mail"
+                                        disabled></button>
                             </a>
 
                             <a class="list-group-item list-group-item-action flex-column align-items-start text-left"
@@ -332,12 +327,11 @@
                                     woord Scandinavië meteen doet denken aan ‘kou’ en winterjassen. Toch is het een erg
                                     onderschatte bestemming.
                                 </p>
-                                <button class="btn btn-outline-primary" disabled>Bellen <i class="fas fa-phone"></i>
-                                </button>
-                                <button class="btn btn-outline-primary" disabled>Mailen <i class="fas fa-envelope"></i>
-                                </button>
+                                <button class="btn btn-outline-primary" data-translate="profiledetail.call"
+                                        disabled></button>
+                                <button class="btn btn-outline-primary" data-translate="profiledetail.mail"
+                                        disabled></button>
                             </a>
-
                         </div>
                     </div>
                 </div>
@@ -345,5 +339,11 @@
         </div>
     </div>
 </div>
+
+<footer class="py-3 bg">
+    <div class="container">
+        <p class="m-0 text-center text-white small" data-translate="footer.copyright"></p>
+    </div>
+</footer>
 </body>
 </html>
