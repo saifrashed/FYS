@@ -16,6 +16,8 @@ h6 {
     font-weight: 800 !important;
 }
 
+
+
 /**
 Landing page styling
  */
@@ -26,6 +28,39 @@ Header
 
 .navbar {
     background-color: #fff;
+}
+
+.navbar .btn-primary,
+.navbar .btn-danger{
+    margin-left: 10px;
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navbar .btn-primary,
+    .navbar .btn-danger{
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
+}
+
+/* Mobiel landscape */
+@media (min-width: 481px) and (max-width: 767px) {
+    .navbar .btn-primary,
+    .navbar .btn-danger{
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
+}
+
+
+/* Mobiel */
+@media (min-width: 320px) and (max-width: 480px) {
+    .navbar .btn-primary,
+    .navbar .btn-danger{
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
 }
 
 /**
@@ -223,7 +258,7 @@ Einde landing page styling
 /*
 Profile detail page styling
  */
-.profileDetail-img{
+.profileDetail-img {
     width: 100%;
     height: 100%;
 
@@ -231,4 +266,15 @@ Profile detail page styling
 
 .toast-success, .toast-info {
     opacity: 1 !important;
+}
+
+
+/* translation styling */
+
+[data-translate] {
+    visibility: hidden;
+}
+
+[data-translate][translated] {
+    visibility: visible;
 }
