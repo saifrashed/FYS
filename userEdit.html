@@ -34,7 +34,8 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.fys.cloud/fyscloud/0.0.3/fyscloud.bundle.min.js"></script>
     <script src="https://cdn.fys.cloud/fyscloud/0.0.3/fyscloud.bundle.min.js"></script>
-    <script src="assets/js/classes/Api.js"></script>
+    <script src="assets/js/classes/Database.js"></script>
+    <script src="assets/js/classes/User.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
 
@@ -52,7 +53,7 @@
             <a class="btn btn-primary ml-auto" data-translate="header.homepage" href="profileOverview.html"></a>
             <a class="btn btn-primary" data-translate="header.profile" href="userProfile.html"></a>
             <a class="btn btn-primary" data-translate="header.notifications" href="notifications.html"></a>
-            <a class="btn btn-danger" data-translate="header.logout" href="index.html"></a>
+            <a class="btn btn-danger" id="logout-button" data-translate="header.logout"></a>
 
             <div class="form-group">
                 <select class="form-control" id="localizationLanguageSwitch">

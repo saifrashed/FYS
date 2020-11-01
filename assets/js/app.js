@@ -2,12 +2,11 @@ $(document).ready(function () {
 
 
     /*
-     * Api class
-     *
-     * Initial functions will be run and the api class will be included.
+     * Initializing FYS API & database operations
      */
-    var api = new Api("https://api.fys.cloud", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5", "mockup");
+    var database = new Database("https://api.fys.cloud", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5", "mockup");
 
+    // database.sendMail("Hahaha", "saifeddinerashed", "saifeddinerashed@icloud.com");
 
     /*
      * Translation section
@@ -232,6 +231,72 @@ $(document).ready(function () {
      * END: Translation section
      */
 
+    /**
+     * User section
+     *
+     * This section contains the eventlisteners that will be handling user actions like editing profile and logging in and registration.
+     */
+
+
+    /*
+     * Initializing User class and it's operations
+     */
+    var user = new User();
+
+
+    /**
+     * Login button event listener
+     */
+    $("#login-button").click(function (e) {
+        e.preventDefault();
+
+        var data = $('#login-form').serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        console.log(data);
+
+
+        window.location.href = "./profileOverview.html";
+    });
+
+    /**
+     * Register button event listener
+     */
+    $("#register-button").click(function (e) {
+        e.preventDefault();
+
+        var data = $('#register-form').serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        console.log(data);
+
+
+        window.location.href = "./profileOverview.html";
+
+    });
+
+
+    /**
+     * Logout button event listener
+     */
+    $("#logout-button").click(function (e) {
+        e.preventDefault();
+
+        //actions
+        console.log("Logging out")
+
+        // window.location.href = "./index.html";
+
+    });
+
+    /**
+     * END: User section
+     */
+
 
     /**
      * Alert for functionalities for which u need to be friends.
@@ -285,5 +350,31 @@ $(document).ready(function () {
         };
 
         toastr.success('Vriendschapverzoek verstuurd!');
+    });
+
+
+    /**
+     * Displays the users friendlist
+     */
+    $('.show-friends-button').on('click', function () {
+        console.log("werkt");
+
+        var friendList = $('.friendlist');
+        var friendListOverlay = $('.page-overlay');
+
+        friendList.toggleClass("show");
+        friendListOverlay.toggleClass("hide-overlay");
+    });
+
+
+    /**
+     * Friendlist page overlay is clickable
+     */
+    $('.page-overlay').on('click', function () {
+        var friendList = $('.friendlist');
+        var friendListOverlay = $('.page-overlay');
+
+        friendList.toggleClass("show");
+        friendListOverlay.toggleClass("hide-overlay");
     });
 });

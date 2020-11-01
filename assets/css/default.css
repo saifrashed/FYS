@@ -78,9 +78,8 @@ body.landing .navbar-light .navbar-toggler {
 }
 
 body.landing header h1, body.landing header h2 {
-    color: #ffc61b;
+    color: #fff;
     word-break: break-all;
-    text-shadow: 4px 4px #d81f06;
 }
 
 body.landing h2 {
@@ -107,7 +106,7 @@ body.landing header.masthead {
     padding-bottom: 7rem;
     background-image: url("../img/stock/stock-5.jpg");
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center;
     background-attachment: scroll;
     background-size: cover;
 }
@@ -343,6 +342,81 @@ Profile detail page styling
     }
 }
 
+
+/* show friends section */
+
+.show-friends-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+    color: white;
+    border-radius: 50%;
+    z-index: 200;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.show-friends-button:hover {
+    cursor: pointer;
+}
+
+.show-friends-button i {
+    font-size: 1.5em;
+}
+
+
+
+.friendlist-section .friendlist {
+    background: #ffffff;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: -250px;
+    width: 250px;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    overflow: scroll;
+    z-index: 100;
+    transition: 0.5s ease-in-out all;
+}
+
+.friendlist-section .show {
+    right: 0;
+    transition: 0.5s ease-in-out all;
+}
+
+.friendlist-section .row {
+    padding:10px;
+    z-index: 110;
+    border-bottom: 1px solid #d0cdd3;
+}
+
+.page-overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 75;
+    transition: 0.5s ease-in-out all;
+}
+
+.page-overlay:hover {
+    cursor:pointer;
+}
+
+.hide-overlay {
+    background: rgba(0, 0, 0, 0);
+    z-index: -1;
+    transition: 0.5s ease-in-out all;
+}
 
 /* translation styling */
 

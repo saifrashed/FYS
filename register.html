@@ -34,7 +34,8 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.fys.cloud/fyscloud/0.0.3/fyscloud.bundle.min.js"></script>
     <script src="https://cdn.fys.cloud/fyscloud/0.0.3/fyscloud.bundle.min.js"></script>
-    <script src="assets/js/classes/Api.js"></script>
+    <script src="assets/js/classes/Database.js"></script>
+    <script src="assets/js/classes/User.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
 
@@ -65,69 +66,83 @@
         <a href="index.html"><img alt="" class="mb-4" src="assets/img/logo-short.jpg" style="height:50px;"></a>
         <h4 class="card-title mt-3 text-center" data-translate="registerpage.formText"></h4>
         <p class="text-center" data-translate="registerpage.formSubText"></p>
-        <form>
+        <form id="register-form">
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input class="form-control" name="" placeholder="Voornaam" type="text">
+                <input class="form-control" name="userFirstName" placeholder="Voornaam" type="text">
             </div>
+
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input class="form-control" name="" placeholder="Achternaam" type="text">
+
+                <input class="form-control" name="userLastName" placeholder="Achternaam" type="text">
             </div>
 
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input class="form-control" name="" placeholder="Email adres" type="email">
+
+                <input class="form-control" name="userEmail" placeholder="Email adres" type="email">
             </div>
+
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                 </div>
+
                 <select class="custom-select" style="max-width: 75px;">
                     <option selected="">+31</option>
                 </select>
-                <input class="form-control" name="" placeholder="Mobiele nummer" type="text">
+
+                <input class="form-control" name="userPhone" placeholder="Mobiele nummer" type="text">
             </div>
+
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="far fa-calendar-alt"></i> </span>
                 </div>
-                <input class="form-control" id="example-date-input" type="date" value="2011-08-19">
+
+                <input class="form-control" name="userBirthDate" type="date">
             </div>
 
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fas fa-transgender-alt"></i> </span>
                 </div>
-                <select class="form-control">
+
+                <select class="form-control" name="userGender">
                     <option selected=""> Geslacht</option>
                     <option>Man</option>
                     <option>Vrouw</option>
                     <option>Geen van beide</option>
                 </select>
             </div>
+
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input class="form-control" placeholder="Wachtwoord" type="password">
+
+                <input class="form-control" name="userPassword" placeholder="Wachtwoord" type="password">
             </div>
+
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input class="form-control" placeholder="Herhaal wachtwoord" type="password">
+
+                <input class="form-control" name="userPasswordRepeat" placeholder="Herhaal wachtwoord" type="password">
             </div>
+
             <div class="form-group">
-                <a class="btn btn-primary btn-block" data-translate="registerpage.formButton" href="profileOverview.html"
-                   type="submit"></a>
+                <a class="btn btn-primary btn-block" id="register-button" data-translate="registerpage.formButton"></a>
             </div>
+
             <p class="text-center" data-translate="registerpage.formRecover"></p>
             <a href="#">Log In</a>
         </form>
