@@ -14,14 +14,27 @@ class Database {
     }
 
     /**
-     * Sends a mail through FYS cloud
+     * Getter for gender table
+     * @returns {Promise<*>}
+     */
+    async getGenders() {
+        try {
+            return await FYSCloud.API.queryDatabase("SELECT * FROM genders")
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Sends a mail to destination
      * @param subject
      * @param nameAddress
      * @param emailAddress
+     * @returns {Promise<*>}
      */
     async sendMail(subject, nameAddress, emailAddress) {
         try {
-           let sendMail = FYSCloud.API.sendEmail({
+            return FYSCloud.API.sendEmail({
                 from:    {
                     name:    "Group",
                     address: "group@fys.cloud"
@@ -35,8 +48,6 @@ class Database {
                 subject: subject,
                 html:    "<h1>Hello Lennard!</h1><p>This is an email :)</p>"
             });
-
-           console.log("Mail sent");
         } catch (e) {
             console.log(e);
         }

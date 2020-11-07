@@ -292,56 +292,9 @@ Profile detail page styling
 /* Toast styling */
 
 
-/* Tablets */
-@media (min-width: 768px) and (max-width: 1024px) {
-    #toast-container {
-        left: 0;
-        right: 0;
-    }
-
-    #toast-container > div {
-        width: 100%;
-    }
-
-    .toast-success, .toast-info {
-        opacity: 0.9 !important;
-    }
+.toast-success, .toast-info {
+    opacity: 0.9 !important;
 }
-
-
-/* Mobiel landscape */
-@media (min-width: 481px) and (max-width: 767px) {
-    #toast-container {
-        left: 0;
-        right: 0;
-    }
-
-    #toast-container > div {
-        width: 100%;
-    }
-
-    .toast-success, .toast-info {
-        opacity: 0.9 !important;
-    }
-}
-
-
-/* Mobiel */
-@media (min-width: 320px) and (max-width: 480px) {
-    #toast-container {
-        left: 0;
-        right: 0;
-    }
-
-    #toast-container > div {
-        width: 100%;
-    }
-
-    .toast-success, .toast-info {
-        opacity: 0.9 !important;
-    }
-}
-
 
 /* show friends section */
 
