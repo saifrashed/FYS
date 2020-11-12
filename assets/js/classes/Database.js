@@ -52,6 +52,4 @@ class Database {
             console.log(e);
         }
     }
-
-
 }
