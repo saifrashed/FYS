@@ -22,7 +22,7 @@ class User {
 
             console.log(loggedUser);
 
-            if(loggedUser[0]) {
+            if (loggedUser[0]) {
                 localStorage.setItem('FYSAuthId', loggedUser[0].userID);
                 window.location.reload();
             } else {
