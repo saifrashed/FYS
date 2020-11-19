@@ -120,24 +120,18 @@ $(document).ready(function () {
      */
 
 
-    /**
-     * Alert for functionalities for which u need to be friends.
-     */
+    // Alert for functionalities for which u need to be friends.
     $(".friend-required-alert").click(function () {
         notification.info("U moet eerst vrienden zijn voor dit");
     });
 
-    /**
-     * Alert to give user feedback when friend request is send.
-     */
+    // Alert to give user feedback when friend request is send.
     $(".friend-request-alert").on("click", function () {
         notification.success("Vriendschapverzoek verstuurd!");
     });
 
 
-    /**
-     * Displays the users friendlist
-     */
+    // Displays the users friendlist
     $('.show-friends-button').on('click', function () {
         var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
@@ -146,10 +140,7 @@ $(document).ready(function () {
         friendListOverlay.toggleClass("hide-overlay");
     });
 
-
-    /**
-     * Friendlist page overlay is clickable
-     */
+    // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
         var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
