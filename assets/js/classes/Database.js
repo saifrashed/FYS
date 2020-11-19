@@ -14,18 +14,6 @@ class Database {
     }
 
     /**
-     * Getter for gender table
-     * @returns {Promise<*>}
-     */
-    async getGenders() {
-        try {
-            return await FYSCloud.API.queryDatabase("SELECT * FROM genders")
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    /**
      * Sends a mail to destination
      * @param subject
      * @param nameAddress
@@ -52,4 +40,43 @@ class Database {
             console.log(e);
         }
     }
+
+    /**
+     * Saif
+     *
+     * Functionaliteit: Haal geslachten op voor registratie pagina
+     */
+    async getGenders() {
+        try {
+            return await FYSCloud.API.queryDatabase("SELECT * FROM genders")
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
+    /**
+     * Callum
+     *
+     * Functionality:
+     */
+
+
+    /**
+     * Yusuf
+     *
+     * Functionality:
+     */
+
+    /**
+     * Lars
+     *
+     * Functionality:
+     */
+
+    /**
+     * Thor
+     *
+     * Functionality:
+     */
 }
