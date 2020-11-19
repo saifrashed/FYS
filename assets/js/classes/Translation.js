@@ -3,7 +3,7 @@
  */
 class Translation {
 
-    initialLanguage = localStorage.getItem('FYSlang') || window.navigator.userLanguage || window.navigator.language || 'en';
+    initialLanguage = localStorage.getItem('FYSlang') || 'en';
     translations    = {
         header:           {
 

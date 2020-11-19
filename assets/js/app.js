@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     /*
      * Declaration of variables
      */
@@ -9,6 +8,7 @@ $(document).ready(function () {
     var translation  = null;
     var notification = null;
     var genders      = null;
+
 
     /**
      * Init
@@ -157,7 +157,6 @@ $(document).ready(function () {
         friendList.toggleClass("show");
         friendListOverlay.toggleClass("hide-overlay");
     });
-
 
     /**
      * Translation event listeners
