@@ -52,8 +52,8 @@ class User {
             const registerdUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
-                 body.userPhone, body.userPassword,
-                 body.userBirthDate, body.userGender]);
+                    body.userPhone, body.userPassword,
+                    body.userBirthDate, body.userGender]);
 
 
             // saves user in browser
@@ -74,8 +74,8 @@ class User {
                 "SELECT COUNT(*) AS amountUsers FROM users WHERE userID = ?",
                 [userID]);
 
-            const path           = window.location.pathname;
-            const page           = path.split("/").pop();
+            const path = window.location.pathname;
+            const page = path.split("/").pop();
             const userPageRoutes = [
                 "profileOverview.html",
                 "profileDetail.html",
@@ -100,4 +100,20 @@ class User {
             console.log(e);
         }
     }
+
+    /**
+     * User information
+     */
+
+    async getUserData(userID) {
+        try {
+            return await FYSCloud.API.queryDatabase(
+                "SELECT * FROM users WHERE userID = ?",
+                [userID]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
 }
