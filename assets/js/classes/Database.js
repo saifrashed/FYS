@@ -65,8 +65,10 @@ class Database {
     /**
      * Yusuf
      *
-     * Functionality:
+     * Functionality: Profiel aanpassen
      */
+
+
 
     /**
      * Lars

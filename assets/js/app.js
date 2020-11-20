@@ -3,11 +3,12 @@ $(document).ready(function () {
     /*
      * Declaration of variables
      */
-    var database     = null;
-    var user         = null;
-    var translation  = null;
+    var database = null;
+    var user = null;
+    var translation = null;
     var notification = null;
-    var genders      = null;
+    var genders = null;
+    var userData = null;
 
 
     /**
@@ -18,16 +19,18 @@ $(document).ready(function () {
      */
     async function init() {
         // variables
-        database     = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
-        user         = new User();
-        translation  = new Translation();
+        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        user = new User();
+        translation = new Translation();
         notification = new Notifications();
-        genders      = await database.getGenders();
-
+        genders = await database.getGenders();
+        userData = await user.getUserData(localStorage.getItem('FYSAuthId'))
 
         // functions
         populateGenders(genders);
-        user.authenticateUser(localStorage.getItem('FYSAuthId'));
+        user.authenticateUser(localStorage.getItem('FYSAuthId'))
+
+        displayUserData(userData)
     }
 
     init();
@@ -42,7 +45,21 @@ $(document).ready(function () {
             $("#gender-selection").append("<option value=" + value.genderID + ">" + value.description + "</option>");
         });
     }
+    function displayUserData(data) {
 
+        var date = new Date(data[0].birthDate);
+        //userbox
+        $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
+        $("#userprofile-username").html(data[0].email);
+        $("#userprofile-birthdate").html(date.toLocaleDateString());
+
+        //userform
+        $("#userprofile-firstname").val(data[0].firstName);
+        $("#userprofile-lastname").val(data[0].lastName);
+        $("#userprofile-email").val(data[0].email);
+        $("#userprofile-phonenumber").val(data[0].tel);
+        //$("#userprofile-address").val(data.);
+    }
 
     /**
      * User section
@@ -133,7 +150,7 @@ $(document).ready(function () {
 
     // Displays the users friendlist
     $('.show-friends-button').on('click', function () {
-        var friendList        = $('.friendlist');
+        var friendList = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -142,7 +159,7 @@ $(document).ready(function () {
 
     // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
-        var friendList        = $('.friendlist');
+        var friendList = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -152,6 +169,7 @@ $(document).ready(function () {
     /**
      * Translation event listeners
      */
+
     $("#localizationLanguageSwitch").on("change", function () {
         translation.switchLanguage($(this).val());
     });
