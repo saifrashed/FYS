@@ -3,6 +3,8 @@
  */
 class User {
     constructor() {
+        this.userID = localStorage.getItem('FYSAuthId');
+
         console.log("User class loaded: true");
     }
 
@@ -102,9 +104,11 @@ class User {
     }
 
     /**
-     * User information
+     * Gets user informatie
+     *
+     * @param userID
+     * @returns {Promise<*>}
      */
-
     async getUserData(userID) {
         try {
             return await FYSCloud.API.queryDatabase(
