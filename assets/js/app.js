@@ -99,7 +99,7 @@ $(document).ready(function () {
                 return obj;
             }, {});
 
-            // dheck if all fields are filled in.
+            // check if all fields are filled in.
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
                     if (!data[key]) {
