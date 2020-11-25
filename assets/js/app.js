@@ -24,7 +24,11 @@ $(document).ready(function () {
         translation  = new Translation();
         notification = new Notifications();
         genders      = await database.getGenders();
-        userData     = await user.getUserData(user.userID);
+        userData     = await user.getUserData(localStorage.getItem('FYSAuthId'))
+
+        // functions
+        populateGenders(genders);
+        user.authenticateUser(localStorage.getItem('FYSAuthId'))
 
         displayUserData(userData)
     }
@@ -59,7 +63,10 @@ $(document).ready(function () {
         $("#userprofile-lastname").val(data[0].lastName);
         $("#userprofile-email").val(data[0].email);
         $("#userprofile-phonenumber").val(data[0].tel);
+        //$("#userprofile-address").val(data.);
     }
+
+
 
 
     /**
