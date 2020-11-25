@@ -3,12 +3,12 @@ $(document).ready(function () {
     /*
      * Declaration of variables
      */
-    var database = null;
-    var user = null;
-    var translation = null;
+    var database     = null;
+    var user         = null;
+    var translation  = null;
     var notification = null;
-    var genders = null;
-    var userData = null;
+    var genders      = null;
+    var userData     = null;
 
 
     /**
@@ -19,16 +19,12 @@ $(document).ready(function () {
      */
     async function init() {
         // variables
-        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
-        user = new User();
-        translation = new Translation();
+        database     = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        user         = new User();
+        translation  = new Translation();
         notification = new Notifications();
-        genders = await database.getGenders();
-        userData = await user.getUserData(localStorage.getItem('FYSAuthId'))
-
-        // functions
-        populateGenders(genders);
-        user.authenticateUser(localStorage.getItem('FYSAuthId'))
+        genders      = await database.getGenders();
+        userData     = await user.getUserData(user.userID);
 
         displayUserData(userData)
     }
@@ -36,18 +32,23 @@ $(document).ready(function () {
     init();
 
     /**
-     * General functions
-     *
-     * Here you can make functions that will be general purpose
+     * Fills gender options in register page
+     * @param data
      */
     function populateGenders(data) {
         data.map(function (value, key) {
             $("#gender-selection").append("<option value=" + value.genderID + ">" + value.description + "</option>");
         });
     }
+
+    /**
+     * Fills logged user data user data
+     * @param data
+     */
     function displayUserData(data) {
 
         var date = new Date(data[0].birthDate);
+
         //userbox
         $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
         $("#userprofile-username").html(data[0].email);
@@ -58,8 +59,8 @@ $(document).ready(function () {
         $("#userprofile-lastname").val(data[0].lastName);
         $("#userprofile-email").val(data[0].email);
         $("#userprofile-phonenumber").val(data[0].tel);
-        //$("#userprofile-address").val(data.);
     }
+
 
     /**
      * User section
@@ -150,7 +151,7 @@ $(document).ready(function () {
 
     // Displays the users friendlist
     $('.show-friends-button').on('click', function () {
-        var friendList = $('.friendlist');
+        var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -159,7 +160,7 @@ $(document).ready(function () {
 
     // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
-        var friendList = $('.friendlist');
+        var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
