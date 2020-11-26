@@ -173,7 +173,7 @@ class Translation {
                 nl: "Mobiel",
                 en: "Mobile"
             },
-            inputAddress:   {
+            inputResidence:   {
                 nl: "Adres",
                 en: "Address"
             },
