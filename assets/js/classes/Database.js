@@ -4,9 +4,9 @@
 class Database {
     constructor(apiUrl, apiKey, dbName, envName) {
         var connection = FYSCloud.API.configure({
-            url:         apiUrl,
-            apiKey:      apiKey,
-            database:    dbName,
+            url: apiUrl,
+            apiKey: apiKey,
+            database: dbName,
             environment: envName
         });
 
@@ -24,18 +24,18 @@ class Database {
     async sendMail(subject, nameAddress, emailAddress) {
         try {
             return FYSCloud.API.sendEmail({
-                from:    {
-                    name:    "Group",
+                from: {
+                    name: "Group",
                     address: "group@fys.cloud"
                 },
-                to:      [
+                to: [
                     {
-                        name:    nameAddress,
+                        name: nameAddress,
                         address: emailAddress
                     }
                 ],
                 subject: subject,
-                html:    "<h1>Hello Lennard!</h1><p>This is an email :)</p>"
+                html: "<h1>Hello Lennard!</h1><p>This is an email :)</p>"
             });
         } catch (e) {
             console.log(e);
@@ -60,7 +60,8 @@ class Database {
      *
      * Functionaliteit: Haalt hobbies of interesses op
      */
-    async getInterests(type) {
+
+    async getInterestList(type) {
         try {
             switch (type) {
                 case "hobbies":
