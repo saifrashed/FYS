@@ -9,13 +9,15 @@ $(document).ready(function () {
     var notification = null;
     var genders      = null;
     var userData     = null;
+    var hobbiesList  = null;
+    var vacationList = null;
 
 
     /**
      * Init
      *
      * Here you can place the functions & classes  you want to run on startup
-     * @returns {Promise<void>}
+     * @returns {Promise<void> }
      */
     async function init() {
         // variables
@@ -24,13 +26,15 @@ $(document).ready(function () {
         translation  = new Translation();
         notification = new Notifications();
         genders      = await database.getGenders();
-        userData     = await user.getUserData(localStorage.getItem('FYSAuthId'))
+        userData     = await user.getUserData(user.userID);
+        hobbiesList  = await database.getInterests("hobbies");
+        vacationList = await database.getInterests("vacations");
 
         // functions
+        user.authenticateUser(user.userID);
         populateGenders(genders);
-        user.authenticateUser(localStorage.getItem('FYSAuthId'))
-
-        displayUserData(userData)
+        displayUserData(userData);
+        populateInterests(hobbiesList, vacationList)
     }
 
     init();
@@ -57,16 +61,32 @@ $(document).ready(function () {
         $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
         $("#userprofile-username").html(data[0].email);
         $("#userprofile-birthdate").html(date.toLocaleDateString());
+        $("#userprofile-residence").html(data[0].residence);
 
         //userform
         $("#userprofile-firstname").val(data[0].firstName);
         $("#userprofile-lastname").val(data[0].lastName);
         $("#userprofile-email").val(data[0].email);
         $("#userprofile-phonenumber").val(data[0].tel);
-        //$("#userprofile-address").val(data.);
+        $("#userEdit-residence").val(data[0].residence);
+
     }
 
 
+    /**
+     * Adds interests list in user edit page
+     * @param hobbies
+     * @param vacations
+     */
+    function populateInterests(hobbies, vacations) {
+        hobbies.map(function (value, key) {
+            $("#userEditHobbies").append("<option value=" + value.interestID + ">" + value.description + "</option>");
+        });
+
+        vacations.map(function (value, key) {
+            $("#userEditVacations").append("<option value=" + value.vacationID + ">" + value.destination + "</option>");
+        });
+    }
 
 
     /**
@@ -138,6 +158,68 @@ $(document).ready(function () {
 
         //actions
         user.logout();
+    });
+
+    $("#userUpdateSubmit").click(async function (e) {
+        e.preventDefault();
+        console.log("klik werkt");
+
+        var data = $('#userUpdateData').serializeArray().reduce(function (obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        var updatedUser = await user.updateUserData(user.userID, data);
+
+
+        if (updatedUser) {
+            notification.success("Gegevens zijn aangepast!");
+        }
+    });
+
+
+    $("#userEdit-addVacation").click(function () {
+
+        var inputSelectedVacation = $('#userEditVacations').find(":selected");
+
+        var selectedVacation = vacationList.filter(obj => {
+            return obj.vacationID == inputSelectedVacation.val();
+        });
+
+        console.log(selectedVacation);
+
+        $("#vacationAccordion").append("<div class=\"card\">\n" +
+            "                                                <div class=\"card-header\" id=\"headingThree\">\n" +
+            "                                                    <h2 class=\"mb-0\">\n" +
+            "                                                        <button aria-controls=\"collapseThree\"\n" +
+            "                                                                aria-expanded=\"false\"\n" +
+            "                                                                class=\"btn btn-link btn-block text-left collapsed\"\n" +
+            "                                                                data-target=\"#collapseThree\"\n" +
+            "                                                                data-toggle=\"collapse\" type=\"button\">\n" +
+            "                                                            " + selectedVacation[0].destination + " <a href=\"#\" style=\"color: #C92332;\"><i\n" +
+            "                                                                class=\"far fa-times-circle\"></i></a>\n" +
+            "                                                        </button>\n" +
+            "                                                    </h2>\n" +
+            "                                                </div>\n" +
+            "                                            </div>");
+
+
+    });
+
+    $("#userEdit-addHobby").click(function () {
+
+        var inputSelectedHobby = $('#userEditHobbies').find(":selected");
+
+        var selectedHobby = hobbiesList.filter(obj => {
+            return obj.interestID == inputSelectedHobby.val();
+        });
+
+        console.log(selectedHobby);
+
+        $("#hobbiesList").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\"\n" +
+            "                                                                                           style=\"color: #C92332;\"><i\n" +
+            "                                                    class=\"far fa-times-circle\"></i></a></li>");
+
     });
 
     /**

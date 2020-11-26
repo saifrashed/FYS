@@ -11,6 +11,7 @@ class Database {
         });
 
         console.log("Database class loaded: " + connection);
+        console.log(FYSCloud.API.queryDatabase("SELECT * FROM interests"));
     }
 
     /**
@@ -54,6 +55,26 @@ class Database {
         }
     }
 
+    /**
+     * Saif
+     *
+     * Functionaliteit: Haalt hobbies of interesses op
+     */
+    async getInterests(type) {
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("SELECT * FROM interests");
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("SELECT * FROM vacations");
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 
     /**
      * Callum
@@ -67,7 +88,6 @@ class Database {
      *
      * Functionality: Profiel aanpassen
      */
-
 
 
     /**

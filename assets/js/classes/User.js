@@ -52,10 +52,11 @@ class User {
     async register(body) {
         try {
             const registerdUser = await FYSCloud.API.queryDatabase(
-                "INSERT INTO users (firstName, lastName, email, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?)",
+                "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
-                    body.userPhone, body.userPassword,
-                    body.userBirthDate, body.userGender]);
+                 body.userResidence.toLowerCase(),
+                 body.userPhone, body.userPassword,
+                 body.userBirthDate, body.userGender]);
 
 
             // saves user in browser
@@ -76,8 +77,8 @@ class User {
                 "SELECT COUNT(*) AS amountUsers FROM users WHERE userID = ?",
                 [userID]);
 
-            const path = window.location.pathname;
-            const page = path.split("/").pop();
+            const path           = window.location.pathname;
+            const page           = path.split("/").pop();
             const userPageRoutes = [
                 "profileOverview.html",
                 "profileDetail.html",
@@ -85,6 +86,7 @@ class User {
                 "userFriends.html",
                 "userProfile.html",
                 "notifications.html",
+                "addMessage.html",
             ];
 
             if (savedUser[0].amountUsers) {
@@ -117,6 +119,73 @@ class User {
         } catch (e) {
             console.log(e);
         }
+    }
+
+
+    /**
+     * Updates user information
+     * @param userID
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async updateUserData(userID, body) {
+        try {
+            return await FYSCloud.API.queryDatabase(
+                "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=? WHERE userID = ?",
+                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence, userID]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Updates user image
+     * @param userID
+     * @returns {Promise<void>}
+     */
+    async updateUserImage(userID) {
+
+    }
+
+    /**
+     * Adds a message to user profile.
+     * @returns {Promise<void>}
+     */
+    async addMessage() {
+        console.log("add message loaded")
+    }
+
+    /**
+     * retrieves interests to user profile
+     * @param type
+     * @param typeID
+     * @param userID
+     * @returns {Promise<void>}
+     */
+    async getInterest(type, userID) {
+        console.log("add interest loaded")
+    }
+
+    /**
+     * Adds interests to user profile
+     * @param type
+     * @param typeID
+     * @param userID
+     * @returns {Promise<void>}
+     */
+    async addInterest(type, typeID, userID) {
+        console.log("add interest loaded")
+    }
+
+    /**
+     * Deletes interests from a user profile
+     * @param type
+     * @param typeID
+     * @param userID
+     * @returns {Promise<void>}
+     */
+    async deleteInterest(type, typeID, userID) {
+        console.log("delete interest loaded")
     }
 
 
