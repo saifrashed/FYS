@@ -3,7 +3,7 @@
  */
 class Translation {
 
-    initialLanguage = localStorage.getItem('FYSlang') || window.navigator.userLanguage || window.navigator.language || 'en';
+    initialLanguage = localStorage.getItem('FYSlang') || 'en';
     translations    = {
         header:           {
 
@@ -173,7 +173,7 @@ class Translation {
                 nl: "Mobiel",
                 en: "Mobile"
             },
-            inputAddress:   {
+            inputResidence:   {
                 nl: "Adres",
                 en: "Address"
             },
