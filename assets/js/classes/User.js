@@ -148,10 +148,10 @@ class User {
     }
 
     /**
-     * Adds a message to user profile.
+     * Adds a post to user profile.
      * @returns {Promise<void>}
      */
-    async addMessage() {
+    async addPost() {
         console.log("add message loaded")
     }
 
