@@ -13,6 +13,8 @@ $(document).ready(function () {
     var vacationList = null;
     var hobbiesUserList = null;
     var vacationUserList = null;
+    var deleteHobbies = null;
+    var deleteVacation = null;
 
     /**
      * Init
@@ -20,6 +22,7 @@ $(document).ready(function () {
      * Here you can place the functions & classes  you want to run on startup
      * @returns {Promise<void> }
      */
+
     async function init() {
         // variables
         database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
@@ -32,13 +35,17 @@ $(document).ready(function () {
         vacationList = await database.getInterestList("vacations");
         hobbiesUserList = await user.getInterest("hobbies", user.userID);
         vacationUserList = await user.getInterest("vacations", user.userID);
-
+        deleteHobbies = await user.deleteInterest("hobbies", hobbiesUserList, user.userID);
+        deleteVacation = await user.deleteInterest("vacation", vacationUserList, user.userID);
         // functions
         user.authenticateUser(user.userID);
         populateGenders(genders);
         displayUserData(userData);
         populateInterests(hobbiesList, vacationList);
         populateUserInterests(hobbiesUserList, vacationUserList);
+        //deleteInterests(deleteHobbies, deleteVacation);
+
+
     }
 
     init();
@@ -236,14 +243,27 @@ $(document).ready(function () {
                 notification.success("hobby toegevoegd!");
             }
 
-            $("#hobbiesList").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\"\n" +
+            $("#hobbiesList").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
                 "                                                                                           style=\"color: #c92332;\"><i\n" +
                 "                                                    class=\"far fa-times-circle\"></i></a></li>");
 
         } catch (e) {
             console.log(e);
         }
+
     });
+
+//     deletes interests and vacations
+//     $("#userEdit-deleteHobby").click(function (e) {
+//         e.preventDefault();
+//         console.log("klik werkt");
+// try{
+//     var
+//
+// }catch (e) {
+//     console.log(e);
+// }
+//   });
 
     /**
      * END: User section

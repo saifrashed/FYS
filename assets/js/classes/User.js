@@ -210,6 +210,20 @@ class User {
      */
     async deleteInterest(type, typeID, userID) {
         console.log("delete interest loaded")
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND typeID = ?",[userID,typeID]
+                    );
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND typeID = ?",[userID,typeID]
+                    );
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
 
