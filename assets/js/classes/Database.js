@@ -79,8 +79,16 @@ class Database {
     /**
      * Callum
      *
-     * Functionality:
+     * Functionality: matchings algoritme
      */
+
+    async getMatches(userID, searchQuery){
+        try{
+
+        }catch (e) {
+            console.log(e)
+        }
+    }
 
 
     /**
