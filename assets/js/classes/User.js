@@ -54,9 +54,9 @@ class User {
             const registerdUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
-                 body.userResidence.toLowerCase(),
-                 body.userPhone, body.userPassword,
-                 body.userBirthDate, body.userGender]);
+                    body.userResidence.toLowerCase(),
+                    body.userPhone, body.userPassword,
+                    body.userBirthDate, body.userGender]);
 
 
             // saves user in browser
@@ -77,8 +77,8 @@ class User {
                 "SELECT COUNT(*) AS amountUsers FROM users WHERE userID = ?",
                 [userID]);
 
-            const path           = window.location.pathname;
-            const page           = path.split("/").pop();
+            const path = window.location.pathname;
+            const page = path.split("/").pop();
             const userPageRoutes = [
                 "profileOverview.html",
                 "profileDetail.html",
@@ -163,7 +163,18 @@ class User {
      * @returns {Promise<void>}
      */
     async getInterest(type, userID) {
-        console.log("add interest loaded")
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("SELECT interestID, description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID=?", [userID]);
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("SELECT vacationID, destination, description, url FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID=?", [userID]);
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -174,7 +185,20 @@ class User {
      * @returns {Promise<void>}
      */
     async addInterest(type, typeID, userID) {
-        console.log("add interest loaded")
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("INSERT INTO user_interests VALUES (? ,?)",
+                        [userID, typeID]);
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("INSERT INTO user_vacations VALUES (? ,?)",
+                        [userID, typeID]);
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
