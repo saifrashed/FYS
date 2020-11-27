@@ -15,6 +15,7 @@ $(document).ready(function () {
     var vacationUserList = null;
     var deleteHobbies = null;
     var deleteVacation = null;
+    var matchData = null;
 
     /**
      * Init
@@ -37,6 +38,8 @@ $(document).ready(function () {
         vacationUserList = await user.getInterest("vacations", user.userID);
         deleteHobbies = await user.deleteInterest("hobbies", hobbiesUserList, user.userID);
         deleteVacation = await user.deleteInterest("vacation", vacationUserList, user.userID);
+        matchData = await database.getMatches(user.userID, "%%")
+
         // functions
         user.authenticateUser(user.userID);
         populateGenders(genders);
@@ -46,9 +49,43 @@ $(document).ready(function () {
         //deleteInterests(deleteHobbies, deleteVacation);
 
 
+        populateMatches(matchData)
+
+
+        //matchings
+
     }
 
     init();
+
+    /**
+     * Here the html page is filled with matchData
+     * @param data
+     */
+    function populateMatches(data) {
+        for (let i = 0; i < matchData.length; i++) {
+            $("#matchRow").append("<div class=\"col-lg-4 col-md-6 mb-4\">\n" +
+                "                    <div class=\"card h-100\">\n" +
+                "                        <a href=\"profileDetail.html\">\n" +
+                "                            <div class=\"profile-img\"\n" +
+                "                                 style=\"background-image: url('assets/img/stock/stock-7.jpg')\"></div>\n" +
+                "                        </a>\n" +
+                "                        <div class=\"card-body\">\n" +
+                "                            <h4 class=\"card-title\">\n" +
+                "                                <a href=\"profileDetail.html\">" + matchData[i].firstName + " " + matchData[i].lastName + "</a>\n" +
+                "                            </h4>\n" +
+                "                            <p class=\"card-text\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam\n" +
+                "                                aspernatur!</p>\n" +
+                "                        </div>\n" +
+                "\n" +
+                "                        <div class=\"card-footer\">\n" +
+                "                            <small class=\"text-muted\">Match: 87%</small>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>");
+            console.log(matchData[i].firstName)
+        }
+    }
 
     /**
      * Fills gender options in register page

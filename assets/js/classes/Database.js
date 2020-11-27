@@ -80,8 +80,17 @@ class Database {
     /**
      * Callum
      *
-     * Functionality:
+     * Functionality: matchings algoritme
      */
+
+    async getMatches(userID, searchQuery) {
+        try {
+            return await FYSCloud.API.queryDatabase('SELECT * FROM users NATURAL JOIN genders WHERE userID != ? AND firstName LIKE ?', [userID, searchQuery]);
+        } catch
+            (e) {
+            console.log(e)
+        }
+    }
 
 
     /**
