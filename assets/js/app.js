@@ -3,14 +3,15 @@ $(document).ready(function () {
     /*
      * Declaration of variables
      */
-    var database = null;
-    var user = null;    var translation = null;
-    var notification = null;
-    var genders = null;
-    var userData = null;
-    var hobbiesList = null;
-    var vacationList = null;
-    var hobbiesUserList = null;
+    var database         = null;
+    var user             = null;
+    var translation      = null;
+    var notification     = null;
+    var genders          = null;
+    var userData         = null;
+    var hobbiesList      = null;
+    var vacationList     = null;
+    var hobbiesUserList  = null;
     var user             = null;
     var vacationUserList = null;
     var deleteHobbies    = null;
@@ -28,19 +29,19 @@ $(document).ready(function () {
     async function init() {
 
         // parameters
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams   = new URLSearchParams(window.location.search);
         const searchQuery = urlParams.get('query') || "";
 
         // variables
-        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
-        user = new User();
-        translation = new Translation();
-        notification = new Notifications();
-        genders = await database.getGenders();
-        userData = await user.getUserData(user.userID);
-        hobbiesList = await database.getInterestList("hobbies");
-        vacationList = await database.getInterestList("vacations");
-        hobbiesUserList = await user.getInterest("hobbies", user.userID);
+        database         = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        user             = new User();
+        translation      = new Translation();
+        notification     = new Notifications();
+        genders          = await database.getGenders();
+        userData         = await user.getUserData(user.userID);
+        hobbiesList      = await database.getInterestList("hobbies");
+        vacationList     = await database.getInterestList("vacations");
+        hobbiesUserList  = await user.getInterest("hobbies", user.userID);
         vacationUserList = await user.getInterest("vacations", user.userID);
         deleteHobbies    = await user.deleteInterest("hobbies", hobbiesUserList, user.userID);
         deleteVacation   = await user.deleteInterest("vacation", vacationUserList, user.userID);
@@ -87,19 +88,29 @@ $(document).ready(function () {
     async function populateMatches(data) {
         try {
             for (let i = 0; i < matchData.length; i++) {
+
+                // dynamic variables for overview page
                 var profileHobbies = await user.getInterest("hobbies", matchData[i].userID);
+                var profileImage   = 'assets/img/stock/stock-7.jpg';
                 var profileExcerpt = "Geen hobbies";
 
+                var hasProfileImage = await FYSCloud.API.fileExists(matchData[i].userID + ".png");
+
+                // checks if there is a profile image for this profile
+                if (hasProfileImage) {
+                    profileImage = "https://dev-is106-5.fys.cloud/uploads/" + matchData[i].userID + ".png";
+                }
+
+                // checks if there is hobbies for this profile
                 if (profileHobbies) {
                     console.log(matchData[i].firstName)
                 }
 
-                console.log(profileHobbies)
                 $("#matchRow").append("<div class=\"col-lg-4 col-md-6 mb-4\">\n" +
                     "                    <div class=\"card h-100\">\n" +
                     "                        <a href=\"profileDetail.html?userID=" + matchData[i].userID + "\">\n" +
                     "                            <div class=\"profile-img\"\n" +
-                    "                                 style=\"background-image: url('assets/img/stock/stock-7.jpg')\"></div>\n" +
+                    "                                 style=\"background-image: url(" + profileImage + ")\"></div>\n" +
                     "                        </a>\n" +
                     "                        <div class=\"card-body\">\n" +
                     "                            <h4 class=\"card-title\">\n" +
@@ -314,7 +325,7 @@ $(document).ready(function () {
             var selectedVacation = vacationList.filter(obj => {
                 return obj.vacationID == inputSelectedVacation.val();
             });
-            var addVacation = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID)
+            var addVacation      = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID)
             if (addVacation) {
                 notification.success("Vakantie toegevoegd!");
             }
@@ -390,10 +401,10 @@ $(document).ready(function () {
             var fileName = $("#userUpdateImageFile").val();
 
             if (fileName) { // returns true if the string is not empty
-                var uploadedImage = user.updateUserImage(user.userID);
+                var uploadedImage = await user.updateUserImage(user.userID);
 
                 $("#userProfileImage").css({
-                    backgroundImage: "url(https://dev-is106-5.fys.cloud/uploads/" + userID + ".png)",
+                    backgroundImage: "url(" + uploadedImage + ")",
                 });
 
                 console.log(uploadedImage);
@@ -426,7 +437,7 @@ $(document).ready(function () {
 
     // Displays the users friendlist
     $('.show-friends-button').on('click', function () {
-        var friendList = $('.friendlist');
+        var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -435,7 +446,7 @@ $(document).ready(function () {
 
     // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
-        var friendList = $('.friendlist');
+        var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");

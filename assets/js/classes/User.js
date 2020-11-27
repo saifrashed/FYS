@@ -149,11 +149,8 @@ class User {
             // delete existing file
             var deletedFile = await FYSCloud.API.deleteFile(userID + ".png");
 
-            var file       = await FYSCloud.Utils.getDataUrl($("#userUpdateImageFile"));
-            var fileUpload = await FYSCloud.API.uploadFile(userID + ".png", file.url);
-
-            console.log(fileUpload);
-
+            var file = await FYSCloud.Utils.getDataUrl($("#userUpdateImageFile"));
+            return await FYSCloud.API.uploadFile(userID + ".png", file.url);
         } catch (e) {
             console.log(e);
         }
