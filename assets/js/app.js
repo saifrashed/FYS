@@ -13,6 +13,7 @@ $(document).ready(function () {
     var vacationList = null;
     var hobbiesUserList = null;
     var vacationUserList = null;
+    var matchData = null;
 
     /**
      * Init
@@ -32,6 +33,7 @@ $(document).ready(function () {
         vacationList = await database.getInterestList("vacations");
         hobbiesUserList = await user.getInterest("hobbies", user.userID);
         vacationUserList = await user.getInterest("vacations", user.userID);
+        matchData = await database.getMatches(user.userID, "%eve%" )
 
         // functions
         user.authenticateUser(user.userID);
@@ -39,6 +41,10 @@ $(document).ready(function () {
         displayUserData(userData);
         populateInterests(hobbiesList, vacationList);
         populateUserInterests(hobbiesUserList, vacationUserList);
+        console.log(matchData);
+
+        //matchings
+
     }
 
     init();
