@@ -54,9 +54,9 @@ class User {
             const registerdUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
-                    body.userResidence.toLowerCase(),
-                    body.userPhone, body.userPassword,
-                    body.userBirthDate, body.userGender]);
+                 body.userResidence.toLowerCase(),
+                 body.userPhone, body.userPassword,
+                 body.userBirthDate, body.userGender]);
 
 
             // saves user in browser
@@ -77,8 +77,8 @@ class User {
                 "SELECT COUNT(*) AS amountUsers FROM users WHERE userID = ?",
                 [userID]);
 
-            const path = window.location.pathname;
-            const page = path.split("/").pop();
+            const path           = window.location.pathname;
+            const page           = path.split("/").pop();
             const userPageRoutes = [
                 "profileOverview.html",
                 "profileDetail.html",
@@ -144,7 +144,19 @@ class User {
      * @returns {Promise<void>}
      */
     async updateUserImage(userID) {
+        try {
 
+            // delete existing file
+            var deletedFile = await FYSCloud.API.deleteFile(userID + ".png");
+
+            var file       = await FYSCloud.Utils.getDataUrl($("#userUpdateImageFile"));
+            var fileUpload = await FYSCloud.API.uploadFile(userID + ".png", file.url);
+
+            console.log(fileUpload);
+
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -213,10 +225,12 @@ class User {
         try {
             switch (type) {
                 case "hobbies":
-                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND typeID = ?",[userID,typeID]
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND typeID = ?", [userID,
+                                                                                                                          typeID]
                     );
                 case "vacations":
-                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND typeID = ?",[userID,typeID]
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND typeID = ?", [userID,
+                                                                                                                          typeID]
                     );
                 default:
                     return false;

@@ -16,6 +16,7 @@ $(document).ready(function () {
     var deleteHobbies    = null;
     var deleteVacation   = null;
     var matchData        = null;
+    var directory        = null;
 
     /**
      * Init
@@ -44,6 +45,9 @@ $(document).ready(function () {
         deleteHobbies    = await user.deleteInterest("hobbies", hobbiesUserList, user.userID);
         deleteVacation   = await user.deleteInterest("vacation", vacationUserList, user.userID);
         matchData        = await database.getMatches(user.userID, "%" + searchQuery + "%");
+        directory        = await FYSCloud.API.listDirectory();
+
+        console.log(directory);
 
         // functions
         user.authenticateUser(user.userID);
@@ -52,6 +56,7 @@ $(document).ready(function () {
         populateInterests(hobbiesList, vacationList);
         populateUserInterests(hobbiesUserList, vacationUserList);
         populateUserEditInterests(hobbiesUserList, vacationUserList);
+        populateProfileImages(user.userID);
 
         //matchings
         populateMatches(matchData);
@@ -63,6 +68,17 @@ $(document).ready(function () {
     }
 
     init();
+
+
+    /**
+     * Populates profile images
+     * @param userID
+     */
+    function populateProfileImages(userID) {
+        $("#userProfileImage").css({
+            backgroundImage: "url(https://dev-is106-5.fys.cloud/uploads/" + userID + ".png)",
+        });
+    }
 
     /**
      * Here the html page is filled with matchData
@@ -148,8 +164,6 @@ $(document).ready(function () {
      * @param vacations
      */
     function populateUserInterests(hobbies, vacations) {
-
-
         hobbies.map(function (value, key) {
             $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>")
         });
@@ -274,9 +288,9 @@ $(document).ready(function () {
 
         var updatedUser = await user.updateUserData(user.userID, data);
 
-
         if (updatedUser) {
             notification.success("Gegevens zijn aangepast!");
+            window.location.href = "./userProfile.html";
         }
     });
 
@@ -355,6 +369,27 @@ $(document).ready(function () {
             console.log("klik werkt");
         } catch (e) {
             console.log(e);
+        }
+    });
+
+    // upload user profile image
+    $("#userUpdateImageFile").click(async function () { // bCheck is a input type button
+        try {
+            var fileName = $("#userUpdateImageFile").val();
+
+            if (fileName) { // returns true if the string is not empty
+                var uploadedImage = user.updateUserImage(user.userID);
+
+                $("#userProfileImage").css({
+                    backgroundImage: "url(https://dev-is106-5.fys.cloud/uploads/" + userID + ".png)",
+                });
+
+                console.log(uploadedImage);
+            } else { // no file was selected
+                notification.info("Geen profielfoto geselecteerd")
+            }
+        } catch (e) {
+            console.log(e)
         }
     });
 
