@@ -177,6 +177,12 @@ $(document).ready(function () {
                 $("#userProfile-hobbies").append("<li class=\"list-group-item\">Geen Hobbie's</li>")
             }
 
+            // User bio
+            if (data[0].bio) {
+                $("#userprofile-bio").text(data[0].bio);
+            } else {
+                $("#userprofile-bio").text("Deze gebruiker heeft nog geen bio");
+            }
 
             // User Vacations
             if (vacations.length != 0) {
