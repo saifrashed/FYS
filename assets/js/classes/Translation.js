@@ -143,6 +143,10 @@ class Translation {
                 nl: "<i class=\"material-icons text-info mr-2\">Berichten</i>Oproepen",
                 en: "<i class=\"material-icons text-info mr-2\">Messages</i>Calls"
             },
+            bio: {
+                nl: "<i class=\"material-icons text-info mr-2\">Bio</i>Beschrijving",
+                en: "<i class=\"material-icons text-info mr-2\">Bio</i>Description"
+            },
             call:              {
                 nl: "Bellen <i class=\"fas fa-phone\"></i>",
                 en: "Call <i class=\"fas fa-phone\"></i>"
