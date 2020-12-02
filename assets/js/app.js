@@ -236,11 +236,9 @@ $(document).ready(function () {
             for (let i = 0; i < matchData.length; i++) {
 
                 // dynamic variables for overview page
-                var profileHobbies = await user.getInterest("hobbies", matchData[i].userID);
                 var profileImage = 'assets/img/stock/stock-7.jpg';
                 var profileExcerpt = "Geen hobbies";
                 var profileScoring = matchData[i].scoring < 10 ? (matchData[i].scoring * 10) : 100;
-
                 var hasProfileImage = await FYSCloud.API.fileExists(matchData[i].userID + ".png");
 
                 // checks if there is a profile image for this profile
@@ -249,9 +247,13 @@ $(document).ready(function () {
                 }
 
                 // checks if there is hobbies for this profile
-                if (profileHobbies) {
-                    // console.log(matchData[i].firstName)
+                if (matchData[i].hobbies.length) {
+                    profileExcerpt = "";
+                    for (let j = 0; j < matchData[i].hobbies.length; j++) {
+                        profileExcerpt += ", " + matchData[i].hobbies[j];
+                    }
                 }
+
 
                 $("#matchRow").append("<div class=\"col-lg-4 col-md-6 mb-4\">\n" +
                     "                    <div class=\"card h-100\">\n" +
