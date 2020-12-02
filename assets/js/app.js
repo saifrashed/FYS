@@ -166,6 +166,7 @@ $(document).ready(function () {
             $("#userprofile-email").val(data[0].email);
             $("#userprofile-phonenumber").val(data[0].tel);
             $("#userEdit-residence").val(data[0].residence);
+            $("#userEdit-bio").val(data[0].bio);
 
 
             // User hobbies
@@ -389,6 +390,7 @@ $(document).ready(function () {
             obj[item.name] = item.value;
             return obj;
         }, {});
+
 
         var updatedUser = await user.updateUserData(user.userID, data);
 

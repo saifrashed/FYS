@@ -131,8 +131,8 @@ class User {
     async updateUserData(userID, body) {
         try {
             return await FYSCloud.API.queryDatabase(
-                "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=? WHERE userID = ?",
-                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence, userID]);
+                "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=?, bio=? WHERE userID = ?",
+                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence, body.userBio, userID]);
         } catch (e) {
             console.log(e);
         }
@@ -155,22 +155,6 @@ class User {
 
             var file = await FYSCloud.Utils.getDataUrl($("#userUpdateImageFile"));
             return await FYSCloud.API.uploadFile(userID + ".png", file.url);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    /**
-     * Updates user bio
-     * @param userID
-     * @param content
-     * @returns {Promise<*>}
-     */
-    async updateBio(userID, content) {
-        try {
-            return await FYSCloud.API.queryDatabase(
-                "UPDATE users SET bio=? WHERE userID = ?",
-                [content, userID]);
         } catch (e) {
             console.log(e);
         }

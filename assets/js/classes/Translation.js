@@ -181,6 +181,10 @@ class Translation {
                 nl: "Adres",
                 en: "Address"
             },
+            inputBio: {
+                nl: "Bio",
+                en: "Bio"
+            }
         },
         notificationpage: {
             title: {
