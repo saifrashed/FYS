@@ -33,6 +33,7 @@ Header
 .navbar .btn-danger,
 .navbar .form-group {
     margin: 0 0 0 10px;
+    position: relative;
 }
 
 /* Tablets */
@@ -253,11 +254,6 @@ register page styling
 }
 
 
-/**
-Einde landing page styling
- */
-
-
 .min-width-input {
     min-width: 100px;
 }
@@ -333,11 +329,27 @@ input#userUpdateImageFile:hover {
 }
 
 
-/* Toast styling */
+/* Notifications styling */
 
 
 .toast-success, .toast-info {
     opacity: 0.9 !important;
+}
+
+div#notificationCounter {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: white;
+    top: -7px;
+    right: -7px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    color: #0269D9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 /* show friends section */
