@@ -17,7 +17,9 @@ $(document).ready(function () {
     var deleteHobbies    = null;
     var deleteVacation   = null;
     var matchData        = null;
-    var directory        = null;
+    var notifications    = null;
+    var selectedUserData = null;
+
 
     /**
      * Init
@@ -25,61 +27,205 @@ $(document).ready(function () {
      * Here you can place the functions & classes  you want to run on startup
      * @returns {Promise<void> }
      */
-
     async function init() {
 
-        // parameters
-        const urlParams   = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('query') || "";
+        /*
+        Parameters (Dynamic data)
+         */
+        const path         = window.location.pathname.split("/").pop();
+        const urlParams    = new URLSearchParams(window.location.search);
+        const searchQuery  = urlParams.get('query') || "";
+        const selectedUser = urlParams.get('userID') || "";
 
-        // variables
-        database         = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
-        user             = new User();
-        translation      = new Translation();
-        notification     = new Notifications();
-        genders          = await database.getGenders();
-        userData         = await user.getUserData(user.userID);
-        hobbiesList      = await database.getInterestList("hobbies");
-        vacationList     = await database.getInterestList("vacations");
-        hobbiesUserList  = await user.getInterest("hobbies", user.userID);
-        vacationUserList = await user.getInterest("vacations", user.userID);
-        deleteHobbies    = await user.deleteInterest("hobbies", hobbiesUserList, user.userID);
-        deleteVacation   = await user.deleteInterest("vacation", vacationUserList, user.userID);
-        matchData        = await database.getMatches(user.userID, "%" + searchQuery + "%");
-        directory        = await FYSCloud.API.listDirectory();
+        /*
+        Class declaration
+         */
+        database     = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        user         = new User();
+        translation  = new Translation();
+        notification = new Notifications();
 
-        console.log(directory);
-
-        // functions
+        /*
+        Authentication wall
+         */
         user.authenticateUser(user.userID);
+
+
+        /*
+        General variabels
+         */
+        genders       = await database.getGenders();
+        hobbiesList   = await database.getInterestList("hobbies");
+        vacationList  = await database.getInterestList("vacations");
+        notifications = await notification.getNotifications(user.userID);
+
+        /*
+        General functions
+         */
         populateGenders(genders);
-        displayUserData(userData);
         populateInterests(hobbiesList, vacationList);
-        populateUserInterests(hobbiesUserList, vacationUserList);
-        populateUserEditInterests(hobbiesUserList, vacationUserList);
-        populateProfileImages(user.userID);
-
-        //matchings
-        populateMatches(matchData);
+        populateNotifications(notifications);
+        notificationCounter(notifications);
 
 
-        console.log(hobbiesUserList)
+        /*
+        Conditional data
+         */
 
+        // For performance, the matching function will only run on the overview page
+        if (path === "profileOverview.html") {
+            matchData = await database.getMatches(user.userID, "%" + searchQuery + "%");
 
+            populateMatches(matchData);
+        }
+
+        if (selectedUser) { // Dit gebeurd er als een profiel wordt aangeklikt op de overzicht pagina
+            userData         = await user.getUserData(selectedUser);
+            hobbiesUserList  = await user.getInterest("hobbies", selectedUser);
+            vacationUserList = await user.getInterest("vacations", selectedUser);
+
+            displayUserData(userData, hobbiesUserList, vacationUserList);
+        } else { // Dit gebeurd er als een pagina de gebruikers gegevens wilt weergeven
+            userData         = await user.getUserData(user.userID);
+            hobbiesUserList  = await user.getInterest("hobbies", user.userID);
+            vacationUserList = await user.getInterest("vacations", user.userID);
+
+            displayUserData(userData, hobbiesUserList, vacationUserList);
+        }
+
+        // notification.addNotification(user.userID, "Yes", "Jaa zeker", "Klik hier om to te voegen")
     }
 
     init();
 
 
     /**
-     * Populates profile images
-     * @param userID
+     * Adds notifications dynamically to notification page
+     * @param notifications
      */
-    function populateProfileImages(userID) {
-        $("#userProfileImage").css({
-            backgroundImage: "url(https://dev-is106-5.fys.cloud/uploads/" + userID + ".png)",
-        });
+    function populateNotifications(notifications) {
+        for (let i = 0; i < notifications.length; i++) {
+
+            $("#notificationsList").append(
+                "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
+                "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
+                "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
+                "                        </div>\n" +
+                "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
+                "                        <small>" + notifications[i].disclaimer + "</small>\n" +
+                "                    </a>"
+            );
+        }
     }
+
+    /**
+     * Adds a notification counter at the notifications header button
+     * @param allNotifications
+     */
+    function notificationCounter(notifications) {
+        $("#notificationCounter").html("<span>" + notifications.length + "</span>")
+    }
+
+
+    /**
+     * Displays information on page
+     * @param data
+     * @param hobbies
+     * @param vacations
+     * @returns {Promise<void>}
+     */
+    async function displayUserData(data, hobbies, vacations) {
+        try {
+            var date = new Date(data[0].birthDate);
+
+
+            // Image Display
+            var profileImage    = 'url(assets/img/stock/stock-7.jpg)';
+            var hasProfileImage = await FYSCloud.API.fileExists(data[0].userID + ".png");
+
+            // checks if there is a profile image for this profile
+            if (hasProfileImage) {
+                profileImage = "url(https://dev-is106-5.fys.cloud/uploads/" + data[0].userID + ".png)";
+            }
+
+
+            $("#userProfileImage").css({
+                backgroundImage: profileImage,
+            });
+
+
+            // User informatie
+            $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
+            $("#userprofile-username").html(data[0].email);
+            $("#userprofile-birthdate").html(date.toLocaleDateString());
+            $("#userprofile-residence").html(data[0].residence);
+
+            //userform
+            $("#userprofile-firstname").val(data[0].firstName);
+            $("#userprofile-lastname").val(data[0].lastName);
+            $("#userprofile-email").val(data[0].email);
+            $("#userprofile-phonenumber").val(data[0].tel);
+            $("#userEdit-residence").val(data[0].residence);
+
+
+            // User hobbies
+            if (hobbies.length != 0) {
+                hobbies.map(function (value, key) {
+                    $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>")
+                });
+            } else {
+                $("#userProfile-hobbies").append("<li class=\"list-group-item\">Geen Hobbie's</li>")
+            }
+
+
+            // User Vacations
+            if (vacations.length != 0) {
+                vacations.map(function (value, key) {
+                    $("#userProfile-vacations").append("<div class=\"card\">\n" +
+                        "                                        <div class=\"card-header\" id=\"headingOne\">\n" +
+                        "                                            <h2 class=\"mb-0\">\n" +
+                        "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
+                        "                                                        class=\"btn btn-link btn-block text-left\"\n" +
+                        "                                                        data-target=\"#collapseOne\"\n" +
+                        "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
+                        "                                                    " + value.destination + "\n" +
+                        "                                                </button>\n" +
+                        "                                            </h2>\n" +
+                        "                                        </div>\n" +
+                        "\n" +
+                        "                                        <div aria-labelledby=\"headingOne\" class=\"collapse\"\n" +
+                        "                                             data-parent=\"#userProfile-vacations\"\n" +
+                        "                                             id=\"collapseOne\">\n" +
+                        "                                            <div class=\"card-body\">\n" +
+                        "                                                " + value.description + "\n" +
+                        "                                                <a class=\"btn btn-outline-primary m-1\"\n" +
+                        "                                                   href=\" " + value.url + " \"\n" +
+                        "                                                   target=\"_blank\">Bekijk vakantie <i\n" +
+                        "                                                        class=\"fas fa-plane\"></i></a>\n" +
+                        "                                            </div>\n" +
+                        "                                        </div>\n" +
+                        "                                    </div>")
+                });
+            } else {
+                $("#userProfile-vacations").append("" +
+                    "   <div class=\"card\">\n" +
+                    "                                        <div class=\"card-header\" id=\"headingOne\">\n" +
+                    "                                            <h2 class=\"mb-0\">\n" +
+                    "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
+                    "                                                        class=\"btn btn-link btn-block text-left\"\n" +
+                    "                                                        data-target=\"#collapseOne\"\n" +
+                    "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
+                    "                                                    Geen vakantie's\n" +
+                    "                                                </button>\n" +
+                    "                                            </h2>\n" +
+                    "                                        </div></div>");
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 
     /**
      * Here the html page is filled with matchData
@@ -93,6 +239,7 @@ $(document).ready(function () {
                 var profileHobbies = await user.getInterest("hobbies", matchData[i].userID);
                 var profileImage   = 'assets/img/stock/stock-7.jpg';
                 var profileExcerpt = "Geen hobbies";
+                var profileScoring = matchData[i].scoring < 10 ? (matchData[i].scoring * 10) : 100;
 
                 var hasProfileImage = await FYSCloud.API.fileExists(matchData[i].userID + ".png");
 
@@ -103,7 +250,7 @@ $(document).ready(function () {
 
                 // checks if there is hobbies for this profile
                 if (profileHobbies) {
-                    console.log(matchData[i].firstName)
+                    // console.log(matchData[i].firstName)
                 }
 
                 $("#matchRow").append("<div class=\"col-lg-4 col-md-6 mb-4\">\n" +
@@ -120,7 +267,7 @@ $(document).ready(function () {
                     "                        </div>\n" +
                     "\n" +
                     "                        <div class=\"card-footer\">\n" +
-                    "                            <small class=\"text-muted\">Match: 87%</small>\n" +
+                    "                            <small class=\"text-muted\">Match: " + profileScoring + "%</small>\n" +
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>");
@@ -128,8 +275,6 @@ $(document).ready(function () {
         } catch (e) {
             console.log(e)
         }
-
-
     }
 
     /**
@@ -140,29 +285,6 @@ $(document).ready(function () {
         data.map(function (value, key) {
             $("#gender-selection").append("<option value=" + value.genderID + ">" + value.description + "</option>");
         });
-    }
-
-    /**
-     * Fills logged user data user data
-     * @param data
-     */
-    function displayUserData(data) {
-
-        var date = new Date(data[0].birthDate);
-
-        //userbox
-        $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
-        $("#userprofile-username").html(data[0].email);
-        $("#userprofile-birthdate").html(date.toLocaleDateString());
-        $("#userprofile-residence").html(data[0].residence);
-
-        //userform
-        $("#userprofile-firstname").val(data[0].firstName);
-        $("#userprofile-lastname").val(data[0].lastName);
-        $("#userprofile-email").val(data[0].email);
-        $("#userprofile-phonenumber").val(data[0].tel);
-        $("#userEdit-residence").val(data[0].residence);
-
     }
 
 
@@ -181,60 +303,7 @@ $(document).ready(function () {
         });
     }
 
-    /**
-     * Populates user page hobbies and vacations
-     * @param hobbies
-     * @param vacations
-     */
-    function populateUserInterests(hobbies, vacations) {
-        hobbies.map(function (value, key) {
-            $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>")
-        });
 
-
-        vacations.map(function (value, key) {
-            $("#userProfile-vacations").append("<div class=\"card\">\n" +
-                "                                        <div class=\"card-header\" id=\"headingOne\">\n" +
-                "                                            <h2 class=\"mb-0\">\n" +
-                "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
-                "                                                        class=\"btn btn-link btn-block text-left\"\n" +
-                "                                                        data-target=\"#collapseOne\"\n" +
-                "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
-                "                                                    " + value.destination + "\n" +
-                "                                                </button>\n" +
-                "                                            </h2>\n" +
-                "                                        </div>\n" +
-                "\n" +
-                "                                        <div aria-labelledby=\"headingOne\" class=\"collapse\"\n" +
-                "                                             data-parent=\"#userProfile-vacations\"\n" +
-                "                                             id=\"collapseOne\">\n" +
-                "                                            <div class=\"card-body\">\n" +
-                "                                                " + value.description + "\n" +
-                "                                                <a class=\"btn btn-outline-primary m-1\"\n" +
-                "                                                   href=\" " + value.url + " \"\n" +
-                "                                                   target=\"_blank\">Bekijk vakantie <i\n" +
-                "                                                        class=\"fas fa-plane\"></i></a>\n" +
-                "                                            </div>\n" +
-                "                                        </div>\n" +
-                "                                    </div>")
-        });
-    }
-
-    /**
-     * Populates user page hobbies and vacations
-     * @param hobbies
-     * @param vacations
-     */
-    function populateUserEditInterests(hobbies, vacations) {
-        console.log(hobbies);
-        console.log(vacations);
-    }
-
-    /**
-     * User section
-     *
-     * This section contains the eventlisteners that will be handling user actions like editing profile and logging in and registration.
-     */
     // Login button event listener
     $("#login-button").click(async function (e) {
         try {
@@ -284,13 +353,16 @@ $(document).ready(function () {
             }
 
             // registers user
-            var registeredUser = user.register(data);
+            var registeredUser  = await user.register(data);
+            var addNotification = await notification.addNotification(registeredUser, "Welkom bij Corendon Vakantie maatje!", "Begin met het toevoegen van interesses om zo jou profiel te personaliseren en de perfecte vakantie maatje te vinden!", "Bewerken kun je doen bij je profiel.");
+
+
+            window.location.reload();
 
         } catch (e) {
             console.log(e);
         }
     });
-
 
     // Logout button event listener
     $("#logout-button").click(function (e) {
@@ -300,6 +372,7 @@ $(document).ready(function () {
         user.logout();
     });
 
+    // If logged user saves changes
     $("#userUpdateSubmit").click(async function (e) {
         e.preventDefault();
         console.log("klik werkt");
@@ -317,7 +390,7 @@ $(document).ready(function () {
         }
     });
 
-//Adds vacation
+    // Adds vacation
     $("#userEdit-addVacation").click(async function () {
         try {
             var inputSelectedVacation = $('#userEditVacations').find(":selected");
@@ -325,7 +398,7 @@ $(document).ready(function () {
             var selectedVacation = vacationList.filter(obj => {
                 return obj.vacationID == inputSelectedVacation.val();
             });
-            var addVacation      = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID)
+            var addVacation      = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID);
             if (addVacation) {
                 notification.success("Vakantie toegevoegd!");
             }
@@ -370,7 +443,7 @@ $(document).ready(function () {
                 return obj.interestID == inputSelectedHobby.val();
             });
 
-            var addHobbies = await user.addInterest("hobbies", selectedHobby[0].interestID, user.userID)
+            var addHobbies = await user.addInterest("hobbies", selectedHobby[0].interestID, user.userID);
             if (addHobbies) {
                 notification.success("hobby toegevoegd!");
             }
@@ -421,9 +494,7 @@ $(document).ready(function () {
         location.href = "./profileOverview.html?query=" + $("#searchQuery").val();
     });
 
-    /**
-     * END: User section
-     */
+
     // Alert for functionalities for which u need to be friends.
     $(".friend-required-alert").click(function () {
         notification.info("U moet eerst vrienden zijn voor dit");
@@ -433,7 +504,6 @@ $(document).ready(function () {
     $(".friend-request-alert").on("click", function () {
         notification.success("Vriendschapverzoek verstuurd!");
     });
-
 
     // Displays the users friendlist
     $('.show-friends-button').on('click', function () {

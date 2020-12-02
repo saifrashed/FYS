@@ -4,70 +4,70 @@
 class Translation {
 
     initialLanguage = localStorage.getItem('FYSlang') || 'en';
-    translations = {
-        header: {
+    translations    = {
+        header:           {
 
-            homepage: {
+            homepage:      {
                 nl: "Home <i class=\"fas fa-home\"></i>",
                 en: "Home <i class=\"fas fa-home\"></i>"
             },
-            profile: {
+            profile:       {
                 nl: "Profiel <i class=\"fas fa-user\"></i>",
                 en: "Profile <i class=\"fas fa-user\"></i>"
             },
             notifications: {
-                nl: "Notificaties <i class=\"fas fa-bell\"></i>",
-                en: "Notifications <i class=\"fas fa-bell\"></i>"
+                nl: "Notificaties <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>",
+                en: "Notifications <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>"
             },
-            logout: {
+            logout:        {
                 nl: "Uitloggen <i class=\"fas fa-sign-out-alt\"></i>",
                 en: "Logout <i class=\"fas fa-sign-out-alt\"></i>"
             },
-            login: {
+            login:         {
                 nl: "Inloggen",
                 en: "Login"
             },
-            register: {
+            register:      {
                 nl: "Registreren",
                 en: "Registration"
             },
         },
-        footer: {
+        footer:           {
             copyright: {
                 nl: "Corendon © Gegarandeerd veilig boeken want Corendon is aangesloten bij het ANVR, SGR en Calamiteitenfonds.",
                 en: "Corendon © Guaranteed safe booking because Corendon is affiliated with the ANVR, SGR and Calamiteitenfonds."
             }
         },
-        homepage: {
-            headerText: {
+        homepage:         {
+            headerText:          {
                 nl: "Vind jou vakantie buddy!",
                 en: "Find your vacation buddy!"
             },
-            headerSubText: {
+            headerSubText:       {
                 nl: "En snel ook...",
                 en: "And fast..."
             },
-            headerButton: {
+            headerButton:        {
                 nl: "Creeër een profiel",
                 en: "Create an profile"
             },
-            headingOne: {
+            headingOne:          {
                 nl: "Registreer",
                 en: "Registration"
             },
-            headingOneContent: {
+            headingOneContent:   {
                 nl: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
                 en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
             },
-            headingTwo: {
+            headingTwo:          {
                 nl: "Personaliseer",
                 en: "Personalize"
             },
-            headingTwoContent: {
+            headingTwoContent:   {
                 nl: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
                 en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
             },
-            headingThree: {
+            headingThree:        {
                 nl: "Ontdek meer",
                 en: "Discover more"
             },
@@ -76,16 +76,16 @@ class Translation {
                 en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
             }
         },
-        breadcrumbs: {
-            home: {
+        breadcrumbs:      {
+            home:            {
                 nl: "Home",
                 en: "Home"
             },
-            profileList: {
+            profileList:     {
                 nl: "Profieloverzicht",
                 en: "Profilelist"
             },
-            userProfile: {
+            userProfile:     {
                 nl: "Mijn profiel",
                 en: "My profile"
             },
@@ -94,20 +94,20 @@ class Translation {
                 en: "Edit profile"
             },
         },
-        registerpage: {
-            formText: {
+        registerpage:     {
+            formText:          {
                 nl: "Creeër een profiel",
                 en: "Create an profile"
             },
-            formSubText: {
+            formSubText:       {
                 nl: "En vind een vakantie maatje",
                 en: "And find a vacation buddy"
             },
-            formButton: {
+            formButton:        {
                 nl: "Creeër een profiel",
                 en: "Create an account"
             },
-            formRecover: {
+            formRecover:       {
                 nl: "Al een profiel gemaakt?",
                 en: "Already have an profile?"
             },
@@ -116,44 +116,44 @@ class Translation {
                 en: "login"
             },
         },
-        profileoverview: {
+        profileoverview:  {
             feelingLuckyButton: {
                 nl: "Ik doe een gok <i class=\"far fa-hand-point-right\"></i>",
                 en: "I'm feeling lucky <i class=\"far fa-hand-point-right\"></i>"
             },
-            searchButton: {
+            searchButton:       {
                 nl: "Zoeken",
                 en: "Search"
             },
-            filterButton: {
+            filterButton:       {
                 nl: "verfijn op interesses",
                 en: "Filter on interests"
             },
         },
-        profiledetail: {
+        profiledetail:    {
             favoriteVacations: {
                 nl: "<i class=\"material-icons text-info mr-2\">Favorieten</i>Vakanties",
                 en: "<i class=\"material-icons text-info mr-2\">Favorite</i>Vacations"
             },
-            favoriteHobbies: {
+            favoriteHobbies:   {
                 nl: "<i class=\"material-icons text-info mr-2\">Favorieten</i>Hobby's",
                 en: "<i class=\"material-icons text-info mr-2\">Favorite</i>Hobbies"
             },
-            messages: {
+            messages:          {
                 nl: "<i class=\"material-icons text-info mr-2\">Berichten</i>Oproepen",
                 en: "<i class=\"material-icons text-info mr-2\">Messages</i>Calls"
             },
-            call: {
+            call:              {
                 nl: "Bellen <i class=\"fas fa-phone\"></i>",
                 en: "Call <i class=\"fas fa-phone\"></i>"
             },
-            mail: {
+            mail:              {
                 nl: "Mailen <i class=\"fas fa-envelope\"></i>",
                 en: "Mail <i class=\"fas fa-envelope\"></i>"
             },
         },
-        useredit: {
-            doneButton: {
+        useredit:         {
+            doneButton:     {
                 nl: "Klaar <i class=\"fas fa-check\"></i>",
                 en: "Done <i class=\"fas fa-check\"></i>"
             },
@@ -161,15 +161,15 @@ class Translation {
                 nl: "Voornaam",
                 en: "Firstname"
             },
-            inputLastName: {
+            inputLastName:  {
                 nl: "Achternaam",
                 en: "Lastname"
             },
-            inputEmail: {
+            inputEmail:     {
                 nl: "Email",
                 en: "Email"
             },
-            inputMobile: {
+            inputMobile:    {
                 nl: "Mobiel",
                 en: "Mobile"
             },
@@ -184,13 +184,13 @@ class Translation {
                 en: "Notifications"
             }
         },
-        userfriends: {
+        userfriends:      {
             title: {
                 nl: "Vrienden",
                 en: "Friends"
             }
         },
-        loremipsum: {
+        loremipsum:       {
             nl: "is handig om te gebruiken als plaatsvervanger",
             en: "is nice for to use as a placeholder"
         }
