@@ -85,6 +85,7 @@ class Database {
     async getMatches(userID, searchQuery) {
         try {
 
+            // ingelogde profiel
             const userProfile       = await FYSCloud.API.queryDatabase('SELECT * FROM users NATURAL JOIN genders WHERE userID = ?', [userID]);
             const userHobbiesQuery  = await FYSCloud.API.queryDatabase('SELECT description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID = ?', [userID]);
             const userVacationQuery = await FYSCloud.API.queryDatabase('SELECT destination FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID = ?', [userID]);
@@ -103,7 +104,7 @@ class Database {
             userProfile[0].hobbies   = userHobbies;
             userProfile[0].vacations = userVacations;
 
-
+            // Alle profielen
             const allProfiles = await FYSCloud.API.queryDatabase('SELECT * FROM users NATURAL JOIN genders WHERE userID != ? AND firstName LIKE ?', [userID,
                                                                                                                                                      searchQuery]);
 
@@ -194,9 +195,7 @@ class Database {
                 allProfiles[i].scoring = scoring
             }
 
-            var sortedProfiles = allProfiles.sort((a, b) => (a.scoring < b.scoring) ? 1 : -1);
-
-            return sortedProfiles;
+            return allProfiles.sort((a, b) => (a.scoring < b.scoring) ? 1 : -1);
         } catch
             (e) {
             console.log(e)

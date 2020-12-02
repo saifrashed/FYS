@@ -3,21 +3,21 @@ $(document).ready(function () {
     /*
      * Declaration of variables
      */
-    var database = null;
-    var user = null;
-    var translation = null;
-    var notification = null;
-    var genders = null;
-    var userData = null;
-    var hobbiesList = null;
-    var vacationList = null;
-    var hobbiesUserList = null;
-    var user = null;
+    var database         = null;
+    var user             = null;
+    var translation      = null;
+    var notification     = null;
+    var genders          = null;
+    var userData         = null;
+    var hobbiesList      = null;
+    var vacationList     = null;
+    var hobbiesUserList  = null;
+    var user             = null;
     var vacationUserList = null;
-    var deleteHobbies = null;
-    var deleteVacation = null;
-    var matchData = null;
-    var notifications = null;
+    var deleteHobbies    = null;
+    var deleteVacation   = null;
+    var matchData        = null;
+    var notifications    = null;
     var selectedUserData = null;
 
 
@@ -32,17 +32,17 @@ $(document).ready(function () {
         /*
         Parameters (Dynamic data)
          */
-        const path = window.location.pathname.split("/").pop();
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('query') || "";
+        const path         = window.location.pathname.split("/").pop();
+        const urlParams    = new URLSearchParams(window.location.search);
+        const searchQuery  = urlParams.get('query') || "";
         const selectedUser = urlParams.get('userID') || "";
 
         /*
         Class declaration
          */
-        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
-        user = new User();
-        translation = new Translation();
+        database     = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        user         = new User();
+        translation  = new Translation();
         notification = new Notifications();
 
         /*
@@ -54,9 +54,9 @@ $(document).ready(function () {
         /*
         General variabels
          */
-        genders = await database.getGenders();
-        hobbiesList = await database.getInterestList("hobbies");
-        vacationList = await database.getInterestList("vacations");
+        genders       = await database.getGenders();
+        hobbiesList   = await database.getInterestList("hobbies");
+        vacationList  = await database.getInterestList("vacations");
         notifications = await notification.getNotifications(user.userID);
 
         /*
@@ -79,19 +79,31 @@ $(document).ready(function () {
             populateMatches(matchData);
         }
 
-        if (selectedUser) { // Dit gebeurd er als een profiel wordt aangeklikt op de overzicht pagina
-            userData = await user.getUserData(selectedUser);
-            hobbiesUserList = await user.getInterest("hobbies", selectedUser);
-            vacationUserList = await user.getInterest("vacations", selectedUser);
 
-            displayUserData(userData, hobbiesUserList, vacationUserList);
-        } else { // Dit gebeurd er als een pagina de gebruikers gegevens wilt weergeven
-            userData = await user.getUserData(user.userID);
-            hobbiesUserList = await user.getInterest("hobbies", user.userID);
-            vacationUserList = await user.getInterest("vacations", user.userID);
+        switch (path) {
+            case "profileDetail.html":
+                userData         = await user.getUserData(selectedUser);
+                hobbiesUserList  = await user.getInterest("hobbies", selectedUser);
+                vacationUserList = await user.getInterest("vacations", selectedUser);
 
-            displayUserData(userData, hobbiesUserList, vacationUserList);
+                displayUserData(userData, hobbiesUserList, vacationUserList);
+                break;
+            case "userProfile.html":
+                userData         = await user.getUserData(user.userID);
+                hobbiesUserList  = await user.getInterest("hobbies", user.userID);
+                vacationUserList = await user.getInterest("vacations", user.userID);
+
+                displayUserData(userData, hobbiesUserList, vacationUserList);
+                break;
+            case "userEdit.html":
+                userData         = await user.getUserData(user.userID);
+                hobbiesUserList  = await user.getInterest("hobbies", user.userID);
+                vacationUserList = await user.getInterest("vacations", user.userID);
+
+                displayUserData(userData, hobbiesUserList, vacationUserList);
+                break;
         }
+
 
         // notification.addNotification(user.userID, "Yes", "Jaa zeker", "Klik hier om to te voegen")
     }
@@ -136,11 +148,12 @@ $(document).ready(function () {
      */
     async function displayUserData(data, hobbies, vacations) {
         try {
+
             var date = new Date(data[0].birthDate);
 
 
             // Image Display
-            var profileImage = 'url(assets/img/stock/stock-7.jpg)';
+            var profileImage    = 'url(assets/img/stock/stock-7.jpg)';
             var hasProfileImage = await FYSCloud.API.fileExists(data[0].userID + ".png");
 
             // checks if there is a profile image for this profile
@@ -240,37 +253,37 @@ $(document).ready(function () {
      */
     async function populateMatches(data) {
         try {
-            for (let i = 0; i < matchData.length; i++) {
+            for (let i = 0; i < data.length; i++) {
 
                 // dynamic variables for overview page
-                var profileImage = 'assets/img/stock/stock-7.jpg';
-                var profileExcerpt = "Geen hobbies";
-                var profileScoring = matchData[i].scoring < 10 ? (matchData[i].scoring * 10) : 100;
-                var hasProfileImage = await FYSCloud.API.fileExists(matchData[i].userID + ".png");
+                var profileImage    = 'assets/img/stock/stock-7.jpg';
+                var profileExcerpt  = "Geen hobbies";
+                var profileScoring  = data[i].scoring < 10 ? (data[i].scoring * 10) : 100;
+                var hasProfileImage = await FYSCloud.API.fileExists(data[i].userID + ".png");
 
                 // checks if there is a profile image for this profile
                 if (hasProfileImage) {
-                    profileImage = "https://dev-is106-5.fys.cloud/uploads/" + matchData[i].userID + ".png";
+                    profileImage = "https://dev-is106-5.fys.cloud/uploads/" + data[i].userID + ".png";
                 }
 
                 // checks if there is hobbies for this profile
-                if (matchData[i].hobbies.length) {
+                if (data[i].hobbies.length) {
                     profileExcerpt = "";
-                    for (let j = 0; j < matchData[i].hobbies.length; j++) {
-                        profileExcerpt += ", " + matchData[i].hobbies[j];
+                    for (let j = 0; j < data[i].hobbies.length; j++) {
+                        profileExcerpt += ", " + data[i].hobbies[j];
                     }
                 }
 
 
                 $("#matchRow").append("<div class=\"col-lg-4 col-md-6 mb-4\">\n" +
                     "                    <div class=\"card h-100\">\n" +
-                    "                        <a href=\"profileDetail.html?userID=" + matchData[i].userID + "\">\n" +
+                    "                        <a href=\"profileDetail.html?userID=" + data[i].userID + "\">\n" +
                     "                            <div class=\"profile-img\"\n" +
                     "                                 style=\"background-image: url(" + profileImage + ")\"></div>\n" +
                     "                        </a>\n" +
                     "                        <div class=\"card-body\">\n" +
                     "                            <h4 class=\"card-title\">\n" +
-                    "                                <a href=\"profileDetail.html?userID=" + matchData[i].userID + "\">" + matchData[i].firstName + " " + matchData[i].lastName + "</a>\n" +
+                    "                                <a href=\"profileDetail.html?userID=" + data[i].userID + "\">" + data[i].firstName + " " + data[i].lastName + "</a>\n" +
                     "                            </h4>\n" +
                     "                            <p class=\"card-text\">" + profileExcerpt + "</p>\n" +
                     "                        </div>\n" +
@@ -362,9 +375,8 @@ $(document).ready(function () {
             }
 
             // registers user
-            var registeredUser = await user.register(data);
+            var registeredUser  = await user.register(data);
             var addNotification = await notification.addNotification(registeredUser, "Welkom bij Corendon Vakantie maatje!", "Begin met het toevoegen van interesses om zo jou profiel te personaliseren en de perfecte vakantie maatje te vinden!", "Bewerken kun je doen bij je profiel.");
-
 
             window.location.reload();
 
@@ -396,6 +408,7 @@ $(document).ready(function () {
 
         if (updatedUser) {
             notification.success("Gegevens zijn aangepast!");
+            notification.addNotification(user.userID, "Profiel is bijgewerkt!", "U kunt uw veranderingen zien op de profielpagina.", "Voor andere wijzigingen, zie profiel bijwerken.")
             window.location.href = "./userProfile.html";
         }
     });
@@ -408,7 +421,7 @@ $(document).ready(function () {
             var selectedVacation = vacationList.filter(obj => {
                 return obj.vacationID == inputSelectedVacation.val();
             });
-            var addVacation = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID);
+            var addVacation      = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID);
             if (addVacation) {
                 notification.success("Vakantie toegevoegd!");
             }
@@ -528,7 +541,7 @@ $(document).ready(function () {
 
     // Displays the users friendlist
     $('.show-friends-button').on('click', function () {
-        var friendList = $('.friendlist');
+        var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -537,7 +550,7 @@ $(document).ready(function () {
 
     // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
-        var friendList = $('.friendlist');
+        var friendList        = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
