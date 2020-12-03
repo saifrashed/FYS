@@ -182,20 +182,25 @@ $(document).ready(function () {
             $("#userEdit-bio").val(data[0].bio);
 
 
-            // User hobbies
-            if (hobbies.length != 0) {
-                hobbies.map(function (value, key) {
-                    $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>")
-                });
-            } else {
-                $("#userProfile-hobbies").append("<li class=\"list-group-item\">Geen Hobbie's</li>")
-            }
-
             // User bio
             if (data[0].bio) {
                 $("#userprofile-bio").text(data[0].bio);
             } else {
                 $("#userprofile-bio").text("Deze gebruiker heeft nog geen bio");
+            }
+
+            // User hobbies
+            if (hobbies.length != 0) {
+                hobbies.map(function (value, key) {
+                    $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>");
+                    $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + value.description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
+                        "                                                                                           style=\"color: #c92332;\"><i\n" +
+                        "                                                    class=\"far fa-times-circle\"></i></a></li>")
+                });
+
+            } else {
+                $("#userProfile-hobbies").append("<li class=\"list-group-item\">Geen Hobbie's</li>");
+                $("#userEdit-hobbies").append("<li class=\"list-group-item\">Geen Hobbie's</li>")
             }
 
             // User Vacations
@@ -224,10 +229,38 @@ $(document).ready(function () {
                         "                                                        class=\"fas fa-plane\"></i></a>\n" +
                         "                                            </div>\n" +
                         "                                        </div>\n" +
-                        "                                    </div>")
+                        "                                    </div>");
+
+                    $("#userEdit-vacations").append("<div class=\"card\">\n" +
+                        "                                        <div class=\"card-header\" id=\"headingOne\">\n" +
+                        "                                            <h2 class=\"mb-0\">\n" +
+                        "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
+                        "                                                        class=\"btn btn-link btn-block text-left\"\n" +
+                        "                                                        data-target=\"#collapseOne\"\n" +
+                        "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
+                        "                                                    " + value.destination + "\n" + " <a href=\"#\" id='userEdit-deleteVacation' \n" +
+                        "                                                                                           style=\"color: #c92332;\"><i\n" +
+                        "                                                    class=\"far fa-times-circle\"></i></a> " +
+                        "                                                </button>\n" +
+                        "                                            </h2>\n" +
+                        "                                        </div>\n" +
+                        "\n" + "                                    </div>");
                 });
             } else {
                 $("#userProfile-vacations").append("" +
+                    "   <div class=\"card\">\n" +
+                    "                                        <div class=\"card-header\" id=\"headingOne\">\n" +
+                    "                                            <h2 class=\"mb-0\">\n" +
+                    "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
+                    "                                                        class=\"btn btn-link btn-block text-left\"\n" +
+                    "                                                        data-target=\"#collapseOne\"\n" +
+                    "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
+                    "                                                    Geen vakantie's\n" +
+                    "                                                </button>\n" +
+                    "                                            </h2>\n" +
+                    "                                        </div></div>");
+
+                $("#userEdit-vacations").append("" +
                     "   <div class=\"card\">\n" +
                     "                                        <div class=\"card-header\" id=\"headingOne\">\n" +
                     "                                            <h2 class=\"mb-0\">\n" +
@@ -426,7 +459,7 @@ $(document).ready(function () {
                 notification.success("Vakantie toegevoegd!");
             }
 
-            $("#vacationAccordion").append("<div class=\"card\">\n" +
+            $("#userEdit-vacations").append("<div class=\"card\">\n" +
                 "                                                <div class=\"card-header\" id=\"headingThree\">\n" +
                 "                                                    <h2 class=\"mb-0\">\n" +
                 "                                                        <button aria-controls=\"collapseThree\"\n" +
@@ -448,12 +481,9 @@ $(document).ready(function () {
 
     // deletes vacation
     $("#userEdit-deleteVacation").click(function (e) {
-        try {
-            e.preventDefault();
-            console.log("klik werkt");
-        } catch (e) {
-            console.log(e);
-        }
+        e.preventDefault();
+        console.log("klik werkt");
+
     });
 
 
@@ -471,7 +501,7 @@ $(document).ready(function () {
                 notification.success("hobby toegevoegd!");
             }
 
-            $("#hobbiesList").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
+            $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
                 "                                                                                           style=\"color: #c92332;\"><i\n" +
                 "                                                    class=\"far fa-times-circle\"></i></a></li>");
 
