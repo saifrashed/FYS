@@ -51,7 +51,7 @@ class User {
      */
     async register(body) {
         try {
-            const registerdUser = await FYSCloud.API.queryDatabase(
+            const registeredUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
                  body.userResidence.toLowerCase(),
@@ -60,8 +60,8 @@ class User {
 
 
             // saves user in browser
-            localStorage.setItem('FYSAuthId', registerdUser.insertId);
-            window.location.reload();
+            localStorage.setItem('FYSAuthId', registeredUser.insertId);
+            return registeredUser.insertId;
         } catch (e) {
             console.log(e);
         }
@@ -131,8 +131,8 @@ class User {
     async updateUserData(userID, body) {
         try {
             return await FYSCloud.API.queryDatabase(
-                "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=? WHERE userID = ?",
-                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence, userID]);
+                "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=?, bio=? WHERE userID = ?",
+                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence, body.userBio, userID]);
         } catch (e) {
             console.log(e);
         }
@@ -144,14 +144,27 @@ class User {
      * @returns {Promise<void>}
      */
     async updateUserImage(userID) {
+        try {
+            // delete existing file
+            var hasProfileImage = await FYSCloud.API.fileExists(userID + ".png");
 
+            // checks if there is a profile image for this profile and deletes it
+            if (hasProfileImage) {
+                var deletedFile = await FYSCloud.API.deleteFile(userID + ".png");
+            }
+
+            var file = await FYSCloud.Utils.getDataUrl($("#userUpdateImageFile"));
+            return await FYSCloud.API.uploadFile(userID + ".png", file.url);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
-     * Adds a message to user profile.
+     * Adds a post to user profile.
      * @returns {Promise<void>}
      */
-    async addMessage() {
+    async addPost() {
         console.log("add message loaded")
     }
 
@@ -163,7 +176,18 @@ class User {
      * @returns {Promise<void>}
      */
     async getInterest(type, userID) {
-        console.log("add interest loaded")
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("SELECT interestID, description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID=?", [userID]);
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("SELECT vacationID, destination, description, url FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID=?", [userID]);
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -174,7 +198,20 @@ class User {
      * @returns {Promise<void>}
      */
     async addInterest(type, typeID, userID) {
-        console.log("add interest loaded")
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("INSERT INTO user_interests VALUES (? ,?)",
+                        [userID, typeID]);
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("INSERT INTO user_vacations VALUES (? ,?)",
+                        [userID, typeID]);
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -185,8 +222,35 @@ class User {
      * @returns {Promise<void>}
      */
     async deleteInterest(type, typeID, userID) {
-        console.log("delete interest loaded")
+        try {
+            switch (type) {
+                case "hobbies":
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND typeID = ?", [userID,
+                                                                                                                          typeID]
+                    );
+                case "vacations":
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND typeID = ?", [userID,
+                                                                                                                          typeID]
+                    );
+                default:
+                    return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 
+
+    /**
+     * Returns a random userID for the "I'm feeling lucky button"
+     * @returns {Promise<*>}
+     */
+    async getRandomUser() {
+        try {
+            return await FYSCloud.API.queryDatabase("SELECT userID FROM users ORDER BY RAND() LIMIT 1");
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
 }

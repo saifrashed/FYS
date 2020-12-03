@@ -16,8 +16,8 @@ class Translation {
                 en: "Profile <i class=\"fas fa-user\"></i>"
             },
             notifications: {
-                nl: "Notificaties <i class=\"fas fa-bell\"></i>",
-                en: "Notifications <i class=\"fas fa-bell\"></i>"
+                nl: "Notificaties <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>",
+                en: "Notifications <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>"
             },
             logout:        {
                 nl: "Uitloggen <i class=\"fas fa-sign-out-alt\"></i>",
@@ -143,6 +143,10 @@ class Translation {
                 nl: "<i class=\"material-icons text-info mr-2\">Berichten</i>Oproepen",
                 en: "<i class=\"material-icons text-info mr-2\">Messages</i>Calls"
             },
+            bio: {
+                nl: "<i class=\"material-icons text-info mr-2\">Bio</i>Beschrijving",
+                en: "<i class=\"material-icons text-info mr-2\">Bio</i>Description"
+            },
             call:              {
                 nl: "Bellen <i class=\"fas fa-phone\"></i>",
                 en: "Call <i class=\"fas fa-phone\"></i>"
@@ -173,10 +177,14 @@ class Translation {
                 nl: "Mobiel",
                 en: "Mobile"
             },
-            inputResidence:   {
+            inputResidence: {
                 nl: "Adres",
                 en: "Address"
             },
+            inputBio: {
+                nl: "Bio",
+                en: "Bio"
+            }
         },
         notificationpage: {
             title: {

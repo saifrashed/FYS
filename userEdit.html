@@ -87,8 +87,7 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <form id="userUpdateImage">
-                                <div class="profiledetail-img"
-                                     style="background-image: url('assets/img/stock/stock-7.jpg')">
+                                <div class="profiledetail-img" id="userProfileImage">
                                 </div>
                                 <input type="file" id="userUpdateImageFile">
                                 <div id="userUpdateImageIcon">
@@ -96,10 +95,10 @@
                                 </div>
                             </form>
                             <div class="mt-3">
-                                <h4 id="userprofile-name"> Lorem ipsum </h4>
-                                <p class="text-secondary mb-1" id="userprofile-username"> gebruikersnaam </p>
-                                <p class="text-secondary mb-1" id="userprofile-birthdate"> geboortedatum </p>
-                                <p class="text-muted font-size-sm" id="userprofile-residence"> Utrecht, Utrecht</p>
+                                <h4 id="userprofile-name"></h4>
+                                <p class="text-secondary mb-1" id="userprofile-username"></p>
+                                <p class="text-secondary mb-1" id="userprofile-birthdate"></p>
+                                <p class="text-muted font-size-sm" id="userprofile-residence"></p>
                                 <a class="btn btn-success" id="userUpdateSubmit"
                                    data-translate="useredit.doneButton"></a>
                             </div>
@@ -126,7 +125,7 @@
                                     </span>
                                 </div>
                                 <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
-                                       placeholder="Website" type="text" value="https://Lorem.com">
+                                       placeholder="Website" type="text">
                             </div>
                         </li>
 
@@ -146,7 +145,7 @@
                                     </span>
                                 </div>
                                 <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
-                                       placeholder="Twitter" type="text" value="@lorem">
+                                       placeholder="Twitter" type="text">
                             </div>
                         </li>
 
@@ -168,7 +167,7 @@
                                 </svg></span>
                                 </div>
                                 <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
-                                       placeholder="Instagram" type="text" value="@lorem">
+                                       placeholder="Instagram" type="text">
                             </div>
                         </li>
 
@@ -188,7 +187,7 @@
                                 </div>
                                 <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
                                        placeholder="Facebook"
-                                       type="text" value="@lorem">
+                                       type="text">
                             </div>
                         </li>
                     </ul>
@@ -270,6 +269,21 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-12 text-secondary">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                        <span class="input-group-text min-width-input">
+                                            <h6 class="mb-0" data-translate="useredit.inputBio"></h6>
+                                        </span>
+                                        </div>
+                                        <textarea class="form-control" id="userEdit-bio"
+                                                  name="userBio"> </textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
 
                         <div class="row gutters-sm">
@@ -279,7 +293,7 @@
                                         <h6 class="d-flex align-items-center mb-3"
                                             data-translate="profiledetail.favoriteVacations"></h6>
 
-                                        <div class="accordion" id="vacationAccordion">
+                                        <div class="accordion" id="userEdit-vacations">
 
                                         </div>
 
@@ -308,7 +322,7 @@
                                     <div class="card-body">
                                         <h6 class="d-flex align-items-center mb-3"
                                             data-translate="profiledetail.favoriteHobbies"></h6>
-                                        <ul class="list-group" id="hobbiesList"></ul>
+                                        <ul class="list-group" id="userEdit-hobbies"></ul>
                                         <div class="form-group mt-3">
                                             <div class="form-row">
                                                 <div class="col-md-9">

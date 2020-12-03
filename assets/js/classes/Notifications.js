@@ -6,6 +6,54 @@ class Notifications {
         console.log("Notification class loaded: true");
     }
 
+
+    /**
+     * Adds a notification
+     * @param userID
+     * @param title
+     * @param content
+     * @param disclaimer
+     * @returns {Promise<void>}
+     */
+    async addNotification(userID, title, content, disclaimer) {
+        try {
+            return await FYSCloud.API.queryDatabase("INSERT INTO notifications (userID, title, content, disclaimer) VALUES (?, ?, ?, ?)",
+                [userID, title, content, disclaimer]);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    /**
+     * Gets all notifications
+     * @param userID
+     * @returns {Promise<void>}
+     */
+    async getNotifications(userID) {
+        try {
+            return await FYSCloud.API.queryDatabase("SELECT notificationID, title, content, disclaimer FROM users NATURAL JOIN notifications WHERE userID=?", [userID]);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    /**
+     * Deletes a notification
+     * @param notificationID
+     * @returns {Promise<void>}
+     */
+    async deleteNotification(notificationID) {
+        try {
+            return await FYSCloud.API.queryDatabase("DELETE FROM notifications WHERE notificationID= ?", [notificationID]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Info Toast
+     * @param message
+     */
     info(message) {
         toastr.options = {
             "closeButton":       false,
@@ -28,6 +76,10 @@ class Notifications {
         toastr.info(message);
     }
 
+    /**
+     * Success Toast
+     * @param message
+     */
     success(message) {
         toastr.options = {
             "closeButton":       false,

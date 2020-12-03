@@ -41,7 +41,6 @@
 </head>
 
 
-
 <body class="text-center">
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
@@ -87,13 +86,13 @@
                 <div class="card profile-card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <div class="profiledetail-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')">
+                            <div class="profiledetail-img" id="userProfileImage">
                             </div>
                             <div class="mt-3">
-                                <h4>Vanessa Smith</h4>
-                                <p class="text-secondary mb-1">Reiziger</p>
-                                <p class="text-muted font-size-sm">Utrecht, Utrecht</p>
+                                <h4 id="userprofile-name"></h4>
+                                <p class="text-secondary mb-1" id="userprofile-username"></p>
+                                <p class="text-secondary mb-1" id="userprofile-birthdate"></p>
+                                <p class="text-muted font-size-sm" id="userprofile-residence"></p>
                                 <button class="btn btn-primary friend-request-alert"><i class="fas fa-user-plus"></i>
                                 </button>
                                 <button class="btn btn-outline-primary friend-required-alert"><i
@@ -166,100 +165,27 @@
                 </div>
             </div>
             <div class="col-md-8">
+
+                <div class="row">
+                    <div class="col-sm-12 mb-3">
+                        <h6 class="d-flex align-items-center mb-3 mt-3" data-translate="profiledetail.bio"></h6>
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action flex-column align-items-start text-left"
+                               href="#">
+                                <p class="mb-1 " id="userprofile-bio"></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row gutters-sm">
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3"
-                                    data-translate="profiledetail.favoriteVacations"></h6>
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card">
-                                        <div class="card-header" id="headingOne">
-                                            <h2 class="mb-0">
-                                                <button aria-controls="collapseOne" aria-expanded="true"
-                                                        class="btn btn-link btn-block text-left"
-                                                        data-target="#collapseOne"
-                                                        data-toggle="collapse" type="button">
-                                                    Marokko
-                                                </button>
-                                            </h2>
-                                        </div>
-
-                                        <div aria-labelledby="headingOne" class="collapse"
-                                             data-parent="#accordionExample"
-                                             id="collapseOne">
-                                            <div class="card-body">
-                                                Beleef een betoverende vakantie in Marokko; schatkist vol contrasten en
-                                                verrassingen. Ontdek de koningssteden met hun eeuwenoude cultuur en de
-                                                prachtige, fascinerende omgeving. Bezoek palmoases, vriendelijke
-                                                berberdorpjes en de sprookjesachtige stad Marrakech, aan de voet van het
-                                                Atlasgebergte en één van de mooiste en kleurrijkste steden van Marokko.
-                                                Een vakantie naar Marokko is betoverend, een koninkrijk met een uniek
-                                                parfum dat gastvrijheid wordt genoemd.
-                                                <a class="btn btn-outline-primary m-1"
-                                                   href="https://www.corendon.nl/marokko"
-                                                   target="_blank">Bekijk vakantie <i
-                                                        class="fas fa-plane"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingTwo">
-                                            <h2 class="mb-0">
-                                                <button aria-controls="collapseTwo" aria-expanded="false"
-                                                        class="btn btn-link btn-block text-left collapsed"
-                                                        data-target="#collapseTwo"
-                                                        data-toggle="collapse" type="button">
-                                                    Griekenland
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div aria-labelledby="headingTwo" class="collapse"
-                                             data-parent="#accordionExample"
-                                             id="collapseTwo">
-                                            <div class="card-body">
-                                                Hoewel Griekenland bekend staat om zijn ongerepte stranden, helderblauwe
-                                                zee en meer dan 300 dagen zon per jaar, heeft een vakantie naar dit
-                                                heerlijke land u nog veel meer te bieden! Griekenland is namelijk ook
-                                                een belangrijke historische bestemming met een rijk cultureel erfgoed en
-                                                vele bezienswaardigheden. Met Corendon vliegt u in slechts 3,5 uur naar
-                                                de mooiste Griekse eilanden.
-                                                <a class="btn btn-outline-primary m-1"
-                                                   href="https://www.corendon.nl/griekenland"
-                                                   target="_blank">Bekijk vakantie <i
-                                                        class="fas fa-plane"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                            <h2 class="mb-0">
-                                                <button aria-controls="collapseThree" aria-expanded="false"
-                                                        class="btn btn-link btn-block text-left collapsed"
-                                                        data-target="#collapseThree"
-                                                        data-toggle="collapse" type="button">
-                                                    Spanje
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div aria-labelledby="headingThree" class="collapse"
-                                             data-parent="#accordionExample"
-                                             id="collapseThree">
-                                            <div class="card-body">
-                                                Hola señor, señorita! Bienvenida, oftewel welkom in het zonovergoten
-                                                Spanje! Niet voor niets is dit Zuid-Europese land al jaren een geliefd
-                                                vakantiebestemming voor jong en oud. Het heerlijke klimaat, de prachtige
-                                                stranden, bijzondere steden en authentiek dorpjes en de heerlijke keuken
-                                                dragen bij aan het ultieme vakantiegevoel. Bovendien valt er hier iedere
-                                                dag van alles te beleven. Wat dacht u van een indrukwekkende stedentip
-                                                naar steden die u zeker moet hebben gezien: Barcelona of Madrid.
-                                            </div>
-                                            <a class="btn btn-outline-primary m-1" href="https://www.corendon.nl/spanje"
-                                               target="_blank">Bekijk
-                                                vakantie <i class="fas fa-plane"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    data-translate="profiledetail.favoriteVacations">
+                                </h6>
+                                <div class="accordion" id="userProfile-vacations"></div>
                             </div>
                         </div>
                     </div>
@@ -268,10 +194,7 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3"
                                     data-translate="profiledetail.favoriteHobbies"></h6>
-                                <ul class="list-group">
-                                    <li class="list-group-item">Bergwandelingen</li>
-                                    <li class="list-group-item">Vissen</li>
-                                    <li class="list-group-item">Scubadiven</li>
+                                <ul class="list-group" id="userProfile-hobbies">
                                 </ul>
                             </div>
                         </div>
@@ -367,7 +290,8 @@
             <a href="userFriends.html">
                 <div class="friendslist-item">
                     <div class="media">
-                        <img alt="user" class="rounded-circle" src="assets/img/stock/stock-7.jpg" width="50" height="50">
+                        <img alt="user" class="rounded-circle" src="assets/img/stock/stock-7.jpg" width="50"
+                             height="50">
                         <div class="media-body ml-4">
                             <div class="d-flex align-items-center justify-content-between mb-1">
                                 <h6 class="mb-0">Isabel van Hoeven</h6>

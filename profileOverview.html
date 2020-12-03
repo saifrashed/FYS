@@ -81,8 +81,8 @@
                 <h5 class="card-header" data-translate="profileoverview.searchButton"></h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input class="form-control" placeholder="Zoek..." type="text">
-                        <span class="input-group-append"><button class="btn btn-secondary" data-placement="top"
+                        <input class="form-control" id="searchQuery" placeholder="Zoek..." type="text">
+                        <span class="input-group-append"><button class="btn btn-secondary" id="searchButton" data-placement="top"
                                                                  data-toggle="tooltip" title="Zoek naar een profiel"
                                                                  type="button"><i
                                 class="fas fa-search"></i></button></span>
@@ -91,22 +91,23 @@
             </div>
 
             <div class="card my-4">
-                <h5 class="card-header" data-translate="profileoverview.filterButton"></h5>
-                <div class="card-body">
-                    <div class="list-group">
-                        <a class="list-group-item" href="#">Scuba dive</a>
-                        <a class="list-group-item" href="#">Sport</a>
-                        <a class="list-group-item" href="#">Waterpolo</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card my-4">
-                <a class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                <a class="btn btn-primary" id="feelingLucky" data-placement="top" data-toggle="tooltip"
                    data-translate="profileoverview.feelingLuckyButton"
-                   href="profileDetail.html" title="Vind een willekeurig profiel"
+                   title="Vind een willekeurig profiel"
                    type="button"></a>
             </div>
+
+            <!--<div class="card my-4">-->
+                <!--<h5 class="card-header" data-translate="profileoverview.filterButton"></h5>-->
+                <!--<div class="card-body">-->
+                    <!--<div class="list-group">-->
+                        <!--<a class="list-group-item" href="#">Scuba dive</a>-->
+                        <!--<a class="list-group-item" href="#">Sport</a>-->
+                        <!--<a class="list-group-item" href="#">Waterpolo</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
         </div>
 
 
@@ -140,118 +141,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <div class="row">
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="profileDetail.html">
-                            <div class="profile-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')"></div>
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="profileDetail.html">Henk Krollenburg</a>
-                            </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-
-                        <div class="card-footer">
-                            <small class="text-muted">Match: 87%</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="profileDetail.html">
-                            <div class="profile-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')"></div>
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="profileDetail.html">Raymond van Duin</a>
-                            </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Match: 79%</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="profileDetail.html">
-                            <div class="profile-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')"></div>
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="profileDetail.html">Stephanie van Wijk</a>
-                            </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur! </p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Match: 87%</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="profileDetail.html">
-                            <div class="profile-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')"></div>
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Patricia Hengelen</a>
-                            </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Match: 87%</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="profileDetail.html">
-                            <div class="profile-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')"></div>
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Annemiek van Dijk</a>
-                            </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Match: 87%</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="profileDetail.html">
-                            <div class="profile-img"
-                                 style="background-image: url('assets/img/stock/stock-4.jpg')"></div>
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Vanessa Smith</a>
-                            </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Match: 87%</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row" id="matchRow"></div>
         </div>
     </div>
 </div>
