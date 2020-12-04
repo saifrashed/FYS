@@ -547,7 +547,7 @@ $(document).ready(function () {
         location.href = "./profileOverview.html?query=" + $("#searchQuery").val();
     });
 
-    // Feeling lucky button
+    // feeling lucky button
     $("#feelingLucky").click(async function () {
         try {
             var randomUserID = await user.getRandomUser();
