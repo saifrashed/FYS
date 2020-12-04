@@ -4,203 +4,258 @@
 class Translation {
 
     initialLanguage = localStorage.getItem('FYSlang') || 'en';
-    translations    = {
-        header:           {
+    translations = {
+        header: {
 
-            homepage:      {
+            homepage: {
                 nl: "Home <i class=\"fas fa-home\"></i>",
-                en: "Home <i class=\"fas fa-home\"></i>"
+                en: "Home <i class=\"fas fa-home\"></i>",
+                de: "Home <i class=\"fas fa-home\"></i>"
+
             },
-            profile:       {
+            profile: {
                 nl: "Profiel <i class=\"fas fa-user\"></i>",
-                en: "Profile <i class=\"fas fa-user\"></i>"
+                en: "Profile <i class=\"fas fa-user\"></i>",
+                de: "Profil <i class=\"fas fa-user\"></i>"
+
             },
             notifications: {
                 nl: "Notificaties <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>",
-                en: "Notifications <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>"
+                en: "Notifications <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>",
+                de: "Benachrichtigungen <i class=\"fas fa-bell\"></i><div id=\"notificationCounter\"></div>"
+
             },
-            logout:        {
+            logout: {
                 nl: "Uitloggen <i class=\"fas fa-sign-out-alt\"></i>",
-                en: "Logout <i class=\"fas fa-sign-out-alt\"></i>"
+                en: "Logout <i class=\"fas fa-sign-out-alt\"></i>",
+                de: "Ausloggen <i class=\"fas fa-sign-out-alt\"></i>",
+
             },
-            login:         {
+            login: {
                 nl: "Inloggen",
-                en: "Login"
+                en: "Login",
+                de: "Anmeldung"
             },
-            register:      {
+            register: {
                 nl: "Registreren",
-                en: "Registration"
+                en: "Registration",
+                de: "Registrieren"
             },
         },
-        footer:           {
+        footer: {
             copyright: {
                 nl: "Corendon © Gegarandeerd veilig boeken want Corendon is aangesloten bij het ANVR, SGR en Calamiteitenfonds.",
-                en: "Corendon © Guaranteed safe booking because Corendon is affiliated with the ANVR, SGR and Calamiteitenfonds."
+                en: "Corendon © Guaranteed safe booking because Corendon is affiliated with the ANVR, SGR and Calamiteitenfonds.",
+                de: "Corendon © Garantierte sichere Buchung, da Corendon mit dem ANVR, SGR und Calamity Fund verbunden ist."
+
             }
         },
-        homepage:         {
-            headerText:          {
-                nl: "Vind jou vakantie buddy!",
-                en: "Find your vacation buddy!"
+        homepage: {
+            headerText: {
+                nl: "Vind jou vakantie maatje!",
+                en: "Find your vacation buddy!",
+                de: "Finden Sie Ihren Urlaubskumpel"
             },
-            headerSubText:       {
+            headerSubText: {
                 nl: "En snel ook...",
-                en: "And fast..."
+                en: "And fast...",
+                de: "unt schnell auch..."
             },
-            headerButton:        {
+            headerButton: {
                 nl: "Creeër een profiel",
-                en: "Create an profile"
+                en: "Create an profile",
+                de: "Erstelle ein profil"
             },
-            headingOne:          {
+            headingOne: {
                 nl: "Registreer",
-                en: "Registration"
+                en: "Registration",
+                de: "Registrieren"
             },
-            headingOneContent:   {
+            headingOneContent: {
                 nl: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
-                en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
+                en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
+                de: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
+
             },
-            headingTwo:          {
+            headingTwo: {
                 nl: "Personaliseer",
-                en: "Personalize"
+                en: "Personalize",
+                de: "Personifizieren"
             },
-            headingTwoContent:   {
+            headingTwoContent: {
                 nl: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
-                en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
+                en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
+                de: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
+
             },
-            headingThree:        {
+            headingThree: {
                 nl: "Ontdek meer",
-                en: "Discover more"
+                en: "Discover more",
+                de: "Entcecke mehr"
             },
             headingThreeContent: {
                 nl: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
-                en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
+                en: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.",
+                de: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati."
+
             }
         },
-        breadcrumbs:      {
-            home:            {
+        breadcrumbs: {
+            home: {
                 nl: "Home",
-                en: "Home"
+                en: "Home",
+                de: "Home"
             },
-            profileList:     {
+            profileList: {
                 nl: "Profieloverzicht",
-                en: "Profilelist"
+                en: "Profilelist",
+                de: "Profilübersicht"
             },
-            userProfile:     {
+            userProfile: {
                 nl: "Mijn profiel",
-                en: "My profile"
+                en: "My profile",
+                de: "Mein profil"
             },
             editUserProfile: {
                 nl: "Profiel bewerken",
-                en: "Edit profile"
+                en: "Edit profile",
+                de: "Profil bearbeiten"
             },
         },
-        registerpage:     {
-            formText:          {
+        registerpage: {
+            formText: {
                 nl: "Creeër een profiel",
-                en: "Create an profile"
+                en: "Create an profile",
+                de: "Erstelle ein Profil"
             },
-            formSubText:       {
+            formSubText: {
                 nl: "En vind een vakantie maatje",
-                en: "And find a vacation buddy"
+                en: "And find a vacation buddy",
+                de: "Und finde einen Urlaubskumpel"
             },
-            formButton:        {
+            formButton: {
                 nl: "Creeër een profiel",
-                en: "Create an account"
+                en: "Create an account",
+                de: "Erstelle ein Profil"
             },
-            formRecover:       {
+            formRecover: {
                 nl: "Al een profiel gemaakt?",
-                en: "Already have an profile?"
+                en: "Already have an profile?",
+                de: "Schon ein Profil erstellt?"
             },
             formRecoverButton: {
                 nl: "inloggen",
-                en: "login"
+                en: "login",
+                de: "anmeldung"
             },
         },
-        profileoverview:  {
+        profileoverview: {
             feelingLuckyButton: {
                 nl: "Ik doe een gok <i class=\"far fa-hand-point-right\"></i>",
-                en: "I'm feeling lucky <i class=\"far fa-hand-point-right\"></i>"
+                en: "I'm feeling lucky <i class=\"far fa-hand-point-right\"></i>",
+                de: "Ich fühle mich glücklich <i class=\"far fa-hand-point-right\"></i>"
             },
-            searchButton:       {
+            searchButton: {
                 nl: "Zoeken",
-                en: "Search"
+                en: "Search",
+                de: "Suche"
             },
-            filterButton:       {
-                nl: "verfijn op interesses",
-                en: "Filter on interests"
+            filterButton: {
+                nl: "Verfijn op interesses",
+                en: "Filter on interests",
+                de: "Durch Interessen verfeinern"
             },
         },
-        profiledetail:    {
+        profiledetail: {
             favoriteVacations: {
                 nl: "<i class=\"material-icons text-info mr-2\">Favorieten</i>Vakanties",
-                en: "<i class=\"material-icons text-info mr-2\">Favorite</i>Vacations"
+                en: "<i class=\"material-icons text-info mr-2\">Favorite</i>Vacations",
+                de: "<i class=\"material-icons text-info mr-2\">Favoriten</i>Ferien"
+
             },
-            favoriteHobbies:   {
+            favoriteHobbies: {
                 nl: "<i class=\"material-icons text-info mr-2\">Favorieten</i>Hobby's",
-                en: "<i class=\"material-icons text-info mr-2\">Favorite</i>Hobbies"
+                en: "<i class=\"material-icons text-info mr-2\">Favorite</i>Hobbies",
+                de: "<i class=\"material-icons text-info mr-2\">Favoriten</i>Hobbys"
             },
-            messages:          {
+            messages: {
                 nl: "<i class=\"material-icons text-info mr-2\">Berichten</i>Oproepen",
-                en: "<i class=\"material-icons text-info mr-2\">Messages</i>Calls"
+                en: "<i class=\"material-icons text-info mr-2\">Messages</i>Calls",
+                de: "<i class=\"material-icons text-info mr-2\">Mitteilungen</i>Anrufe"
             },
             bio: {
                 nl: "<i class=\"material-icons text-info mr-2\">Bio</i>Beschrijving",
-                en: "<i class=\"material-icons text-info mr-2\">Bio</i>Description"
+                en: "<i class=\"material-icons text-info mr-2\">Bio</i>Description",
+                de: "<i class=\"material-icons text-info mr-2\">Bio</i>Beschreibung"
             },
-            call:              {
+            call: {
                 nl: "Bellen <i class=\"fas fa-phone\"></i>",
-                en: "Call <i class=\"fas fa-phone\"></i>"
+                en: "Call <i class=\"fas fa-phone\"></i>",
+                de: "Wählen <i class=\"fas fa-phone\"></i>"
             },
-            mail:              {
+            mail: {
                 nl: "Mailen <i class=\"fas fa-envelope\"></i>",
-                en: "Mail <i class=\"fas fa-envelope\"></i>"
+                en: "Mail <i class=\"fas fa-envelope\"></i>",
+                de: "Mail <i class=\"fas fa-envelope\"></i>"
             },
         },
-        useredit:         {
-            doneButton:     {
+        useredit: {
+            doneButton: {
                 nl: "Klaar <i class=\"fas fa-check\"></i>",
-                en: "Done <i class=\"fas fa-check\"></i>"
+                en: "Done <i class=\"fas fa-check\"></i>",
+                de: "Bereit <i class=\"fas fa-check\"></i>"
             },
             inputFirstName: {
                 nl: "Voornaam",
-                en: "Firstname"
+                en: "Firstname",
+                de: "Vorname"
             },
-            inputLastName:  {
+            inputLastName: {
                 nl: "Achternaam",
-                en: "Lastname"
+                en: "Lastname",
+                de: "Nachname"
             },
-            inputEmail:     {
+            inputEmail: {
                 nl: "Email",
-                en: "Email"
+                en: "Email",
+                de: "Email"
             },
-            inputMobile:    {
+            inputMobile: {
                 nl: "Mobiel",
-                en: "Mobile"
+                en: "Mobile",
+                de: "Mobiltelefon"
             },
             inputResidence: {
                 nl: "Adres",
-                en: "Address"
+                en: "Address",
+                de: "Adresse"
+
             },
             inputBio: {
                 nl: "Bio",
-                en: "Bio"
+                en: "Bio",
+                de: "Bio"
             }
         },
         notificationpage: {
             title: {
                 nl: "Notificaties",
-                en: "Notifications"
+                en: "Notifications",
+                de: "Benachrichtigungen"
             }
         },
-        userfriends:      {
+        userfriends: {
             title: {
                 nl: "Vrienden",
-                en: "Friends"
+                en: "Friends",
+                de: "Freunde"
             }
         },
-        loremipsum:       {
+        loremipsum: {
             nl: "is handig om te gebruiken als plaatsvervanger",
-            en: "is nice for to use as a placeholder"
+            en: "is nice for to use as a placeholder",
+            de: "ist bequem als erastz zu verwenden"
+
         }
     };
 
