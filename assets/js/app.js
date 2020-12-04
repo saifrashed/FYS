@@ -50,7 +50,6 @@ $(document).ready(function () {
          */
         user.authenticateUser(user.userID);
 
-
         /*
         General variabels
          */
@@ -491,7 +490,6 @@ $(document).ready(function () {
     $("#userEdit-addHobby").click(async function () {
         try {
             var inputSelectedHobby = $('#userEditHobbies').find(":selected");
-
             var selectedHobby = hobbiesList.filter(obj => {
                 return obj.interestID == inputSelectedHobby.val();
             });
