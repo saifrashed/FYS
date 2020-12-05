@@ -571,9 +571,9 @@ $(document).ready(function () {
             var friendRequest = await database.sendFriendRequest(user.userID, selectedUser);
             var userRequested = await user.getUserData(user.userID)
             // send notification to the users
-            var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
+            var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd naar " + userData[0].firstName + "!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
             var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen",  "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "U kunt dit verzoek accepteren om vrienden te worden");
-            notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName);
+            notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName + "!");
             console.log(user.userID);
             console.log(selectedUser);
             console.log(userData[0].firstName)
