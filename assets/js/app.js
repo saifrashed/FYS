@@ -12,7 +12,6 @@ $(document).ready(function () {
     var hobbiesList      = null;
     var vacationList     = null;
     var hobbiesUserList  = null;
-    var user             = null;
     var vacationUserList = null;
     var deleteHobbies    = null;
     var deleteVacation   = null;
