@@ -193,9 +193,10 @@ $(document).ready(function () {
             if (hobbies.length != 0) {
                 hobbies.map(function (value, key) {
                     $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>");
-                    $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + value.description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
+                    $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + value.description + " <a href=\"#\"  \n" +
                         "                                                                                           style=\"color: #c92332;\"><i\n" +
-                        "                                                    class=\"far fa-times-circle\"></i></a></li>")
+                        "                                                    class=\"far fa-times-circle\" id='userEdit-deleteHobby' data-id='"+ value.interestID + "'></i></a></li>")
+                    console.log(value);
                 });
 
             } else {
@@ -513,12 +514,8 @@ $(document).ready(function () {
 
     // deletes hobby
     $("#userEdit-deleteHobby").click(function (e) {
-        try {
             e.preventDefault();
-            console.log("klik werkt");
-        } catch (e) {
-            console.log(e);
-        }
+            console.log("delete werkt")
     });
 
     // upload user profile image
