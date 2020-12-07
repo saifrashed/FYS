@@ -86,11 +86,11 @@ class Database {
         try {
 
             // ingelogde profiel
-            const userProfile       = await FYSCloud.API.queryDatabase('SELECT * FROM users NATURAL JOIN genders WHERE userID = ?', [userID]);
-            const userHobbiesQuery  = await FYSCloud.API.queryDatabase('SELECT description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID = ?', [userID]);
+            const userProfile = await FYSCloud.API.queryDatabase('SELECT * FROM users NATURAL JOIN genders WHERE userID = ?', [userID]);
+            const userHobbiesQuery = await FYSCloud.API.queryDatabase('SELECT description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID = ?', [userID]);
             const userVacationQuery = await FYSCloud.API.queryDatabase('SELECT destination FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID = ?', [userID]);
 
-            var userHobbies   = [];
+            var userHobbies = [];
             var userVacations = [];
 
             for (let i = 0; i < userHobbiesQuery.length; i++) {
@@ -101,19 +101,19 @@ class Database {
                 userVacations.push(userVacationQuery[i].destination)
             }
 
-            userProfile[0].hobbies   = userHobbies;
+            userProfile[0].hobbies = userHobbies;
             userProfile[0].vacations = userVacations;
 
             // Alle profielen
             const allProfiles = await FYSCloud.API.queryDatabase('SELECT * FROM users NATURAL JOIN genders WHERE userID != ? AND firstName LIKE ?', [userID,
-                                                                                                                                                     searchQuery]);
+                searchQuery]);
 
             // Fills hobbies and vacations in the matches result
             for (let i = 0; i < allProfiles.length; i++) {
-                var hobbiesQuery   = await FYSCloud.API.queryDatabase('SELECT description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID = ?', [allProfiles[i].userID]);
+                var hobbiesQuery = await FYSCloud.API.queryDatabase('SELECT description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID = ?', [allProfiles[i].userID]);
                 var vacationsQuery = await FYSCloud.API.queryDatabase('SELECT destination FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID = ?', [allProfiles[i].userID]);
 
-                var hobbies   = [];
+                var hobbies = [];
                 var vacations = [];
 
                 for (let i = 0; i < hobbiesQuery.length; i++) {
@@ -124,7 +124,7 @@ class Database {
                     vacations.push(vacationsQuery[i].destination)
                 }
 
-                allProfiles[i].hobbies   = hobbies;
+                allProfiles[i].hobbies = hobbies;
                 allProfiles[i].vacations = vacations;
             }
 
@@ -146,12 +146,12 @@ class Database {
                 let scoring = 0;
 
                 // date check
-                var userBirthYear    = new Date(userProfile[0].birthDate);
+                var userBirthYear = new Date(userProfile[0].birthDate);
                 var profileBirthYear = new Date(allProfiles[i].birthDate);
 
                 var ageDifMs = profileBirthYear - userBirthYear;
-                var ageDate  = new Date(ageDifMs); // miliseconds from epoch
-                var ageDif   = Math.abs(ageDate.getUTCFullYear() - 1970);
+                var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                var ageDif = Math.abs(ageDate.getUTCFullYear() - 1970);
 
                 if (ageDif <= 4) {
                     scoring += 3;
@@ -159,7 +159,7 @@ class Database {
 
 
                 // residence check
-                var userResidence    = userProfile[0].residence;
+                var userResidence = userProfile[0].residence;
                 var profileResidence = allProfiles[i].residence;
 
                 if (userResidence === profileResidence) {
@@ -168,7 +168,7 @@ class Database {
 
 
                 // hobbies check
-                var userHobbies    = userProfile[0].hobbies;
+                var userHobbies = userProfile[0].hobbies;
                 var profileHobbies = allProfiles[i].hobbies;
 
                 // hobbies comparison
@@ -181,7 +181,7 @@ class Database {
                 }
 
                 // vacations check
-                var userVacations    = userProfile[0].vacations;
+                var userVacations = userProfile[0].vacations;
                 var profileVacations = allProfiles[i].vacations;
 
                 for (let profileIndex = 0; profileIndex < profileVacations.length; profileIndex++) {
@@ -201,4 +201,20 @@ class Database {
             console.log(e)
         }
     }
+
+    /**
+     * sending friendrequest FYS project
+     * @param userOneID
+     * @param userTwoID
+     * @returns {Promise<*>}
+     */
+    async sendFriendRequest(userOneID, userTwoID){
+        try{
+            return await FYSCloud.API.queryDatabase('INSERT INTO connections (userOneID, userTwoID, userRequestedID) VALUES (?, ?, ?)',[userOneID, userTwoID, userOneID]);
+
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
 }
