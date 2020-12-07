@@ -18,6 +18,8 @@ $(document).ready(function () {
     var matchData        = null;
     var notifications    = null;
     var selectedUserData = null;
+    var selectedUser     = null;
+    var searchQuery      = null;
 
 
     /**
@@ -33,8 +35,8 @@ $(document).ready(function () {
          */
         const path         = window.location.pathname.split("/").pop();
         const urlParams    = new URLSearchParams(window.location.search);
-        const searchQuery  = urlParams.get('query') || "";
-        const selectedUser = urlParams.get('userID') || "";
+        searchQuery  = urlParams.get('query') || "";
+        selectedUser = urlParams.get('userID') || "";
 
         /*
         Class declaration
@@ -562,8 +564,23 @@ $(document).ready(function () {
     });
 
     // Alert to give user feedback when friend request is send.
-    $(".friend-request-alert").on("click", function () {
-        notification.success("Vriendschapverzoek verstuurd!");
+    $(".friend-request-alert").on("click", async function () {
+        try {
+            //add both userID's to the database
+            var friendRequest = await database.sendFriendRequest(user.userID, selectedUser);
+            var userRequested = await user.getUserData(user.userID)
+            // send notification to the users
+            var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd naar " + userData[0].firstName + "!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
+            var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen",  "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "U kunt dit verzoek accepteren om vrienden te worden");
+            notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName + "!");
+            console.log(user.userID);
+            console.log(selectedUser);
+            console.log(userData[0].firstName)
+            console.log(userRequested);
+            console.log(friendRequest);
+        }catch (e){
+            console.log(e);
+        }
     });
 
     // Displays the users friendlist
