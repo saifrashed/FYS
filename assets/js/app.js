@@ -138,7 +138,7 @@ $(document).ready(function () {
             });
 
 
-            // User informatie
+            // User information
             $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
             $("#userprofile-username").html(data[0].email);
             $("#userprofile-birthdate").html(date.toLocaleDateString());
@@ -158,6 +158,9 @@ $(document).ready(function () {
             $("[name=instagram]").val(data.socials[0].instagram);
             $("[name=facebook]").val(data.socials[0].facebook);
 
+            // User post
+            $("#userprofile-postTitle").val(data[0].title);
+            $("#userprofile-postContent").val(data[0].content);
 
             // User socials
 

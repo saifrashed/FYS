@@ -295,4 +295,27 @@ class User {
         }
     }
 
+    /**
+     * Places post on users page
+     * @returns {Promise<*>}
+     */
+    // async placePost()   {
+    //     try{
+    //         return await FYSCloud.API.queryDatabase("INSERT INTO posts VALUES(?,?,?,?,?,?)", [postID ,userID, vacationID, title, content, dateCreated]);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+
+    /**
+     * Gets posts from the user
+     * @returns {Promise<*>}
+     */
+    // async getPost() {
+    //     try{
+    //         return await FYSCloud.API.queryDatabase("SELECT postID ,userID, vacationID, title, content, dateCreated FROM posts");
+    //     }catch (e) {
+    //         console.log(e);
+    //     }
+    // }
 }
