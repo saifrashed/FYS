@@ -225,11 +225,11 @@ class User {
         try {
             switch (type) {
                 case "hobbies":
-                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND typeID = ?", [userID,
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND interestID = ?", [userID,
                                                                                                                           typeID]
                     );
                 case "vacations":
-                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND typeID = ?", [userID,
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND vacationID = ?", [userID,
                                                                                                                           typeID]
                     );
                 default:

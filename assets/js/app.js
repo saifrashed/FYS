@@ -13,11 +13,8 @@ $(document).ready(function () {
     var vacationList     = null;
     var hobbiesUserList  = null;
     var vacationUserList = null;
-    var deleteHobbies    = null;
-    var deleteVacation   = null;
     var matchData        = null;
     var notifications    = null;
-    var selectedUserData = null;
     var selectedUser     = null;
     var searchQuery      = null;
 
@@ -33,10 +30,10 @@ $(document).ready(function () {
         /*
         Parameters (Dynamic data)
          */
-        const path         = window.location.pathname.split("/").pop();
-        const urlParams    = new URLSearchParams(window.location.search);
-        searchQuery  = urlParams.get('query') || "";
-        selectedUser = urlParams.get('userID') || "";
+        const path      = window.location.pathname.split("/").pop();
+        const urlParams = new URLSearchParams(window.location.search);
+        searchQuery     = urlParams.get('query') || "";
+        selectedUser    = urlParams.get('userID') || "";
 
         /*
         Class declaration
@@ -103,40 +100,9 @@ $(document).ready(function () {
                 displayUserData(userData, hobbiesUserList, vacationUserList);
                 break;
         }
-
-
-        // notification.addNotification(user.userID, "Yes", "Jaa zeker", "Klik hier om to te voegen")
     }
 
-    init();
-
-
-    /**
-     * Adds notifications dynamically to notification page
-     * @param notifications
-     */
-    function populateNotifications(notifications) {
-        for (let i = 0; i < notifications.length; i++) {
-
-            $("#notificationsList").append(
-                "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
-                "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
-                "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
-                "                        </div>\n" +
-                "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
-                "                        <small>" + notifications[i].disclaimer + "</small>\n" +
-                "                    </a>"
-            );
-        }
-    }
-
-    /**
-     * Adds a notification counter at the notifications header button
-     * @param allNotifications
-     */
-    function notificationCounter(notifications) {
-        $("#notificationCounter").html("<span>" + notifications.length + "</span>")
-    }
+    init(); // Run Initialise function
 
 
     /**
@@ -192,8 +158,8 @@ $(document).ready(function () {
             // User hobbies
             if (hobbies.length != 0) {
                 hobbies.map(function (value, key) {
-                    $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>");
-                    $("#userEdit-hobbies").append("<li class=\"list-group-item\" id='userEdit-deleteHobby'>" + value.description + " <a \n" +
+                    $("#userProfile-hobbies").append("<li class=\"list-group-item\" data-id='" + value.interestID + "'>" + value.description + "</li>");
+                    $("#userEdit-hobbies").append("<li class=\"list-group-item\" data-id='" + value.interestID + "'>" + value.description + " <a \n" +
                         "                                                                                           style=\"color: #c92332;\"><i\n" +
                         "                                                    class=\"far fa-times-circle\"></i></a></li>")
                 });
@@ -212,7 +178,7 @@ $(document).ready(function () {
                         "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
                         "                                                        class=\"btn btn-link btn-block text-left\"\n" +
                         "                                                        data-target=\"#collapseOne\"\n" +
-                        "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
+                        "                                                        data-toggle=\"collapse\" data-id='" + value.vacationID + "' type=\"button\">\n" +
                         "                                                    " + value.destination + "\n" +
                         "                                                </button>\n" +
                         "                                            </h2>\n" +
@@ -237,8 +203,8 @@ $(document).ready(function () {
                         "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
                         "                                                        class=\"btn btn-link btn-block text-left\"\n" +
                         "                                                        data-target=\"#collapseOne\"\n" +
-                        "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
-                        "                                                    " + value.destination + "\n" + " <a href=\"#\" id='userEdit-deleteVacation' \n" +
+                        "                                                        data-toggle=\"collapse\" data-id='" + value.vacationID + "' type=\"button\">\n" +
+                        "                                                    " + value.destination + "\n" + " <a href=\"#\" \n" +
                         "                                                                                           style=\"color: #c92332;\"><i\n" +
                         "                                                    class=\"far fa-times-circle\"></i></a> " +
                         "                                                </button>\n" +
@@ -277,6 +243,33 @@ $(document).ready(function () {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    /**
+     * Adds notifications dynamically to notification page
+     * @param notifications
+     */
+    function populateNotifications(notifications) {
+        for (let i = 0; i < notifications.length; i++) {
+
+            $("#notificationsList").append(
+                "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
+                "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
+                "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
+                "                        </div>\n" +
+                "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
+                "                        <small>" + notifications[i].disclaimer + "</small>\n" +
+                "                    </a>"
+            );
+        }
+    }
+
+    /**
+     * Adds a notification counter at the notifications header button
+     * @param allNotifications
+     */
+    function notificationCounter(notifications) {
+        $("#notificationCounter").html("<span>" + notifications.length + "</span>")
     }
 
 
@@ -479,11 +472,25 @@ $(document).ready(function () {
         }
     });
 
-    // deletes vacation
-    $("#userEdit-deleteVacation").click(function (e) {
-        e.preventDefault();
-        console.log("klik werkt");
 
+    // deletes vacation
+    $("#userEdit-vacations").on("click", "button", async function () {
+        try {
+            var element   = $(this);
+            var elementID = element.attr("data-id");
+
+            const deletedVacation = await user.deleteInterest('vacations', elementID, user.userID);
+
+            if (deletedVacation) {
+                element.parent().parent().remove();
+                notification.success("Vakantie is verwijderd!");
+            } else {
+                notification.info("Vakantie verwijderen is mislukt!");
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
     });
 
 
@@ -491,7 +498,7 @@ $(document).ready(function () {
     $("#userEdit-addHobby").click(async function () {
         try {
             var inputSelectedHobby = $('#userEditHobbies').find(":selected");
-            var selectedHobby = hobbiesList.filter(obj => {
+            var selectedHobby      = hobbiesList.filter(obj => {
                 return obj.interestID == inputSelectedHobby.val();
             });
 
@@ -500,7 +507,7 @@ $(document).ready(function () {
                 notification.success("hobby toegevoegd!");
             }
 
-            $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
+            $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" \n" +
                 "                                                                                           style=\"color: #c92332;\"><i\n" +
                 "                                                    class=\"far fa-times-circle\"></i></a></li>");
 
@@ -511,8 +518,23 @@ $(document).ready(function () {
     });
 
     // deletes hobby
-    $("#userEdit-deleteHobby").click(function (e) {
-            console.log("klik werkt");
+    $("#userEdit-hobbies").on("click", "li", async function () {
+        try {
+            var element   = $(this);
+            var elementID = element.attr("data-id");
+
+            const deletedHobby = await user.deleteInterest('hobbies', elementID, user.userID);
+
+            if (deletedHobby) {
+                element.remove();
+                notification.success("Hobby is verwijderd!");
+            } else {
+                notification.info("Hobby verwijderen is mislukt!");
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
     });
 
     // upload user profile image
@@ -562,18 +584,20 @@ $(document).ready(function () {
     $(".friend-request-alert").on("click", async function () {
         try {
             //add both userID's to the database
-            var friendRequest = await database.sendFriendRequest(user.userID, selectedUser);
-            var userRequested = await user.getUserData(user.userID)
+            var friendRequest   = await database.sendFriendRequest(user.userID, selectedUser);
+            var userRequested   = await user.getUserData(user.userID)
             // send notification to the users
             var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd naar " + userData[0].firstName + "!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
-            var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen",  "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "U kunt dit verzoek accepteren om vrienden te worden");
+            var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen", "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "U kunt dit verzoek accepteren of afwijzen om vrienden te worden");
             notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName + "!");
+
+
             console.log(user.userID);
             console.log(selectedUser);
-            console.log(userData[0].firstName)
+            console.log(userData[0].firstName);
             console.log(userRequested);
             console.log(friendRequest);
-        }catch (e){
+        } catch (e) {
             console.log(e);
         }
     });
