@@ -12,13 +12,11 @@ $(document).ready(function () {
     var hobbiesList      = null;
     var vacationList     = null;
     var hobbiesUserList  = null;
-    var user             = null;
     var vacationUserList = null;
-    var deleteHobbies    = null;
-    var deleteVacation   = null;
     var matchData        = null;
     var notifications    = null;
-    var selectedUserData = null;
+    var selectedUser     = null;
+    var searchQuery      = null;
 
 
     /**
@@ -32,10 +30,10 @@ $(document).ready(function () {
         /*
         Parameters (Dynamic data)
          */
-        const path         = window.location.pathname.split("/").pop();
-        const urlParams    = new URLSearchParams(window.location.search);
-        const searchQuery  = urlParams.get('query') || "";
-        const selectedUser = urlParams.get('userID') || "";
+        const path      = window.location.pathname.split("/").pop();
+        const urlParams = new URLSearchParams(window.location.search);
+        searchQuery     = urlParams.get('query') || "";
+        selectedUser    = urlParams.get('userID') || "";
 
         /*
         Class declaration
@@ -81,61 +79,35 @@ $(document).ready(function () {
 
         switch (path) {
             case "profileDetail.html":
-                userData         = await user.getUserData(selectedUser);
-                hobbiesUserList  = await user.getInterest("hobbies", selectedUser);
-                vacationUserList = await user.getInterest("vacations", selectedUser);
+                userData           = await user.getUserData(selectedUser);
+                userData.hobbies   = await user.getInterest("hobbies", selectedUser);
+                userData.vacations = await user.getInterest("vacations", selectedUser);
+                userData.socials   = await user.getSocials(selectedUser);
 
-                displayUserData(userData, hobbiesUserList, vacationUserList);
+                displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
             case "userProfile.html":
-                userData         = await user.getUserData(user.userID);
-                hobbiesUserList  = await user.getInterest("hobbies", user.userID);
-                vacationUserList = await user.getInterest("vacations", user.userID);
+                userData           = await user.getUserData(user.userID);
+                userData.hobbies   = await user.getInterest("hobbies", user.userID);
+                userData.vacations = await user.getInterest("vacations", user.userID);
+                userData.socials   = await user.getSocials(user.userID);
 
-                displayUserData(userData, hobbiesUserList, vacationUserList);
+                console.log(userData);
+
+                displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
             case "userEdit.html":
-                userData         = await user.getUserData(user.userID);
-                hobbiesUserList  = await user.getInterest("hobbies", user.userID);
-                vacationUserList = await user.getInterest("vacations", user.userID);
+                userData           = await user.getUserData(user.userID);
+                userData.hobbies   = await user.getInterest("hobbies", user.userID);
+                userData.vacations = await user.getInterest("vacations", user.userID);
+                userData.socials   = await user.getSocials(user.userID);
 
-                displayUserData(userData, hobbiesUserList, vacationUserList);
+                displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
         }
-
-
-        // notification.addNotification(user.userID, "Yes", "Jaa zeker", "Klik hier om to te voegen")
     }
 
-    init();
-
-
-    /**
-     * Adds notifications dynamically to notification page
-     * @param notifications
-     */
-    function populateNotifications(notifications) {
-        for (let i = 0; i < notifications.length; i++) {
-
-            $("#notificationsList").append(
-                "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
-                "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
-                "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
-                "                        </div>\n" +
-                "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
-                "                        <small>" + notifications[i].disclaimer + "</small>\n" +
-                "                    </a>"
-            );
-        }
-    }
-
-    /**
-     * Adds a notification counter at the notifications header button
-     * @param allNotifications
-     */
-    function notificationCounter(notifications) {
-        $("#notificationCounter").html("<span>" + notifications.length + "</span>")
-    }
+    init(); // Run Initialise function
 
 
     /**
@@ -166,19 +138,112 @@ $(document).ready(function () {
             });
 
 
-            // User informatie
+            // User information
             $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
             $("#userprofile-username").html(data[0].email);
             $("#userprofile-birthdate").html(date.toLocaleDateString());
             $("#userprofile-residence").html(data[0].residence);
 
-            //userform
+            // userform
             $("#userprofile-firstname").val(data[0].firstName);
             $("#userprofile-lastname").val(data[0].lastName);
             $("#userprofile-email").val(data[0].email);
             $("#userprofile-phonenumber").val(data[0].tel);
             $("#userEdit-residence").val(data[0].residence);
             $("#userEdit-bio").val(data[0].bio);
+
+            // socials
+            $("[name=website]").val(data.socials[0].website);
+            $("[name=twitter]").val(data.socials[0].twitter);
+            $("[name=instagram]").val(data.socials[0].instagram);
+            $("[name=facebook]").val(data.socials[0].facebook);
+
+            // User post
+            $("#userprofile-postTitle").val(data[0].title);
+            $("#userprofile-postContent").val(data[0].content);
+
+            // User socials
+
+            if (data.socials[0].website) { // website
+                $("#userprofile-socials").append("     <a href='" + data.socials[0].website + "' target='_blank'>\n" +
+                    "                            <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+                    "                                <h6 class=\"mb-0\">\n" +
+                    "                                    <svg class=\"feather feather-globe mr-2 icon-inline\" fill=\"none\" height=\"24\"\n" +
+                    "                                         stroke=\"currentColor\"\n" +
+                    "                                         stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+                    "                                         viewBox=\"0 0 24 24\"\n" +
+                    "                                         width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "                                        <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n" +
+                    "                                        <line x1=\"2\" x2=\"22\" y1=\"12\" y2=\"12\"></line>\n" +
+                    "                                        <path d=\"M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"></path>\n" +
+                    "                                    </svg>\n" +
+                    "                                    Website\n" +
+                    "                                </h6>\n" +
+                    "                                <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+                    "                            </li>\n" +
+                    "                        </a>")
+            }
+
+            if (data.socials[0].twitter) { // twitter
+                $("#userprofile-socials").append(" <a href='" + data.socials[0].twitter + "' target='_blank'>\n" +
+                    "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+                    "                                    <h6 class=\"mb-0\">\n" +
+                    "                                        <svg class=\"feather feather-twitter mr-2 icon-inline text-info\" fill=\"none\"\n" +
+                    "                                             height=\"24\"\n" +
+                    "                                             stroke=\"currentColor\"\n" +
+                    "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+                    "                                             viewBox=\"0 0 24 24\"\n" +
+                    "                                             width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "                                            <path d=\"M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z\"></path>\n" +
+                    "                                        </svg>\n" +
+                    "                                        Twitter\n" +
+                    "                                    </h6>\n" +
+                    "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+                    "                                </li>\n" +
+                    "                            </a>")
+            }
+
+
+            if (data.socials[0].instagram) { // instagram
+                $("#userprofile-socials").append("<a <a href='" + data.socials[0].instagram + "' target='_blank'>\n" +
+                    "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+                    "                                    <h6 class=\"mb-0\">\n" +
+                    "                                        <svg class=\"feather feather-instagram mr-2 icon-inline text-danger\" fill=\"none\"\n" +
+                    "                                             height=\"24\" stroke=\"currentColor\"\n" +
+                    "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+                    "                                             viewBox=\"0 0 24 24\"\n" +
+                    "                                             width=\"24\"\n" +
+                    "                                             xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "                                            <rect height=\"20\" rx=\"5\" ry=\"5\" width=\"20\" x=\"2\" y=\"2\"></rect>\n" +
+                    "                                            <path d=\"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z\"></path>\n" +
+                    "                                            <line x1=\"17.5\" x2=\"17.51\" y1=\"6.5\" y2=\"6.5\"></line>\n" +
+                    "                                        </svg>\n" +
+                    "                                        Instagram\n" +
+                    "                                    </h6>\n" +
+                    "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+                    "                                </li>\n" +
+                    "                            </a>")
+            }
+
+
+            if (data.socials[0].facebook) { // facebook
+                $("#userprofile-socials").append("<a href='" + data.socials[0].facebook + "' target='_blank'>\n" +
+                    "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+                    "                                    <h6 class=\"mb-0\">\n" +
+                    "                                        <svg class=\"feather feather-facebook mr-2 icon-inline text-primary\" fill=\"none\"\n" +
+                    "                                             height=\"24\" stroke=\"currentColor\"\n" +
+                    "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+                    "                                             viewBox=\"0 0 24 24\"\n" +
+                    "                                             width=\"24\"\n" +
+                    "                                             xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "                                            <path d=\"M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z\"></path>\n" +
+                    "                                        </svg>\n" +
+                    "                                        Facebook\n" +
+                    "                                    </h6>\n" +
+                    "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+                    "                                </li>\n" +
+                    "                            </a>")
+            }
 
 
             // User bio
@@ -191,8 +256,8 @@ $(document).ready(function () {
             // User hobbies
             if (hobbies.length != 0) {
                 hobbies.map(function (value, key) {
-                    $("#userProfile-hobbies").append("<li class=\"list-group-item\">" + value.description + "</li>");
-                    $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + value.description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
+                    $("#userProfile-hobbies").append("<li class=\"list-group-item\" data-id='" + value.interestID + "'>" + value.description + "</li>");
+                    $("#userEdit-hobbies").append("<li class=\"list-group-item\" data-id='" + value.interestID + "'>" + value.description + " <a \n" +
                         "                                                                                           style=\"color: #c92332;\"><i\n" +
                         "                                                    class=\"far fa-times-circle\"></i></a></li>")
                 });
@@ -211,7 +276,7 @@ $(document).ready(function () {
                         "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
                         "                                                        class=\"btn btn-link btn-block text-left\"\n" +
                         "                                                        data-target=\"#collapseOne\"\n" +
-                        "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
+                        "                                                        data-toggle=\"collapse\" data-id='" + value.vacationID + "' type=\"button\">\n" +
                         "                                                    " + value.destination + "\n" +
                         "                                                </button>\n" +
                         "                                            </h2>\n" +
@@ -236,8 +301,8 @@ $(document).ready(function () {
                         "                                                <button aria-controls=\"collapseOne\" aria-expanded=\"true\"\n" +
                         "                                                        class=\"btn btn-link btn-block text-left\"\n" +
                         "                                                        data-target=\"#collapseOne\"\n" +
-                        "                                                        data-toggle=\"collapse\" type=\"button\">\n" +
-                        "                                                    " + value.destination + "\n" + " <a href=\"#\" id='userEdit-deleteVacation' \n" +
+                        "                                                        data-toggle=\"collapse\" data-id='" + value.vacationID + "' type=\"button\">\n" +
+                        "                                                    " + value.destination + "\n" + " <a href=\"#\" \n" +
                         "                                                                                           style=\"color: #c92332;\"><i\n" +
                         "                                                    class=\"far fa-times-circle\"></i></a> " +
                         "                                                </button>\n" +
@@ -276,6 +341,33 @@ $(document).ready(function () {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    /**
+     * Adds notifications dynamically to notification page
+     * @param notifications
+     */
+    function populateNotifications(notifications) {
+        for (let i = 0; i < notifications.length; i++) {
+
+            $("#notificationsList").append(
+                "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
+                "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
+                "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
+                "                        </div>\n" +
+                "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
+                "                        <small>" + notifications[i].disclaimer + "</small>\n" +
+                "                    </a>"
+            );
+        }
+    }
+
+    /**
+     * Adds a notification counter at the notifications header button
+     * @param allNotifications
+     */
+    function notificationCounter(notifications) {
+        $("#notificationCounter").html("<span>" + notifications.length + "</span>")
     }
 
 
@@ -428,15 +520,22 @@ $(document).ready(function () {
     // If logged user saves changes
     $("#userUpdateSubmit").click(async function (e) {
         e.preventDefault();
-        console.log("klik werkt");
+
 
         var data = $('#userUpdateData').serializeArray().reduce(function (obj, item) {
             obj[item.name] = item.value;
             return obj;
         }, {});
 
+        var dataSocials = $('#userEdit-socials').serializeArray().reduce(function (obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
 
-        var updatedUser = await user.updateUserData(user.userID, data);
+
+        var updatedSocials = await user.updateSocials(user.userID, dataSocials);
+        var updatedUser    = await user.updateUserData(user.userID, data);
+
 
         if (updatedUser) {
             notification.success("Gegevens zijn aangepast!");
@@ -478,11 +577,25 @@ $(document).ready(function () {
         }
     });
 
-    // deletes vacation
-    $("#userEdit-deleteVacation").click(function (e) {
-        e.preventDefault();
-        console.log("klik werkt");
 
+    // deletes vacation
+    $("#userEdit-vacations").on("click", "button", async function () {
+        try {
+            var element   = $(this);
+            var elementID = element.attr("data-id");
+
+            const deletedVacation = await user.deleteInterest('vacations', elementID, user.userID);
+
+            if (deletedVacation) {
+                element.parent().parent().remove();
+                notification.success("Vakantie is verwijderd!");
+            } else {
+                notification.info("Vakantie verwijderen is mislukt!");
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
     });
 
 
@@ -490,7 +603,7 @@ $(document).ready(function () {
     $("#userEdit-addHobby").click(async function () {
         try {
             var inputSelectedHobby = $('#userEditHobbies').find(":selected");
-            var selectedHobby = hobbiesList.filter(obj => {
+            var selectedHobby      = hobbiesList.filter(obj => {
                 return obj.interestID == inputSelectedHobby.val();
             });
 
@@ -499,7 +612,7 @@ $(document).ready(function () {
                 notification.success("hobby toegevoegd!");
             }
 
-            $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" id='userEdit-deleteHobby' \n" +
+            $("#userEdit-hobbies").append("<li class=\"list-group-item\">" + selectedHobby[0].description + " <a href=\"#\" \n" +
                 "                                                                                           style=\"color: #c92332;\"><i\n" +
                 "                                                    class=\"far fa-times-circle\"></i></a></li>");
 
@@ -510,10 +623,20 @@ $(document).ready(function () {
     });
 
     // deletes hobby
-    $("#userEdit-deleteHobby").click(function (e) {
+    $("#userEdit-hobbies").on("click", "li", async function () {
         try {
-            e.preventDefault();
-            console.log("klik werkt");
+            var element   = $(this);
+            var elementID = element.attr("data-id");
+
+            const deletedHobby = await user.deleteInterest('hobbies', elementID, user.userID);
+
+            if (deletedHobby) {
+                element.remove();
+                notification.success("Hobby is verwijderd!");
+            } else {
+                notification.info("Hobby verwijderen is mislukt!");
+            }
+
         } catch (e) {
             console.log(e);
         }
@@ -563,8 +686,25 @@ $(document).ready(function () {
     });
 
     // Alert to give user feedback when friend request is send.
-    $(".friend-request-alert").on("click", function () {
-        notification.success("Vriendschapverzoek verstuurd!");
+    $(".friend-request-alert").on("click", async function () {
+        try {
+            //add both userID's to the database
+            var friendRequest   = await database.sendFriendRequest(user.userID, selectedUser);
+            var userRequested   = await user.getUserData(user.userID)
+            // send notification to the users
+            var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd naar " + userData[0].firstName + "!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
+            var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen", "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "U kunt dit verzoek accepteren om vrienden te worden");
+            notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName + "!");
+
+
+            console.log(user.userID);
+            console.log(selectedUser);
+            console.log(userData[0].firstName);
+            console.log(userRequested);
+            console.log(friendRequest);
+        } catch (e) {
+            console.log(e);
+        }
     });
 
     // Displays the users friendlist

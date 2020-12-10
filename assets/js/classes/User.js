@@ -132,7 +132,8 @@ class User {
         try {
             return await FYSCloud.API.queryDatabase(
                 "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=?, bio=? WHERE userID = ?",
-                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence, body.userBio, userID]);
+                [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence,
+                 body.userBio, userID]);
         } catch (e) {
             console.log(e);
         }
@@ -225,15 +226,56 @@ class User {
         try {
             switch (type) {
                 case "hobbies":
-                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND typeID = ?", [userID,
-                                                                                                                          typeID]
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND interestID = ?", [userID,
+                                                                                                                              typeID]
                     );
                 case "vacations":
-                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND typeID = ?", [userID,
-                                                                                                                          typeID]
+                    return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND vacationID = ?", [userID,
+                                                                                                                              typeID]
                     );
                 default:
                     return false;
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
+    /**
+     * Gets all socials of a user.
+     * @param userID
+     * @returns {Promise<*>}
+     */
+    async getSocials(userID) {
+        try {
+            return await FYSCloud.API.queryDatabase("SELECT website, facebook, instagram, twitter FROM user_socials WHERE userID= ?", [userID,
+            ]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Updates socials for user
+     * @param userID
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async updateSocials(userID, body) {
+        try {
+            const userSocials = await FYSCloud.API.queryDatabase(
+                "SELECT * FROM user_socials WHERE userID = ?",
+                [userID]);
+
+            if (userSocials[0]) {
+                return await FYSCloud.API.queryDatabase(
+                    "UPDATE user_socials SET website=?, twitter=?, instagram=?, facebook=? WHERE userID = ?",
+                    [body.website, body.twitter, body.instagram, body.facebook, userID]);
+            } else {
+                return await FYSCloud.API.queryDatabase(
+                    "INSERT INTO user_socials(website, twitter, instagram, facebook, userID) VALUES(?,?,?,?,?)",
+                    [body.website, body.twitter, body.instagram, body.facebook, userID]);
             }
         } catch (e) {
             console.log(e);
@@ -253,4 +295,27 @@ class User {
         }
     }
 
+    /**
+     * Places post on users page
+     * @returns {Promise<*>}
+     */
+    // async placePost()   {
+    //     try{
+    //         return await FYSCloud.API.queryDatabase("INSERT INTO posts VALUES(?,?,?,?,?,?)", [postID ,userID, vacationID, title, content, dateCreated]);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+
+    /**
+     * Gets posts from the user
+     * @returns {Promise<*>}
+     */
+    // async getPost() {
+    //     try{
+    //         return await FYSCloud.API.queryDatabase("SELECT postID ,userID, vacationID, title, content, dateCreated FROM posts");
+    //     }catch (e) {
+    //         console.log(e);
+    //     }
+    // }
 }
