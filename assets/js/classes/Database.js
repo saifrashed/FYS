@@ -246,16 +246,24 @@ class Database {
 
     }
 
-
+    /**
+     * function to count average and total reviews
+     * @param userIDReviewed
+     * @returns {Promise<{avg: *, count: (number|PaymentItem)}>}
+     */
+    
     async getReviews(userIDReviewed) {
         try {
 
-            var countTotalReview = await FYSCloud.API.queryDatabase('SELECT COUNT(rating) FROM user_review WHERE userIDReviewed = ?',[userIDReviewed])
-            var avgTotalReview = await FYSCloud.API.queryDatabase('SELECT AVG(rating) FROM user_review WHERE userIDReviewed = ?',[userIDReviewed])
+            var countTotalReview = await FYSCloud.API.queryDatabase('SELECT COUNT(rating) AS total FROM user_review WHERE userIDReviewed = ?', [userIDReviewed])
+            var avgTotalReview = await FYSCloud.API.queryDatabase('SELECT AVG(rating) AS average FROM user_review WHERE userIDReviewed = ?', [userIDReviewed])
 
-            console.log(countTotalReview)
-            console.log(avgTotalReview)
+            var data = {
+                "avg": avgTotalReview[0].average,
+                "count": countTotalReview[0].total
+            }
 
+            return data;
 
         } catch (e) {
             console.log(e)

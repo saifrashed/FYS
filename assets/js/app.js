@@ -15,6 +15,7 @@ $(document).ready(function () {
     var notifications = null;
     var selectedUser = null;
     var searchQuery = null;
+    var userReview = null;
 
 
     /**
@@ -53,6 +54,8 @@ $(document).ready(function () {
         hobbiesList = await database.getInterestList("hobbies");
         vacationList = await database.getInterestList("vacations");
         notifications = await notification.getNotifications(user.userID);
+        userReview = await database.getReviews(selectedUser);
+
 
         /*
         General functions
@@ -61,7 +64,6 @@ $(document).ready(function () {
         populateInterests(hobbiesList, vacationList);
         populateNotifications(notifications);
         notificationCounter(notifications);
-
 
         /*
         Conditional data
@@ -141,6 +143,9 @@ $(document).ready(function () {
             $("#userprofile-username").html(data[0].email);
             $("#userprofile-birthdate").html(date.toLocaleDateString());
             $("#userprofile-residence").html(data[0].residence);
+
+            // User review information
+            $("#totalReview").html("( " + userReview.count + " reviews )")
 
             // userform
             $("#userprofile-firstname").val(data[0].firstName);
@@ -759,23 +764,6 @@ $(document).ready(function () {
         translation.translate();
     });
 
-    $(".rating").on("click", "input", async function () {
-        try {
-            var review = ($(this).val());
-            var userRating = await database.updateReview(user.userID, selectedUser, review);
-            var userReview = await database.getReviews(selectedUser);
-
-
-
-            console.log(userRating)
-            console.log(userReview)
-
-
-
-        } catch (e) {
-            console.log(e)
-        }
-    });
     /***************************   Extra functionality   *********************************/
 
 
@@ -789,6 +777,21 @@ $(document).ready(function () {
         try {
             var randomUserID = await user.getRandomUser();
             location.href = "./profileDetail.html?userID=" + randomUserID[0].userID;
+        } catch (e) {
+            console.log(e)
+        }
+    });
+
+    // Button to post review on users profile
+    $(".rating").on("click", "input", async function () {
+        try {
+            var review = ($(this).val());
+            var userRating = await database.updateReview(user.userID, selectedUser, review);
+
+            console.log(userRating)
+            console.log(userReview)
+
+
         } catch (e) {
             console.log(e)
         }
