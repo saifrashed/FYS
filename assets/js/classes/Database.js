@@ -218,23 +218,49 @@ class Database {
     }
 
 
-    async updateReview(userID, userIDReviewd, rating) {
+    /**
+     * updates userReview if not
+     * @param userID
+     * @param userIDReviewed
+     * @param rating
+     * @returns {Promise<*>}
+     */
+    async updateReview(userID, userIDReviewed, rating) {
         try {
-            return await FYSCloud.API.queryDatabase('INSERT INTO user_review(`userID`, `userIDReviewd`, `rating`) VALUES (?,?,?)', [userID, userIDReviewd, rating]);
+            const userReview = await FYSCloud.API.queryDatabase(
+                "SELECT * FROM user_review WHERE userID = ? AND userIDReviewed = ?",
+                [userID, userIDReviewed]);
+
+            if (userReview[0]) {
+                return await FYSCloud.API.queryDatabase(
+                    "UPDATE user_review SET rating=? WHERE userID = ? AND userIDReviewed",
+                    [rating, userID, userIDReviewed]);
+            } else {
+                return await FYSCloud.API.queryDatabase(
+                    "INSERT INTO user_review(rating, userID, userIDReviewed) VALUES(?,?,?)",
+                    [rating, userID, userIDReviewed]);
+            }
         } catch (e) {
             console.log(e)
         }
 
     }
 
-    //async getReviews(userID, userIDReviewd, rating) {
-    //   try {
-    //     var Reviews = await FYSCloud.API.queryDatabase ('SELECT rating FROM user_review WHERE userID = ?')[userID]
-    //   console.log(Reviews);
-    //   } catch (e) {
-    //console.log(e)
-    //  }
-    //}
+
+    async getReviews(userIDReviewed) {
+        try {
+
+            var countTotalReview = await FYSCloud.API.queryDatabase('SELECT COUNT(rating) FROM user_review WHERE userIDReviewed = ?',[userIDReviewed])
+            var avgTotalReview = await FYSCloud.API.queryDatabase('SELECT AVG(rating) FROM user_review WHERE userIDReviewed = ?',[userIDReviewed])
+
+            console.log(countTotalReview)
+            console.log(avgTotalReview)
 
 
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
 }
+

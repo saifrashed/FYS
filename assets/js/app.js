@@ -3,18 +3,18 @@ $(document).ready(function () {
     /*
      * Declaration of variables
      */
-    var database      = null;
-    var user          = null;
-    var translation   = null;
-    var notification  = null;
-    var genders       = null;
-    var userData      = null;
-    var hobbiesList   = null;
-    var vacationList  = null;
-    var matchData     = null;
+    var database = null;
+    var user = null;
+    var translation = null;
+    var notification = null;
+    var genders = null;
+    var userData = null;
+    var hobbiesList = null;
+    var vacationList = null;
+    var matchData = null;
     var notifications = null;
-    var selectedUser  = null;
-    var searchQuery   = null;
+    var selectedUser = null;
+    var searchQuery = null;
 
 
     /**
@@ -28,17 +28,17 @@ $(document).ready(function () {
         /*
         Parameters (Dynamic data)
          */
-        const path      = window.location.pathname.split("/").pop();
+        const path = window.location.pathname.split("/").pop();
         const urlParams = new URLSearchParams(window.location.search);
-        searchQuery     = urlParams.get('query') || "";
-        selectedUser    = urlParams.get('userID') || "";
+        searchQuery = urlParams.get('query') || "";
+        selectedUser = urlParams.get('userID') || "";
 
         /*
         Class declaration
          */
-        database     = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
-        user         = new User();
-        translation  = new Translation();
+        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        user = new User();
+        translation = new Translation();
         notification = new Notifications();
 
         /*
@@ -49,9 +49,9 @@ $(document).ready(function () {
         /*
         General variabels
          */
-        genders       = await database.getGenders();
-        hobbiesList   = await database.getInterestList("hobbies");
-        vacationList  = await database.getInterestList("vacations");
+        genders = await database.getGenders();
+        hobbiesList = await database.getInterestList("hobbies");
+        vacationList = await database.getInterestList("vacations");
         notifications = await notification.getNotifications(user.userID);
 
         /*
@@ -77,28 +77,28 @@ $(document).ready(function () {
 
         switch (path) {
             case "profileDetail.html":
-                userData           = await user.getUserData(selectedUser);
-                userData.hobbies   = await user.getInterest("hobbies", selectedUser);
+                userData = await user.getUserData(selectedUser);
+                userData.hobbies = await user.getInterest("hobbies", selectedUser);
                 userData.vacations = await user.getInterest("vacations", selectedUser);
-                userData.socials   = await user.getSocials(selectedUser);
+                userData.socials = await user.getSocials(selectedUser);
 
                 displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
             case "userProfile.html":
-                userData           = await user.getUserData(user.userID);
-                userData.hobbies   = await user.getInterest("hobbies", user.userID);
+                userData = await user.getUserData(user.userID);
+                userData.hobbies = await user.getInterest("hobbies", user.userID);
                 userData.vacations = await user.getInterest("vacations", user.userID);
-                userData.socials   = await user.getSocials(user.userID);
+                userData.socials = await user.getSocials(user.userID);
 
                 console.log(userData);
 
                 displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
             case "userEdit.html":
-                userData           = await user.getUserData(user.userID);
-                userData.hobbies   = await user.getInterest("hobbies", user.userID);
+                userData = await user.getUserData(user.userID);
+                userData.hobbies = await user.getInterest("hobbies", user.userID);
                 userData.vacations = await user.getInterest("vacations", user.userID);
-                userData.socials   = await user.getSocials(user.userID);
+                userData.socials = await user.getSocials(user.userID);
 
                 displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
@@ -122,7 +122,7 @@ $(document).ready(function () {
 
 
             // Image Display
-            var profileImage    = 'url(assets/img/stock/stock-7.jpg)';
+            var profileImage = 'url(assets/img/stock/stock-7.jpg)';
             var hasProfileImage = await FYSCloud.API.fileExists(data[0].userID + ".png");
 
             // checks if there is a profile image for this profile
@@ -394,9 +394,9 @@ $(document).ready(function () {
             for (let i = 0; i < data.length; i++) {
 
                 // dynamic variables for overview page
-                var profileImage    = 'assets/img/stock/stock-7.jpg';
-                var profileExcerpt  = "Geen hobbies";
-                var profileScoring  = data[i].scoring < 10 ? (data[i].scoring * 10) : 100;
+                var profileImage = 'assets/img/stock/stock-7.jpg';
+                var profileExcerpt = "Geen hobbies";
+                var profileScoring = data[i].scoring < 10 ? (data[i].scoring * 10) : 100;
                 var hasProfileImage = await FYSCloud.API.fileExists(data[i].userID + ".png");
 
                 // checks if there is a profile image for this profile
@@ -467,7 +467,6 @@ $(document).ready(function () {
     /***************************   Authentication/Login/Register   *********************************/
 
 
-
     // Login button event listener
     $("#login-button").click(async function (e) {
         try {
@@ -518,7 +517,7 @@ $(document).ready(function () {
             }
 
             // registers user
-            var registeredUser  = await user.register(data);
+            var registeredUser = await user.register(data);
             var addNotification = await notification.addNotification(registeredUser, "Welkom bij Corendon Vakantie maatje!", "Begin met het toevoegen van interesses om zo jou profiel te personaliseren en de perfecte vakantie maatje te vinden!", "Bewerken kun je doen bij je profiel.");
 
             window.location.reload();
@@ -555,7 +554,7 @@ $(document).ready(function () {
 
 
         var updatedSocials = await user.updateSocials(user.userID, dataSocials);
-        var updatedUser    = await user.updateUserData(user.userID, data);
+        var updatedUser = await user.updateUserData(user.userID, data);
 
 
         if (updatedUser) {
@@ -573,7 +572,7 @@ $(document).ready(function () {
             var selectedVacation = vacationList.filter(obj => {
                 return obj.vacationID == inputSelectedVacation.val();
             });
-            var addVacation      = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID);
+            var addVacation = await user.addInterest("vacations", selectedVacation[0].vacationID, user.userID);
             if (addVacation) {
                 notification.success("Vakantie toegevoegd!");
             }
@@ -602,7 +601,7 @@ $(document).ready(function () {
     // deletes vacation
     $("#userEdit-vacations").on("click", "button", async function () {
         try {
-            var element   = $(this);
+            var element = $(this);
             var elementID = element.attr("data-id");
 
             const deletedVacation = await user.deleteInterest('vacations', elementID, user.userID);
@@ -648,7 +647,7 @@ $(document).ready(function () {
     // deletes hobby
     $("#userEdit-hobbies").on("click", "li", async function () {
         try {
-            var element   = $(this);
+            var element = $(this);
             var elementID = element.attr("data-id");
 
             const deletedHobby = await user.deleteInterest('hobbies', elementID, user.userID);
@@ -698,8 +697,8 @@ $(document).ready(function () {
     // Alert to give user feedback when friend request is send.
     $(".friend-request-alert").on("click", async function () {
         try {
-            var friendRequest   = await database.sendFriendRequest(user.userID, selectedUser);
-            var userRequested   = await user.getUserData(user.userID);
+            var friendRequest = await database.sendFriendRequest(user.userID, selectedUser);
+            var userRequested = await user.getUserData(user.userID);
             var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd naar " + userData[0].firstName + "!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
             var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen", "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "", "friendRequest", user.userID);
             notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName + "!");
@@ -729,7 +728,7 @@ $(document).ready(function () {
 
     // Displays the users friendlist
     $('.show-friends-button').on('click', function () {
-        var friendList        = $('.friendlist');
+        var friendList = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -738,7 +737,7 @@ $(document).ready(function () {
 
     // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
-        var friendList        = $('.friendlist');
+        var friendList = $('.friendlist');
         var friendListOverlay = $('.page-overlay');
 
         friendList.toggleClass("show");
@@ -760,23 +759,23 @@ $(document).ready(function () {
         translation.translate();
     });
 
-//     $(".rating").on("click", "input", async function () {
-//         try {
-//             //moet selected user worden
-//             var review     = ($(this).val());
-//             var userRating = await database.updateReview(user.userID, selectedUser, review);
-//             //var profileRating = await database.getReviews(user.userID, selectedUser, rating)
-//
-//             console.log(selectedUser + " " + review + " " + userRating)
-//             console.log(userRating[1])
-//
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     })
-// });
+    $(".rating").on("click", "input", async function () {
+        try {
+            var review = ($(this).val());
+            var userRating = await database.updateReview(user.userID, selectedUser, review);
+            var userReview = await database.getReviews(selectedUser);
 
 
+
+            console.log(userRating)
+            console.log(userReview)
+
+
+
+        } catch (e) {
+            console.log(e)
+        }
+    });
     /***************************   Extra functionality   *********************************/
 
 
@@ -789,10 +788,12 @@ $(document).ready(function () {
     $("#feelingLucky").click(async function () {
         try {
             var randomUserID = await user.getRandomUser();
-            location.href    = "./profileDetail.html?userID=" + randomUserID[0].userID;
+            location.href = "./profileDetail.html?userID=" + randomUserID[0].userID;
         } catch (e) {
             console.log(e)
         }
     });
 });
+
+
 
