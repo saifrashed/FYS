@@ -54,7 +54,6 @@ $(document).ready(function () {
         hobbiesList   = await database.getInterestList("hobbies");
         vacationList  = await database.getInterestList("vacations");
         notifications = await notification.getNotifications(user.userID);
-        userReview    = await database.getReviews(selectedUser);
 
 
         /*
@@ -72,7 +71,6 @@ $(document).ready(function () {
         // For performance, the matching function will only run on the overview page
         if (path === "profileOverview.html") {
             matchData = await database.getMatches(user.userID, "%" + searchQuery + "%");
-
             populateMatches(matchData);
         }
 
@@ -83,6 +81,8 @@ $(document).ready(function () {
                 userData.hobbies   = await user.getInterest("hobbies", selectedUser);
                 userData.vacations = await user.getInterest("vacations", selectedUser);
                 userData.socials   = await user.getSocials(selectedUser);
+                userReview         = await database.getReviews(selectedUser);
+
                 userData.posts     = await user.getPost(selectedUser);
 
                 displayUserData(userData, userData.hobbies, userData.vacations);
@@ -92,9 +92,10 @@ $(document).ready(function () {
                 userData.hobbies   = await user.getInterest("hobbies", user.userID);
                 userData.vacations = await user.getInterest("vacations", user.userID);
                 userData.socials   = await user.getSocials(user.userID);
+                userReview         = await database.getReviews(user.userID);
                 userData.posts     = await user.getPost(user.userID);
 
-                console.log(userData);
+                console.log(userReview);
 
                 displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
@@ -151,7 +152,14 @@ $(document).ready(function () {
 
             // User review information
             $("#totalReview").html("( " + userReview.count + " reviews )");
-            $("#userRating").html(userReview.avg.toFixed(2));
+
+
+            if(userReview.avg) {
+                $("#userRating").html(userReview.avg.toFixed(2));
+            } else {
+                $("#userRating").html(0);
+            }
+
 
             // userform
             $("#userprofile-firstname").val(data[0].firstName);
@@ -360,7 +368,7 @@ $(document).ready(function () {
             switch (notifications[i].type) {
                 case "default":
                     $("#notificationsList").append(
-                        "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" data-id='"+notifications[i].notificationID+"' href=\"#\">\n" +
+                        "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" data-id='" + notifications[i].notificationID + "' href=\"#\">\n" +
                         "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
                         "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
                         "                        </div>\n" +
@@ -371,7 +379,7 @@ $(document).ready(function () {
                     break;
                 case "friendRequest":
                     $("#notificationsList").append(
-                        "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" data-id='"+notifications[i].notificationID+"' href=\"#\">\n" +
+                        "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" data-id='" + notifications[i].notificationID + "' href=\"#\">\n" +
                         "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
                         "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
                         "                        </div>\n" +
@@ -745,7 +753,7 @@ $(document).ready(function () {
             var targetUser = await user.getUserData($(this).attr("data-id"));
             var loggedUser = await user.getUserData(user.userID);
 
-            var notificationID = $(this).parent().parent().attr("data-id");
+            var notificationID   = $(this).parent().parent().attr("data-id");
             var notificationType = $(this).attr("id");
 
             console.log(notificationID);
