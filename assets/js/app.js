@@ -146,10 +146,7 @@ $(document).ready(function () {
 
             // User review information
             $("#totalReview").html("( " + userReview.count + " reviews )");
-
-
-            console.log(userReview.avg);
-
+            $("#userRating").html(userReview.avg.toFixed(2));
 
             // userform
             $("#userprofile-firstname").val(data[0].firstName);
@@ -159,98 +156,102 @@ $(document).ready(function () {
             $("#userEdit-residence").val(data[0].residence);
             $("#userEdit-bio").val(data[0].bio);
 
-            // socials
-            $("[name=website]").val(data.socials[0].website);
-            $("[name=twitter]").val(data.socials[0].twitter);
-            $("[name=instagram]").val(data.socials[0].instagram);
-            $("[name=facebook]").val(data.socials[0].facebook);
-
             // User post
             $("#userprofile-postTitle").val(data[0].title);
             $("#userprofile-postContent").val(data[0].content);
 
-            // User socials
 
-            if (data.socials[0].website) { // website
-                $("#userprofile-socials").append("     <a href='" + data.socials[0].website + "' target='_blank'>\n" +
-                    "                            <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
-                    "                                <h6 class=\"mb-0\">\n" +
-                    "                                    <svg class=\"feather feather-globe mr-2 icon-inline\" fill=\"none\" height=\"24\"\n" +
-                    "                                         stroke=\"currentColor\"\n" +
-                    "                                         stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
-                    "                                         viewBox=\"0 0 24 24\"\n" +
-                    "                                         width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                    "                                        <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n" +
-                    "                                        <line x1=\"2\" x2=\"22\" y1=\"12\" y2=\"12\"></line>\n" +
-                    "                                        <path d=\"M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"></path>\n" +
-                    "                                    </svg>\n" +
-                    "                                    Website\n" +
-                    "                                </h6>\n" +
-                    "                                <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
-                    "                            </li>\n" +
-                    "                        </a>")
-            }
-
-            if (data.socials[0].twitter) { // twitter
-                $("#userprofile-socials").append(" <a href='" + data.socials[0].twitter + "' target='_blank'>\n" +
-                    "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
-                    "                                    <h6 class=\"mb-0\">\n" +
-                    "                                        <svg class=\"feather feather-twitter mr-2 icon-inline text-info\" fill=\"none\"\n" +
-                    "                                             height=\"24\"\n" +
-                    "                                             stroke=\"currentColor\"\n" +
-                    "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
-                    "                                             viewBox=\"0 0 24 24\"\n" +
-                    "                                             width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                    "                                            <path d=\"M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z\"></path>\n" +
-                    "                                        </svg>\n" +
-                    "                                        Twitter\n" +
-                    "                                    </h6>\n" +
-                    "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
-                    "                                </li>\n" +
-                    "                            </a>")
-            }
-
-
-            if (data.socials[0].instagram) { // instagram
-                $("#userprofile-socials").append("<a <a href='" + data.socials[0].instagram + "' target='_blank'>\n" +
-                    "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
-                    "                                    <h6 class=\"mb-0\">\n" +
-                    "                                        <svg class=\"feather feather-instagram mr-2 icon-inline text-danger\" fill=\"none\"\n" +
-                    "                                             height=\"24\" stroke=\"currentColor\"\n" +
-                    "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
-                    "                                             viewBox=\"0 0 24 24\"\n" +
-                    "                                             width=\"24\"\n" +
-                    "                                             xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                    "                                            <rect height=\"20\" rx=\"5\" ry=\"5\" width=\"20\" x=\"2\" y=\"2\"></rect>\n" +
-                    "                                            <path d=\"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z\"></path>\n" +
-                    "                                            <line x1=\"17.5\" x2=\"17.51\" y1=\"6.5\" y2=\"6.5\"></line>\n" +
-                    "                                        </svg>\n" +
-                    "                                        Instagram\n" +
-                    "                                    </h6>\n" +
-                    "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
-                    "                                </li>\n" +
-                    "                            </a>")
-            }
-
-
-            if (data.socials[0].facebook) { // facebook
-                $("#userprofile-socials").append("<a href='" + data.socials[0].facebook + "' target='_blank'>\n" +
-                    "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
-                    "                                    <h6 class=\"mb-0\">\n" +
-                    "                                        <svg class=\"feather feather-facebook mr-2 icon-inline text-primary\" fill=\"none\"\n" +
-                    "                                             height=\"24\" stroke=\"currentColor\"\n" +
-                    "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
-                    "                                             viewBox=\"0 0 24 24\"\n" +
-                    "                                             width=\"24\"\n" +
-                    "                                             xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                    "                                            <path d=\"M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z\"></path>\n" +
-                    "                                        </svg>\n" +
-                    "                                        Facebook\n" +
-                    "                                    </h6>\n" +
-                    "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
-                    "                                </li>\n" +
-                    "                            </a>")
-            }
+            // // User socials
+            // if (data.socials[0].website) { // website
+            //     $("[name=website]").val(data.socials[0].website);
+            //
+            //
+            //     $("#userprofile-socials").append("     <a href='" + data.socials[0].website + "' target='_blank'>\n" +
+            //         "                            <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+            //         "                                <h6 class=\"mb-0\">\n" +
+            //         "                                    <svg class=\"feather feather-globe mr-2 icon-inline\" fill=\"none\" height=\"24\"\n" +
+            //         "                                         stroke=\"currentColor\"\n" +
+            //         "                                         stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+            //         "                                         viewBox=\"0 0 24 24\"\n" +
+            //         "                                         width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+            //         "                                        <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\n" +
+            //         "                                        <line x1=\"2\" x2=\"22\" y1=\"12\" y2=\"12\"></line>\n" +
+            //         "                                        <path d=\"M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"></path>\n" +
+            //         "                                    </svg>\n" +
+            //         "                                    Website\n" +
+            //         "                                </h6>\n" +
+            //         "                                <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+            //         "                            </li>\n" +
+            //         "                        </a>")
+            // }
+            //
+            // if (data.socials[0].twitter) { // twitter
+            //     $("[name=twitter]").val(data.socials[0].twitter);
+            //
+            //
+            //     $("#userprofile-socials").append(" <a href='" + data.socials[0].twitter + "' target='_blank'>\n" +
+            //         "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+            //         "                                    <h6 class=\"mb-0\">\n" +
+            //         "                                        <svg class=\"feather feather-twitter mr-2 icon-inline text-info\" fill=\"none\"\n" +
+            //         "                                             height=\"24\"\n" +
+            //         "                                             stroke=\"currentColor\"\n" +
+            //         "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+            //         "                                             viewBox=\"0 0 24 24\"\n" +
+            //         "                                             width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+            //         "                                            <path d=\"M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z\"></path>\n" +
+            //         "                                        </svg>\n" +
+            //         "                                        Twitter\n" +
+            //         "                                    </h6>\n" +
+            //         "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+            //         "                                </li>\n" +
+            //         "                            </a>")
+            // }
+            //
+            //
+            // if (data.socials[0].instagram) { // instagram
+            //     $("[name=instagram]").val(data.socials[0].instagram);
+            //
+            //     $("#userprofile-socials").append("<a <a href='" + data.socials[0].instagram + "' target='_blank'>\n" +
+            //         "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+            //         "                                    <h6 class=\"mb-0\">\n" +
+            //         "                                        <svg class=\"feather feather-instagram mr-2 icon-inline text-danger\" fill=\"none\"\n" +
+            //         "                                             height=\"24\" stroke=\"currentColor\"\n" +
+            //         "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+            //         "                                             viewBox=\"0 0 24 24\"\n" +
+            //         "                                             width=\"24\"\n" +
+            //         "                                             xmlns=\"http://www.w3.org/2000/svg\">\n" +
+            //         "                                            <rect height=\"20\" rx=\"5\" ry=\"5\" width=\"20\" x=\"2\" y=\"2\"></rect>\n" +
+            //         "                                            <path d=\"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z\"></path>\n" +
+            //         "                                            <line x1=\"17.5\" x2=\"17.51\" y1=\"6.5\" y2=\"6.5\"></line>\n" +
+            //         "                                        </svg>\n" +
+            //         "                                        Instagram\n" +
+            //         "                                    </h6>\n" +
+            //         "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+            //         "                                </li>\n" +
+            //         "                            </a>")
+            // }
+            //
+            //
+            // if (data.socials[0].facebook) { // facebook
+            //     $("[name=facebook]").val(data.socials[0].facebook);
+            //
+            //     $("#userprofile-socials").append("<a href='" + data.socials[0].facebook + "' target='_blank'>\n" +
+            //         "                                <li class=\"list-group-item d-flex justify-content-between align-items-center flex-wrap\">\n" +
+            //         "                                    <h6 class=\"mb-0\">\n" +
+            //         "                                        <svg class=\"feather feather-facebook mr-2 icon-inline text-primary\" fill=\"none\"\n" +
+            //         "                                             height=\"24\" stroke=\"currentColor\"\n" +
+            //         "                                             stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"\n" +
+            //         "                                             viewBox=\"0 0 24 24\"\n" +
+            //         "                                             width=\"24\"\n" +
+            //         "                                             xmlns=\"http://www.w3.org/2000/svg\">\n" +
+            //         "                                            <path d=\"M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z\"></path>\n" +
+            //         "                                        </svg>\n" +
+            //         "                                        Facebook\n" +
+            //         "                                    </h6>\n" +
+            //         "                                    <span class=\"text-secondary\"><i class=\"fas fa-arrow-right\"></i></span>\n" +
+            //         "                                </li>\n" +
+            //         "                            </a>")
+            // }
 
 
             // User bio
@@ -826,24 +827,17 @@ $(document).ready(function () {
     });
 
     // Button to post review on users profile
-    $(".rating").on("click", "span", async function () {
+    $(".rating").on("click", "input", async function () {
         try {
 
-            var review     = $(this).attr("data-id");
+            var review     = $(this).val();
             var userRating = await database.updateReview(user.userID, selectedUser, review);
-            notification.success("Beoordeling is geplaats")
+            notification.success("Beoordeling is geplaatst!")
 
         } catch (e) {
             console.log(e)
         }
     });
-
-    // rating star hover
-    $(".rating>span").hover(function () {
-        $(this).addClass("checked");
-    }, function () {
-        $(this).removeClass("checked");
-    })
 });
 
 
