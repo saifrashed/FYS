@@ -299,26 +299,41 @@ class User {
      * Places post on users page
      * @returns {Promise<*>}
      */
-    // async placePost()   {
-    //     try{
-    //         return await FYSCloud.API.queryDatabase("INSERT INTO posts VALUES(?,?,?,?,?,?)", [postID ,userID, vacationID, title, content, dateCreated]);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // }
+    async addPost(userID, vacationID, title, content) {
+        try {
+            return await FYSCloud.API.queryDatabase("INSERT INTO posts VALUES(?,?,?,?)", [userID, vacationID, title,
+                                                                                          content]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     /**
      * Gets posts from the user
      * @returns {Promise<*>}
      */
-    // async getPost() {
-    //     try{
-    //         return await FYSCloud.API.queryDatabase("SELECT postID ,userID, vacationID, title, content, dateCreated FROM posts");
-    //     }catch (e) {
-    //         console.log(e);
-    //     }
-    // }
+    async getPost(userID) {
+        try {
+            return await FYSCloud.API.queryDatabase("SELECT * FROM posts WHERE userID=?", [userID]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
+    /**
+     * Deletes a post
+     * @param userID
+     * @param postID
+     * @returns {Promise<*>}
+     */
+    async deletePost(userID, postID) {
+        try {
+            return await FYSCloud.API.queryDatabase("UPDATE posts WHERE userID=? AND postID=? SET status='archived'", [userID,
+                                                                                                        postID]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     /**
      * Gets all connections (friends)

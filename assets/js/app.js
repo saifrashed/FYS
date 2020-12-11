@@ -156,10 +156,6 @@ $(document).ready(function () {
             $("#userEdit-residence").val(data[0].residence);
             $("#userEdit-bio").val(data[0].bio);
 
-            // User post
-            $("#userprofile-postTitle").val(data[0].title);
-            $("#userprofile-postContent").val(data[0].content);
-
 
             // // User socials
             // if (data.socials[0].website) { // website
