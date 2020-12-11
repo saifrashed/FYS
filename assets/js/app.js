@@ -777,6 +777,21 @@ $(document).ready(function () {
         friendListOverlay.toggleClass("hide-overlay");
     });
 
+    // $("#place-post").click(async function () {
+    //     try {
+    //         var placePost = await User.placePost();
+    //         console.log(placePost);
+    //         var inputSelectedVacation = $('#userPostVacation').find(":selected");
+    //
+    //         var selectedVacation = vacationList.filter(obj => {
+    //             return obj.postVacation === inputSelectedVacation.val();
+    //         });
+
+    //         var addPostVacation = await user.placePost("Posts", user.userID,selectedVacation[0].postVacation,"title","content","datecreated");
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // });
 
     /***************************   Translations   *********************************/
 
