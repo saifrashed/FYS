@@ -259,7 +259,6 @@ class Translation {
         }
     };
 
-
     constructor() {
         console.log("Translation class loaded: true");
 
