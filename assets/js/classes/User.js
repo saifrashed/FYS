@@ -318,4 +318,44 @@ class User {
     //         console.log(e);
     //     }
     // }
+
+
+    /**
+     * Gets all connections (friends)
+     * @param userID
+     * @returns {Promise<void>}
+     */
+    async getConnections(userID) {
+        try {
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Gets all chats
+     * @param connectionID
+     * @returns {Promise<void>}
+     */
+    async getChats(connectionID) {
+        try {
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Gets all messages from a chat
+     * @param chatID
+     * @returns {Promise<void>}
+     */
+    async getMessages(chatID) {
+        try {
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }

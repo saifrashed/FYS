@@ -15,10 +15,10 @@ class Notifications {
      * @param disclaimer
      * @returns {Promise<void>}
      */
-    async addNotification(userID, title, content, disclaimer) {
+    async addNotification(userID, title, content, disclaimer, type = "default", target = null) {
         try {
-            return await FYSCloud.API.queryDatabase("INSERT INTO notifications (userID, title, content, disclaimer) VALUES (?, ?, ?, ?)",
-                [userID, title, content, disclaimer]);
+            return await FYSCloud.API.queryDatabase("INSERT INTO notifications (userID, title, content, disclaimer, type, target) VALUES (?, ?, ?, ?, ?, ?)",
+                [userID, title, content, disclaimer, type, target]);
         } catch (e) {
             console.log(e);
         }
@@ -31,7 +31,7 @@ class Notifications {
      */
     async getNotifications(userID) {
         try {
-            return await FYSCloud.API.queryDatabase("SELECT notificationID, title, content, disclaimer FROM users NATURAL JOIN notifications WHERE userID=?", [userID]);
+            return await FYSCloud.API.queryDatabase("SELECT notificationID, title, content, disclaimer, type, target FROM users NATURAL JOIN notifications WHERE userID=?", [userID]);
         } catch (e) {
             console.log(e);
         }

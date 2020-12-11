@@ -111,7 +111,7 @@ $(document).ready(function () {
 
 
     /**
-     * Displays information on page
+     * Displays information on pages
      * @param data
      * @param hobbies
      * @param vacations
@@ -349,16 +349,32 @@ $(document).ready(function () {
      */
     function populateNotifications(notifications) {
         for (let i = 0; i < notifications.length; i++) {
-
-            $("#notificationsList").append(
-                "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
-                "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
-                "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
-                "                        </div>\n" +
-                "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
-                "                        <small>" + notifications[i].disclaimer + "</small>\n" +
-                "                    </a>"
-            );
+            switch (notifications[i].type) {
+                case "default":
+                    $("#notificationsList").append(
+                        "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
+                        "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
+                        "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
+                        "                        </div>\n" +
+                        "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
+                        "                        <small>" + notifications[i].disclaimer + "</small>\n" +
+                        "                    </a>"
+                    );
+                    break;
+                case "friendRequest":
+                    $("#notificationsList").append(
+                        "    <a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\" href=\"#\">\n" +
+                        "                        <div class=\"d-flex w-100 justify-content-between\">\n" +
+                        "                            <h5 class=\"mb-1\">" + notifications[i].title + "</h5>\n" +
+                        "                        </div>\n" +
+                        "                        <p class=\"mb-1\">" + notifications[i].content + "</p>\n" +
+                        "                        <small><button class='btn btn-success mr-2' id='friendRequest-accept' data-id='" + notifications[i].target + "'>Accepteren</button><button class='btn btn-danger' id='friendRequest-decline' data-id='" + notifications[i].target + "'>Afwijzen</button> </small>\n" +
+                        "                    </a>"
+                    );
+                    break;
+                default:
+                    return false;
+            }
         }
     }
 
@@ -450,6 +466,10 @@ $(document).ready(function () {
     }
 
 
+    /***************************   Authentication/Login/Register   *********************************/
+
+
+
     // Login button event listener
     $("#login-button").click(async function (e) {
         try {
@@ -512,10 +532,12 @@ $(document).ready(function () {
     // Logout button event listener
     $("#logout-button").click(function (e) {
         e.preventDefault();
-
-        //actions
         user.logout();
     });
+
+
+    /***************************   User editing page   *********************************/
+
 
     // If logged user saves changes
     $("#userUpdateSubmit").click(async function (e) {
@@ -603,11 +625,13 @@ $(document).ready(function () {
     $("#userEdit-addHobby").click(async function () {
         try {
             var inputSelectedHobby = $('#userEditHobbies').find(":selected");
+
             var selectedHobby      = hobbiesList.filter(obj => {
                 return obj.interestID == inputSelectedHobby.val();
             });
 
             var addHobbies = await user.addInterest("hobbies", selectedHobby[0].interestID, user.userID);
+
             if (addHobbies) {
                 notification.success("hobby toegevoegd!");
             }
@@ -663,21 +687,8 @@ $(document).ready(function () {
         }
     });
 
-    // search button
-    $("#searchButton").click(function (e) {
-        location.href = "./profileOverview.html?query=" + $("#searchQuery").val();
-    });
 
-    // feeling lucky button
-    $("#feelingLucky").click(async function () {
-        try {
-            var randomUserID = await user.getRandomUser();
-
-            location.href = "./profileDetail.html?userID=" + randomUserID[0].userID;
-        } catch (e) {
-            console.log(e)
-        }
-    })
+    /***************************   Connections/Chats/Messages   *********************************/
 
 
     // Alert for functionalities for which u need to be friends.
@@ -688,20 +699,30 @@ $(document).ready(function () {
     // Alert to give user feedback when friend request is send.
     $(".friend-request-alert").on("click", async function () {
         try {
-            //add both userID's to the database
             var friendRequest   = await database.sendFriendRequest(user.userID, selectedUser);
-            var userRequested   = await user.getUserData(user.userID)
-            // send notification to the users
+            var userRequested   = await user.getUserData(user.userID);
             var notificationOne = await notification.addNotification(user.userID, "Vriendschapsverzoek is verstuurd naar " + userData[0].firstName + "!", "Wanneer uw verzoek is geaccepteerd, kunt u in contact komen met deze persoon", "U krijgt een melding wanneer uw verzoek is geaccepteerd");
-            var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen", "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "U kunt dit verzoek accepteren om vrienden te worden");
+            var notificationTwo = await notification.addNotification(selectedUser, "Hoi " + userData[0].firstName + " u heeft een vriendschapverzoek ontvangen", "van " + userRequested[0].firstName + " " + userRequested[0].lastName, "", "friendRequest", user.userID);
             notification.success("Vriendschapverzoek verstuurd naar " + userData[0].firstName + "!");
 
+        } catch (e) {
+            console.log(e);
+        }
+    });
 
-            console.log(user.userID);
-            console.log(selectedUser);
-            console.log(userData[0].firstName);
-            console.log(userRequested);
-            console.log(friendRequest);
+    $("#notificationsList").on("click", "button", async function () {
+        try {
+            var targetUser = await user.getUserData($(this).attr("data-id"));
+            var loggedUser = await user.getUserData(user.userID);
+
+            // delete notification
+            // send notification to both parties
+            // turn connection to accepted
+            // create a chat
+
+            console.log(targetUser);
+            console.log(loggedUser);
+
         } catch (e) {
             console.log(e);
         }
@@ -725,6 +746,10 @@ $(document).ready(function () {
         friendListOverlay.toggleClass("hide-overlay");
     });
 
+
+    /***************************   Translations   *********************************/
+
+
     /**
      * Translation event listeners
      */
@@ -736,3 +761,24 @@ $(document).ready(function () {
         translation.translate();
     });
 });
+
+
+/***************************   Extra functionality   *********************************/
+
+
+// search button
+$("#searchButton").click(function () {
+    location.href = "./profileOverview.html?query=" + $("#searchQuery").val();
+});
+
+// feeling lucky button
+$("#feelingLucky").click(async function () {
+    try {
+        var randomUserID = await user.getRandomUser();
+
+        location.href = "./profileDetail.html?userID=" + randomUserID[0].userID;
+    } catch (e) {
+        console.log(e)
+    }
+});
+
