@@ -4,9 +4,9 @@
 class Database {
     constructor(apiUrl, apiKey, dbName, envName) {
         var connection = FYSCloud.API.configure({
-            url:         apiUrl,
-            apiKey:      apiKey,
-            database:    dbName,
+            url: apiUrl,
+            apiKey: apiKey,
+            database: dbName,
             environment: envName
         });
 
@@ -24,18 +24,18 @@ class Database {
     async sendMail(subject, nameAddress, emailAddress) {
         try {
             return FYSCloud.API.sendEmail({
-                from:    {
-                    name:    "Group",
+                from: {
+                    name: "Group",
                     address: "group@fys.cloud"
                 },
-                to:      [
+                to: [
                     {
-                        name:    nameAddress,
+                        name: nameAddress,
                         address: emailAddress
                     }
                 ],
                 subject: subject,
-                html:    "<h1>Hello Lennard!</h1><p>This is an email :)</p>"
+                html: "<h1>Hello Lennard!</h1><p>This is an email :)</p>"
             });
         } catch (e) {
             console.log(e);
@@ -208,13 +208,33 @@ class Database {
      * @param userTwoID
      * @returns {Promise<*>}
      */
-    async sendFriendRequest(userOneID, userTwoID){
-        try{
-            return await FYSCloud.API.queryDatabase('INSERT INTO connections (userOneID, userTwoID, userRequestedID) VALUES (?, ?, ?)',[userOneID, userTwoID, userOneID]);
+    async sendFriendRequest(userOneID, userTwoID) {
+        try {
+            return await FYSCloud.API.queryDatabase('INSERT INTO connections (userOneID, userTwoID, userRequestedID) VALUES (?, ?, ?)', [userOneID, userTwoID, userOneID]);
 
-        }catch (e) {
+        } catch (e) {
             console.log(e);
         }
     }
+
+
+    async updateReview(userID, userIDReviewd, rating) {
+        try {
+            return await FYSCloud.API.queryDatabase('INSERT INTO user_review(`userID`, `userIDReviewd`, `rating`) VALUES (?,?,?)', [userID, userIDReviewd, rating]);
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    //async getReviews(userID, userIDReviewd, rating) {
+    //   try {
+    //     var Reviews = await FYSCloud.API.queryDatabase ('SELECT rating FROM user_review WHERE userID = ?')[userID]
+    //   console.log(Reviews);
+    //   } catch (e) {
+    //console.log(e)
+    //  }
+    //}
+
 
 }

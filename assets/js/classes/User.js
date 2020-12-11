@@ -28,7 +28,7 @@ class User {
                 localStorage.setItem('FYSAuthId', loggedUser[0].userID);
                 window.location.reload();
             } else {
-                return false
+                return
             }
 
         } catch (e) {
