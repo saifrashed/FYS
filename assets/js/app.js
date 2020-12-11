@@ -764,6 +764,10 @@ $(document).ready(function () {
         friendListOverlay.toggleClass("hide-overlay");
     });
 
+    $('#report').on('click', function () {
+        notification.error("Gebruiker is gerapporteerd")
+    });
+
     // Friendlist page overlay is clickable
     $('.page-overlay').on('click', function () {
         var friendList        = $('.friendlist');
