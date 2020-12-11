@@ -71,30 +71,26 @@
                 <h1 class="text-center pb-5" style="font-weight:800;">Plaats bericht</h1>
                 <form>
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Bestemming</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Spanje</option>
-                            <option>Griekenland</option>
-                            <option>Marokko</option>
-                            <option>Italië</option>
-                            <option>Duitsland</option>
+                        <label>Bestemming</label>
+                        <select class="form-control" id="userEditVacations">
+                            <option>Voeg een bestemming toe</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Titel</label>
+                        <label >Titel</label>
                         <input class="form-control" type="text" placeholder="Bijv: Gezellig een dagje uit in Marokko"
-                               id="userprofile-postTitle">
+                               id="postTitle">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Bericht</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="text"
-                                  placeholder="Bijv: Ik zoek een ..." id="userprofile-postContent"></textarea>
+                        <label >Bericht</label>
+                        <textarea class="form-control" rows="3" type="text"
+                                  placeholder="Bijv: Ik zoek een ..." id="postContent"> </textarea>
                     </div>
 
                     <p class="text-muted">Disclaimer: Dit bericht is alleen te zien door uw vrienden.</p>
 
                     <div class="form-group">
-                        <button class="btn btn-primary btn-lg btn-block mt-5" type="button" type="submit">Plaats
+                        <button class="btn btn-primary btn-lg btn-block mt-5" id = "addPost-button" type="button" type="submit">Plaats
                             oproep
                         </button>
                     </div>

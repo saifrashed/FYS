@@ -54,9 +54,9 @@ class User {
             const registeredUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
-                 body.userResidence.toLowerCase(),
-                 body.userPhone, body.userPassword,
-                 body.userBirthDate, body.userGender]);
+                    body.userResidence.toLowerCase(),
+                    body.userPhone, body.userPassword,
+                    body.userBirthDate, body.userGender]);
 
 
             // saves user in browser
@@ -77,8 +77,8 @@ class User {
                 "SELECT COUNT(*) AS amountUsers FROM users WHERE userID = ?",
                 [userID]);
 
-            const path           = window.location.pathname;
-            const page           = path.split("/").pop();
+            const path = window.location.pathname;
+            const page = path.split("/").pop();
             const userPageRoutes = [
                 "profileOverview.html",
                 "profileDetail.html",
@@ -133,7 +133,7 @@ class User {
             return await FYSCloud.API.queryDatabase(
                 "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=?, bio=? WHERE userID = ?",
                 [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence,
-                 body.userBio, userID]);
+                    body.userBio, userID]);
         } catch (e) {
             console.log(e);
         }
@@ -227,11 +227,11 @@ class User {
             switch (type) {
                 case "hobbies":
                     return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND interestID = ?", [userID,
-                                                                                                                              typeID]
+                        typeID]
                     );
                 case "vacations":
                     return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND vacationID = ?", [userID,
-                                                                                                                              typeID]
+                        typeID]
                     );
                 default:
                     return false;
@@ -296,25 +296,31 @@ class User {
     }
 
     /**
-     * Places post on users page
+     * Adds post
+     * @param userID
+     * @param vacationID
+     * @param title
+     * @param content
      * @returns {Promise<*>}
      */
     async addPost(userID, vacationID, title, content) {
         try {
-            return await FYSCloud.API.queryDatabase("INSERT INTO posts VALUES(?,?,?,?)", [userID, vacationID, title,
-                                                                                          content]);
+            return await FYSCloud.API.queryDatabase("INSERT INTO posts(userID,vacationID,title,content) VALUES(?,?,?,?)", [userID, vacationID, title,
+                content]);
         } catch (e) {
             console.log(e);
         }
     }
 
     /**
-     * Gets posts from the user
+     * gets post
+     * @param userID
      * @returns {Promise<*>}
      */
+
     async getPost(userID) {
         try {
-            return await FYSCloud.API.queryDatabase("SELECT * FROM posts WHERE userID=?", [userID]);
+            return await FYSCloud.API.queryDatabase("SELECT * FROM posts WHERE userID=? AND status ='published'", [userID]);
         } catch (e) {
             console.log(e);
         }
@@ -329,7 +335,7 @@ class User {
     async deletePost(userID, postID) {
         try {
             return await FYSCloud.API.queryDatabase("UPDATE posts WHERE userID=? AND postID=? SET status='archived'", [userID,
-                                                                                                        postID]);
+                postID]);
         } catch (e) {
             console.log(e);
         }

@@ -83,6 +83,7 @@ $(document).ready(function () {
                 userData.hobbies   = await user.getInterest("hobbies", selectedUser);
                 userData.vacations = await user.getInterest("vacations", selectedUser);
                 userData.socials   = await user.getSocials(selectedUser);
+                userData.posts     = await user.getPost(selectedUser);
 
                 displayUserData(userData, userData.hobbies, userData.vacations);
                 break;
@@ -91,6 +92,7 @@ $(document).ready(function () {
                 userData.hobbies   = await user.getInterest("hobbies", user.userID);
                 userData.vacations = await user.getInterest("vacations", user.userID);
                 userData.socials   = await user.getSocials(user.userID);
+                userData.posts     = await user.getPost(user.userID);
 
                 console.log(userData);
 
@@ -107,6 +109,7 @@ $(document).ready(function () {
         }
     }
 
+
     init(); // Run Initialise function
 
 
@@ -119,6 +122,8 @@ $(document).ready(function () {
      */
     async function displayUserData(data, hobbies, vacations) {
         try {
+
+            console.log(data);
 
             var date = new Date(data[0].birthDate);
 
@@ -155,7 +160,6 @@ $(document).ready(function () {
             $("#userprofile-phonenumber").val(data[0].tel);
             $("#userEdit-residence").val(data[0].residence);
             $("#userEdit-bio").val(data[0].bio);
-
 
             // // User socials
             // if (data.socials[0].website) { // website
@@ -691,6 +695,28 @@ $(document).ready(function () {
         }
     });
 
+    //create post
+    $("#addPost-button").click(async function() { //post button
+       try{
+
+           var inputVacation = $("#userEditVacations").val();
+           var inputTitle = $("#postTitle").val();
+           var inputContent = $("#postContent").val();
+
+           var addPost = await user.addPost(user.userID,inputVacation,inputTitle,inputContent);
+
+           if(addPost){
+               notification.success("Bericht Toegevoegd!")
+           } else {
+              notification.error("Oeps! Er is wat misgegaan.")
+           }
+           console.log(addPost);
+
+       } catch (e) {
+           console.log(e);
+       }
+    });
+
 
     /***************************   Connections/Chats/Messages   *********************************/
 
@@ -774,21 +800,6 @@ $(document).ready(function () {
         friendListOverlay.toggleClass("hide-overlay");
     });
 
-    // $("#place-post").click(async function () {
-    //     try {
-    //         var placePost = await User.placePost();
-    //         console.log(placePost);
-    //         var inputSelectedVacation = $('#userPostVacation').find(":selected");
-    //
-    //         var selectedVacation = vacationList.filter(obj => {
-    //             return obj.postVacation === inputSelectedVacation.val();
-    //         });
-
-    //         var addPostVacation = await user.placePost("Posts", user.userID,selectedVacation[0].postVacation,"title","content","datecreated");
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // });
 
     /***************************   Translations   *********************************/
 
