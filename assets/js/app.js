@@ -358,11 +358,14 @@ $(document).ready(function () {
             if (data.posts.length != 0) {
                 data.posts.map(function (value, key) {
                     console.log(value.dateCreated);
+
+                    var formattedDate = new Date(value.dateCreated).toLocaleDateString();
+
                     $("#userProfile-posts").append("<a class=\"list-group-item list-group-item-action flex-column align-items-start text-left\"\n" +
                         "                               href=\"#\">\n" +
                         "                                <div class=\"d-flex w-100 justify-content-between\">\n" +
                         "                                    <h5 class=\"mb-1\">" + value.title + "</h5>\n" +
-                        "                                    <small>"+ value.dateCreated +"</small>\n" +
+                        "                                    <small>"+ formattedDate +"</small>\n" +
                         "                                </div>\n" +
                         "                                <p class=\"mb-1 \">\n" + value.content +
                         "                                </p>\n" +

@@ -151,9 +151,9 @@ class Translation {
         },
         profileoverview: {
             feelingLuckyButton: {
-                nl: "Ik doe een gok <i class=\"far fa-hand-point-right\"></i>",
-                en: "I'm feeling lucky <i class=\"far fa-hand-point-right\"></i>",
-                de: "Ich fühle mich glücklich <i class=\"far fa-hand-point-right\"></i>"
+                nl: "Ik doe een gok <i class=\"fas fa-dice\"></i>",
+                en: "I'm feeling lucky <i class=\"fas fa-dice\"></i>",
+                de: "Ich fühle mich glücklich <i class=\"fas fa-dice\"></i>"
             },
             searchButton: {
                 nl: "Zoeken",
