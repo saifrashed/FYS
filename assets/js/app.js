@@ -37,7 +37,7 @@ $(document).ready(function () {
         /*
         Class declaration
          */
-        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_dev", "dev");
+        database = new Database("https://api.fys.cloud/", "fys_is106_5.Pk9ggWAU7qg9EXTv", "fys_is106_5_live", "live");
         user = new User();
         translation = new Translation();
         notification = new Notifications();
