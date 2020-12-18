@@ -348,35 +348,12 @@ class User {
      */
     async getConnections(userID) {
         try {
+            return await FYSCloud.API.queryDatabase("SELECT * FROM connections WHERE userID=? AND isAccepted = 1", [userID]);
 
         } catch (e) {
             console.log(e);
         }
     }
 
-    /**
-     * Gets all chats
-     * @param connectionID
-     * @returns {Promise<void>}
-     */
-    async getChats(connectionID) {
-        try {
 
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    /**
-     * Gets all messages from a chat
-     * @param chatID
-     * @returns {Promise<void>}
-     */
-    async getMessages(chatID) {
-        try {
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
 }

@@ -783,33 +783,26 @@ $(document).ready(function () {
         try {
             var targetUser = await user.getUserData($(this).attr("data-id"));
             var loggedUser = await user.getUserData(user.userID);
-
             var notificationID = $(this).parent().parent().attr("data-id");
             var notificationType = $(this).attr("id");
-
-            console.log(notificationID);
-
             var targetUserID = targetUser[0].userID;
             var loggedUserID = loggedUser[0].userID;
 
             switch (notificationType) {
-
                 case "friendRequest-accept":
-                    //1. accept friend request
                     const acceptFriend = await database.acceptFriendRequest(targetUserID, loggedUserID);
-                    console.log(acceptFriend)
-
-                    //2. delete notifications
-                    //3. create accepted notification
+                    const deleteNotification = await notification.deleteNotification(notificationID);
+                    const notificationLogged = await notification.addNotification(loggedUserID, "U heeft uw nieuwe vakantiemaatje gevonden!", "U kunt nu in contact komen met uw nieuwe vriend", "U kunt al uw vrienden zien als u op de knop rechtsonder klikt");
+                    const notificationTargeted = await notification.addNotification(targetUserID, "Uw verzoek is geaccepteerd, u heeft er een nieuw vakantiemaatje bij", "U kunt nu in contact komen met uw nieuwe vriend", "U kunt al uw vrienden zien als u op de knop rechtsonder klikt" );
+                    location.reload();
                     break;
                 case "friendRequest-decline":
-                    //1. delete notification
-
+                    const removeNotification = await notification.deleteNotification(notificationID);
+                    location.reload();
                     break;
                 default:
                     console.log("foutje!");
                     break;
-
             }
 
         } catch (e) {
