@@ -16,6 +16,7 @@ $(document).ready(function () {
     var selectedUser = null;
     var searchQuery = null;
     var userReview = null;
+    var connections = null;
 
 
     /**
@@ -54,6 +55,7 @@ $(document).ready(function () {
         hobbiesList = await database.getInterestList("hobbies");
         vacationList = await database.getInterestList("vacations");
         notifications = await notification.getNotifications(user.userID);
+        connections = await user.getConnections(user.userID);
 
 
         /*
@@ -63,6 +65,8 @@ $(document).ready(function () {
         populateInterests(hobbiesList, vacationList);
         populateNotifications(notifications);
         notificationCounter(notifications);
+        populateConnections(connections);
+
 
         /*
         Conditional data
@@ -510,6 +514,43 @@ $(document).ready(function () {
         vacations.map(function (value, key) {
             $("#userEditVacations").append("<option value=" + value.vacationID + ">" + value.destination + "</option>");
         });
+    }
+
+    async function populateConnections(connections) {
+        try {
+            for (let i = 0; i < connections.length; i++) {
+                var user = await user.getUserData(connections[i]);
+                console.log(user)
+                console.log(connections[i])
+                // var profileImage = 'assets/img/stock/stock-7.jpg';
+                // var profileExcerpt = "Geen hobbies";
+                // var hasProfileImage = await FYSCloud.API.fileExists(data[i].userID + ".png");
+                //
+                // // checks if there is a profile image for this profile
+                // if (hasProfileImage) {
+                //     profileImage = "https://dev-is106-5.fys.cloud/uploads/" + data[i].userID + ".png";
+                // }
+
+                $(".friendlist").append("<div class=\"row\">\n" +
+                    "            <a href=\"#\">\n" +
+                    "                <div class=\"friendslist-item\">\n" +
+                    "                    <div class=\"media\">\n" +
+                    "                        <img alt=\"user\" class=\"rounded-circle\" src=\"assets/img/stock/stock-7.jpg\" width=\"50\" height=\"50\">\n" +
+                    "                        <div class=\"media-body ml-4\">\n" +
+                    "                            <div class=\"d-flex align-items-center justify-content-between mb-1\">\n" +
+                    "                                <h6 class=\"mb-0\">Isabel van Hoeven</h6>\n" +
+                    "                            </div>\n" +
+                    "                            <p class=\"font-italic mb-0 text-small text-left\">Yes! Zullen we doe...</p>\n" +
+                    "                        </div>\n" +
+                    "                    </div>\n" +
+                    "                </div>\n" +
+                    "            </a>\n" +
+                    "        </div>")
+                console.log(connections[i])
+            }
+        }catch (e) {
+            console.log(e);
+        }
     }
 
 

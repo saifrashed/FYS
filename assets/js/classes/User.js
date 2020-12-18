@@ -348,8 +348,16 @@ class User {
      */
     async getConnections(userID) {
         try {
-            return await FYSCloud.API.queryDatabase("SELECT * FROM connections WHERE userID=? AND isAccepted = 1", [userID]);
-
+            const getConnection = await FYSCloud.API.queryDatabase("SELECT userOneID, userTwoID FROM connections WHERE userOneID=? OR userTwoID=? AND isAccepted = 1", [userID, userID]);
+            var connections = [];
+            for (let i = 0; i < getConnection.length; i++) {
+                if(getConnection[i].userOneID != userID){
+                    connections.push(getConnection[i].userOneID);
+                }else if(getConnection[i].userTwoID != userID){
+                    connections.push(getConnection[i].userTwoID);
+                }
+            }
+            return connections;
         } catch (e) {
             console.log(e);
         }
