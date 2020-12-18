@@ -226,7 +226,7 @@ class Database {
      */
     async acceptFriendRequest(userOneID, userTwoID) {
         try{
-            return await FYSCloud.API.queryDatabase('UPDATE connections SET isAccepted=true WHERE userOneID=? AND userTwoID=? AND userRequestedID=?',[userOneID, userTwoID, userOneID])
+            return await FYSCloud.API.queryDatabase('UPDATE connections SET isAccepted=1 WHERE userOneID=? AND userTwoID=? AND userRequestedID=?',[userOneID, userTwoID, userOneID])
 
         }catch (e) {
             console.log(e);
