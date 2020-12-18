@@ -218,6 +218,20 @@ class Database {
         }
     }
 
+    /**
+     * Accepts the friendrequest
+     * @param userOneID
+     * @param userTwoID
+     * @returns {Promise<*>}
+     */
+    async acceptFriendRequest(userOneID, userTwoID) {
+        try{
+            return await FYSCloud.API.queryDatabase('UPDATE connections SET isAccepted=true WHERE userOneID=? AND userTwoID=? AND userRequestedID=?',[userOneID, userTwoID, userOneID])
+
+        }catch (e) {
+            console.log(e);
+        }
+    }
 
     /**
      * updates userReview if not

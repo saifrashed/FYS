@@ -789,22 +789,22 @@ $(document).ready(function () {
 
             console.log(notificationID);
 
-            // delete notification
-            // send notification to both parties
-            // turn connection to accepted
-            // create a chat
-
-            console.log(targetUser);
-            console.log(loggedUser);
-
+            var targetUserID = targetUser[0].userID;
+            var loggedUserID = loggedUser[0].userID;
 
             switch (notificationType) {
 
                 case "friendRequest-accept":
-                    console.log("Accepteren code");
+                    //1. accept friend request
+                    const acceptFriend = await database.acceptFriendRequest(targetUserID, loggedUserID);
+                    console.log(acceptFriend)
+
+                    //2. delete notifications
+                    //3. create accepted notification
                     break;
                 case "friendRequest-decline":
-                    console.log("Afwijzen code");
+                    //1. delete notification
+
                     break;
                 default:
                     console.log("foutje!");
