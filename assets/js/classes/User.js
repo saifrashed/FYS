@@ -15,14 +15,10 @@ class User {
      * @returns {Promise<void>}
      */
     async login(body) {
-        console.log(body.userEmail + " " + body.userPassword);
-
         try {
             const loggedUser = await FYSCloud.API.queryDatabase(
                 "SELECT * FROM users WHERE email = ? AND password = ?",
                 [body.userEmail.toLowerCase(), body.userPassword]);
-
-            console.log(loggedUser);
 
             if (loggedUser[0]) {
                 localStorage.setItem('FYSAuthId', loggedUser[0].userID);
@@ -202,9 +198,25 @@ class User {
         try {
             switch (type) {
                 case "hobbies":
+
+                    // already exists check
+                    var existingInterest = await FYSCloud.API.queryDatabase("SELECT interestID, description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID=? AND interestID=?", [userID, typeID]);
+
+                    if(existingInterest.length !== 0) {
+                        return false;
+                    }
+
                     return await FYSCloud.API.queryDatabase("INSERT INTO user_interests VALUES (? ,?)",
                         [userID, typeID]);
                 case "vacations":
+
+                    // already exists check
+                    var existingVacation = await FYSCloud.API.queryDatabase("SELECT vacationID, destination, description, url FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID=? AND vacationID=?", [userID, typeID]);
+
+                    if(existingVacation.length !== 0) {
+                        return false;
+                    }
+
                     return await FYSCloud.API.queryDatabase("INSERT INTO user_vacations VALUES (? ,?)",
                         [userID, typeID]);
                 default:

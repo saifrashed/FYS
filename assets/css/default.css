@@ -213,7 +213,16 @@ Footer
 
 footer.bg {
     background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+}
+
+.footer-decoration {
     margin-top: 100px;
+    height: 100px;
+    background-image: url("../img/vakantie_patroon.png");
+    background-size: 300px;
+    background-position: center;
+    box-shadow:inset 0px 15px 23px 0px rgba(255,255,255);
+
 }
 
 /* Tablets */
