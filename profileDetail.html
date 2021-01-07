@@ -92,16 +92,20 @@
                             <div class="mt-3">
                                 <h4 id="userprofile-name"></h4>
                                 <b>
-                                <p class="text-secondary mb-1" id="userprofile-birthdate"></p>
-                                <p class="text-muted font-size-sm" id="userprofile-residence"></p>
-                                <button class="btn btn-primary friend-request-alert"><i class="fas fa-user-plus"></i>
-                                </button>
-                                <button class="btn btn-outline-primary friend-required-alert"><i
-                                        class="fas fa-phone"></i></button>
-                                <button class="btn btn-outline-primary friend-required-alert"><i
-                                        class="fas fa-envelope"></i>
-                                </button>
-                                    <a href="#" class="btn btn-primary btn-danger" id="report"> Report </a></b>
+                                    <p class="text-secondary mb-1" id="userprofile-birthdate"></p>
+                                    <p class="text-muted font-size-sm" id="userprofile-residence"></p>
+                                </b>
+                                <div id="profile-buttons">
+                                    <button id="add-friend-button" class="btn btn-primary friend-request-alert"><i
+                                            class="fas fa-user-plus"></i>
+                                    </button>
+                                    <a href="#" id="call-friend-button" class="btn btn-outline-primary friend-required-alert"><i
+                                            class="fas fa-phone"></i></a>
+                                    <a href="#" id="email-friend-button" class="btn btn-outline-primary friend-required-alert"><i
+                                            class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-danger" id="report"> Report </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -110,7 +114,15 @@
                 <div class="card mt-3 p-2">
                     <span id="userRating"></span>
 
-                    <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                    <div class="rating"><input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                        <input
+                                type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio"
+                                                                                                            name="rating"
+                                                                                                            value="3"
+                                                                                                            id="3"><label
+                                for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label
+                                for="2">☆</label>
+                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
                     </div>
 
                     <span id="totalReview"></span>
