@@ -70,6 +70,9 @@ $(document).ready(function () {
         populateConnections(connections);
 
 
+        console.log(CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse("Rashed112")));
+
+
         /*
         Conditional data
          */
