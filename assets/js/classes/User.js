@@ -18,7 +18,7 @@ class User {
         try {
             const loggedUser = await FYSCloud.API.queryDatabase(
                 "SELECT * FROM users WHERE email = ? AND password = ?",
-                [body.userEmail.toLowerCase(), body.userPassword]);
+                [body.userEmail.toLowerCase(), CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword))]);
 
             if (loggedUser[0]) {
                 localStorage.setItem('FYSAuthId', loggedUser[0].userID);
@@ -47,13 +47,14 @@ class User {
      */
     async register(body) {
         try {
+
+            let password = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword));
             const registeredUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
                     body.userResidence.toLowerCase(),
-                    body.userPhone, body.userPassword,
+                    body.userPhone, password,
                     body.userBirthDate, body.userGender]);
-
 
             // saves user in browser
             localStorage.setItem('FYSAuthId', registeredUser.insertId);
