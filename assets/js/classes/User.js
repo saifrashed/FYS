@@ -18,7 +18,8 @@ class User {
         try {
             const loggedUser = await FYSCloud.API.queryDatabase(
                 "SELECT * FROM users WHERE email = ? AND password = ?",
-                [body.userEmail.toLowerCase(), CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword))]);
+                [body.userEmail.toLowerCase(),
+                 CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword))]);
 
             if (loggedUser[0]) {
                 localStorage.setItem('FYSAuthId', loggedUser[0].userID);
@@ -48,13 +49,13 @@ class User {
     async register(body) {
         try {
 
-            let password = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword));
+            let password         = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword));
             const registeredUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
                 [body.userFirstName.toLowerCase(), body.userLastName.toLowerCase(), body.userEmail.toLowerCase(),
-                    body.userResidence.toLowerCase(),
-                    body.userPhone, password,
-                    body.userBirthDate, body.userGender]);
+                 body.userResidence.toLowerCase(),
+                 body.userPhone, password,
+                 body.userBirthDate, body.userGender]);
 
             // saves user in browser
             localStorage.setItem('FYSAuthId', registeredUser.insertId);
@@ -74,8 +75,8 @@ class User {
                 "SELECT COUNT(*) AS amountUsers FROM users WHERE userID = ?",
                 [userID]);
 
-            const path = window.location.pathname;
-            const page = path.split("/").pop();
+            const path           = window.location.pathname;
+            const page           = path.split("/").pop();
             const userPageRoutes = [
                 "profileOverview.html",
                 "profileDetail.html",
@@ -130,7 +131,7 @@ class User {
             return await FYSCloud.API.queryDatabase(
                 "UPDATE users SET firstName=?, lastName=?, email=?, tel=?, residence=?, bio=? WHERE userID = ?",
                 [body.userFirstName, body.userLastName, body.userEmail, body.userPhone, body.userResidence,
-                    body.userBio, userID]);
+                 body.userBio, userID]);
         } catch (e) {
             console.log(e);
         }
@@ -201,9 +202,10 @@ class User {
                 case "hobbies":
 
                     // already exists check
-                    var existingInterest = await FYSCloud.API.queryDatabase("SELECT interestID, description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID=? AND interestID=?", [userID, typeID]);
+                    var existingInterest = await FYSCloud.API.queryDatabase("SELECT interestID, description FROM users NATURAL JOIN user_interests NATURAL JOIN interests WHERE userID=? AND interestID=?", [userID,
+                                                                                                                                                                                                             typeID]);
 
-                    if(existingInterest.length !== 0) {
+                    if (existingInterest.length !== 0) {
                         return false;
                     }
 
@@ -212,9 +214,10 @@ class User {
                 case "vacations":
 
                     // already exists check
-                    var existingVacation = await FYSCloud.API.queryDatabase("SELECT vacationID, destination, description, url FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID=? AND vacationID=?", [userID, typeID]);
+                    var existingVacation = await FYSCloud.API.queryDatabase("SELECT vacationID, destination, description, url FROM users NATURAL JOIN user_vacations NATURAL JOIN vacations WHERE userID=? AND vacationID=?", [userID,
+                                                                                                                                                                                                                               typeID]);
 
-                    if(existingVacation.length !== 0) {
+                    if (existingVacation.length !== 0) {
                         return false;
                     }
 
@@ -240,11 +243,11 @@ class User {
             switch (type) {
                 case "hobbies":
                     return await FYSCloud.API.queryDatabase("DELETE FROM user_interests WHERE userID= ? AND interestID = ?", [userID,
-                        typeID]
+                                                                                                                              typeID]
                     );
                 case "vacations":
                     return await FYSCloud.API.queryDatabase("DELETE FROM user_vacations WHERE userID= ? AND vacationID = ?", [userID,
-                        typeID]
+                                                                                                                              typeID]
                     );
                 default:
                     return false;
@@ -318,8 +321,10 @@ class User {
      */
     async addPost(userID, vacationID, title, content) {
         try {
-            return await FYSCloud.API.queryDatabase("INSERT INTO posts(userID,vacationID,title,content) VALUES(?,?,?,?)", [userID, vacationID, title,
-                content]);
+            return await FYSCloud.API.queryDatabase("INSERT INTO posts(userID,vacationID,title,content) VALUES(?,?,?,?)", [userID,
+                                                                                                                           vacationID,
+                                                                                                                           title,
+                                                                                                                           content]);
         } catch (e) {
             console.log(e);
         }
@@ -348,7 +353,7 @@ class User {
     async deletePost(userID, postID) {
         try {
             return await FYSCloud.API.queryDatabase("UPDATE posts WHERE userID=? AND postID=? SET status='archived'", [userID,
-                postID]);
+                                                                                                                       postID]);
         } catch (e) {
             console.log(e);
         }
@@ -361,12 +366,13 @@ class User {
      */
     async getConnections(userID) {
         try {
-            const getConnection = await FYSCloud.API.queryDatabase("SELECT userOneID, userTwoID FROM connections WHERE userOneID=? OR userTwoID=? AND isAccepted = 1", [userID, userID]);
-            var connections = [];
+            const getConnection = await FYSCloud.API.queryDatabase("SELECT userOneID, userTwoID FROM connections WHERE userOneID=? OR userTwoID=? AND isAccepted = 1", [userID,
+                                                                                                                                                                        userID]);
+            var connections     = [];
             for (let i = 0; i < getConnection.length; i++) {
-                if(getConnection[i].userOneID != userID){
+                if (getConnection[i].userOneID != userID) {
                     connections.push(getConnection[i].userOneID);
-                }else if(getConnection[i].userTwoID != userID){
+                } else if (getConnection[i].userTwoID != userID) {
                     connections.push(getConnection[i].userTwoID);
                 }
             }
@@ -376,5 +382,19 @@ class User {
         }
     }
 
+    /**
+     * Deletes connection
+     * @param userOneID
+     * @param userTwoID
+     * @returns {Promise<*>}
+     */
+    async deleteConnection(userOneID, userTwoID) {
+        try {
+            return await FYSCloud.API.queryDatabase("DELETE FROM connections WHERE userOneID=? OR userTwoID=? AND userOneID=? OR userTwoID=? ", [userOneID,
+                                                                                                                                                 userTwoID, userOneID,userTwoID])
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
 }
