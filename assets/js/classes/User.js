@@ -4,7 +4,6 @@
 class User {
     constructor() {
         this.userID = localStorage.getItem('FYSAuthId');
-
         console.log("User class loaded: true");
     }
 
@@ -19,7 +18,7 @@ class User {
             const loggedUser = await FYSCloud.API.queryDatabase(
                 "SELECT * FROM users WHERE email = ? AND password = ?",
                 [body.userEmail.toLowerCase(),
-                 CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword))]);
+                 cryptoJS.enc.Base64.stringify(CrypCtoJS.enc.Utf8.parse(body.userPassword))]);
 
             if (loggedUser[0]) {
                 localStorage.setItem('FYSAuthId', loggedUser[0].userID);
@@ -48,7 +47,6 @@ class User {
      */
     async register(body) {
         try {
-
             let password         = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(body.userPassword));
             const registeredUser = await FYSCloud.API.queryDatabase(
                 "INSERT INTO users (firstName, lastName, email, residence, tel, password, birthDate, genderID) VALUES(?,?,?,?,?,?,?,?)",
@@ -207,10 +205,10 @@ class User {
 
                     if (existingInterest.length !== 0) {
                         return false;
+                    } else {
+                        return await FYSCloud.API.queryDatabase("INSERT INTO user_interests VALUES (? ,?)",
+                            [userID, typeID]);
                     }
-
-                    return await FYSCloud.API.queryDatabase("INSERT INTO user_interests VALUES (? ,?)",
-                        [userID, typeID]);
                 case "vacations":
 
                     // already exists check
@@ -219,10 +217,10 @@ class User {
 
                     if (existingVacation.length !== 0) {
                         return false;
+                    } else {
+                        return await FYSCloud.API.queryDatabase("INSERT INTO user_vacations VALUES (? ,?)",
+                            [userID, typeID]);
                     }
-
-                    return await FYSCloud.API.queryDatabase("INSERT INTO user_vacations VALUES (? ,?)",
-                        [userID, typeID]);
                 default:
                     return false;
             }
@@ -391,7 +389,9 @@ class User {
     async deleteConnection(userOneID, userTwoID) {
         try {
             return await FYSCloud.API.queryDatabase("DELETE FROM connections WHERE userOneID=? OR userTwoID=? AND userOneID=? OR userTwoID=? ", [userOneID,
-                                                                                                                                                 userTwoID, userOneID,userTwoID])
+                                                                                                                                                 userTwoID,
+                                                                                                                                                 userOneID,
+                                                                                                                                                 userTwoID])
         } catch (e) {
             console.log(e)
         }

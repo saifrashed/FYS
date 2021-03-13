@@ -3,22 +3,20 @@ $(document).ready(function () {
     /*
      * Declaration of variables
      */
-    var database        = null;
-    var user            = null;
-    var translation     = null;
-    var notification    = null;
-    var genders         = null;
-    var userData        = null;
-    var hobbiesList     = null;
-    var vacationList    = null;
-    var matchData       = null;
-    var notifications   = null;
-    var selectedUser    = null;
-    var searchQuery     = null;
-    var userReview      = null;
-    var connections     = null;
-    var matchesSetCount = null;
-    var matchesPerPage  = null;
+    var database      = null;
+    var user          = null;
+    var translation   = null;
+    var notification  = null;
+    var genders       = null;
+    var userData      = null;
+    var hobbiesList   = null;
+    var vacationList  = null;
+    var matchData     = null;
+    var notifications = null;
+    var selectedUser  = null;
+    var searchQuery   = null;
+    var userReview    = null;
+    var connections   = null;
 
 
     /**
@@ -76,10 +74,8 @@ $(document).ready(function () {
 
         // For performance, the matching function will only run on the overview page
         if (path === "profileOverview.html") {
-            matchData       = await database.getMatches(user.userID, "%" + searchQuery + "%");
-            matchesSetCount = 1;
-            matchesPerPage  = 9;
-            populateMatches(matchData, matchesSetCount, matchesPerPage);
+            matchData = await database.getMatches(user.userID, "%" + searchQuery + "%");
+            populateMatches(matchData);
         }
 
 
@@ -125,14 +121,20 @@ $(document).ready(function () {
 
     init(); // Run Initialise function
 
+
+    function capitalize(s) {
+        if (typeof s !== 'string') return '';
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    }
+
     async function displayFriendButtons(userData) {
         try {
             // console.log(userData.tel)
 
-            let callFriendButton = $("#call-friend-button");
+            let callFriendButton  = $("#call-friend-button");
             let emailFriendButton = $("#email-friend-button");
-            let addFriendButton = $("#add-friend-button");
-            let reportButton = $("#report");
+            let addFriendButton   = $("#add-friend-button");
+            let reportButton      = $("#report");
 
 
             reportButton.remove();
@@ -179,7 +181,7 @@ $(document).ready(function () {
             });
 
             // User information
-            $("#userprofile-name").html(data[0].firstName + " " + data[0].lastName);
+            $("#userprofile-name").html(capitalize(data[0].firstName) + " " + capitalize(data[0].lastName));
             $("#userprofile-username").html(data[0].email);
             $("#userprofile-birthdate").html(date.toLocaleDateString());
             $("#userprofile-residence").html(data[0].residence);
@@ -488,17 +490,10 @@ $(document).ready(function () {
      * Here the html page is filled with matchData
      * @param data
      */
-    async function populateMatches(data, matchesSetCount, matchesPerPage) {
+    async function populateMatches(data) {
         try {
 
-            var matchesSetStart = (matchesPerPage * matchesSetCount) - matchesPerPage;
-            var matchesSetEnd   = matchesPerPage * matchesSetCount;
-
-            if (matchesSetEnd > data.length) {
-                return false;
-            }
-
-            for (let i = matchesSetStart; i < matchesSetEnd; i++) {
+            for (let i = 0; i < data.length; i++) {
 
                 // dynamic variables for overview page
                 var profileImage    = 'assets/img/stock/stock-7.jpg';
@@ -508,14 +503,14 @@ $(document).ready(function () {
 
                 // checks if there is a profile image for this profile
                 if (hasProfileImage) {
-                    profileImage = "https://dev-is106-5.fys.cloud/uploads/" + data[i].userID + ".png";
+                    profileImage = "https://is106-5.fys.cloud/uploads/" + data[i].userID + ".png";
                 }
 
                 // checks if there is hobbies for this profile
                 if (data[i].hobbies.length) {
                     profileExcerpt = "";
                     for (let j = 0; j < data[i].hobbies.length; j++) {
-                        profileExcerpt += ", " + data[i].hobbies[j];
+                        profileExcerpt += data[i].hobbies[j] + " ";
                     }
                 }
 
@@ -528,7 +523,7 @@ $(document).ready(function () {
                     "                        </a>\n" +
                     "                        <div class=\"card-body\">\n" +
                     "                            <h4 class=\"card-title\">\n" +
-                    "                                <a href=\"profileDetail.html?userID=" + data[i].userID + "\">" + data[i].firstName + " " + data[i].lastName + "</a>\n" +
+                    "                                <a href=\"profileDetail.html?userID=" + data[i].userID + "\">" + capitalize(data[i].firstName) + " " + capitalize(data[i].lastName) + "</a>\n" +
                     "                            </h4>\n" +
                     "                            <p class=\"card-text\">" + profileExcerpt + "</p>\n" +
                     "                        </div>\n" +
@@ -542,16 +537,6 @@ $(document).ready(function () {
         } catch (e) {
             console.log(e)
         }
-    }
-
-    // scroll load
-    if (window.location.pathname.split("/").pop() == "profileOverview.html") {
-        document.onscroll = function () {
-            if (document.documentElement.scrollTop + window.innerHeight == document.documentElement.scrollHeight) {
-                matchesSetCount += 1;
-                populateMatches(matchData, matchesSetCount, matchesPerPage);
-            }
-        };
     }
 
     /**
@@ -657,7 +642,7 @@ $(document).ready(function () {
                 if (data.hasOwnProperty(key)) {
                     if (!data[key]) {
                         notification.info("Controleer of alle velden ingevuld zijn.");
-                        return;
+                        return true;
                     }
                 }
             }
